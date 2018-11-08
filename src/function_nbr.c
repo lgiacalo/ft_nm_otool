@@ -6,11 +6,16 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:43:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/06 21:27:22 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:49:52 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
+
+static void		ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
 static void		ft_print_ligne(unsigned char *str, size_t i, size_t size)
 {
@@ -32,7 +37,7 @@ static void		ft_print_ligne(unsigned char *str, size_t i, size_t size)
 	ft_putchar('\n');
 }
 
-static void		print_memory(const void *addr, size_t size)
+void		print_memory(const void *addr, size_t size)
 {
 	unsigned char	*str;
 	size_t			i;
@@ -47,15 +52,7 @@ static void		print_memory(const void *addr, size_t size)
 	}
 }
 
-void	ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
-{
-	ft_putstr(str1);
-	ft_putstr("0x");
-	ft_putnbr16(nbr);
-	ft_putstr(str2);
-}
-
-void	ft_putnbr(long long int n)
+void		ft_putnbr(long long int n)
 {
 	long long int	nbr;
 
@@ -74,7 +71,7 @@ void	ft_putnbr(long long int n)
 	}
 }
 
-void	ft_putnbr16(unsigned long long int n)
+void		ft_putnbr16(unsigned long long int n)
 {
 	unsigned long long int	nbr;
 
@@ -86,4 +83,12 @@ void	ft_putnbr16(unsigned long long int n)
 		ft_putnbr16((nbr / 16));
 		ft_putnbr16((nbr % 16));
 	}
+}
+
+void	ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
+{
+	ft_putstr(str1);
+	ft_putstr("0x");
+	ft_putnbr16(nbr);
+	ft_putstr(str2);
 }

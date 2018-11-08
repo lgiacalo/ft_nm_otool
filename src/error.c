@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_str.c                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:43:49 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 18:50:01 by lgiacalo         ###   ########.fr       */
+/*   Created: 2018/11/08 17:06:27 by lgiacalo          #+#    #+#             */
+/*   Updated: 2018/11/08 18:48:39 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-void	ft_print_int(char *str1, long long int nbr, char *str2)
+void	error_void(char *str)
 {
-	ft_putstr(str1);
-	ft_putnbr(nbr);
-	ft_putstr(str2);
+	ft_print_str("Error : ", str, "\n");
+	return ;
 }
 
-static size_t	ft_strlen(const char *s)
+int		error_int(char *str)
 {
-	char const *temp;
-
-	temp = s;
-	while (*temp)
-		temp++;
-	return (temp - s);
+	ft_print_str("Error : ", str, "\n");
+	return (EXIT_FAILURE);
 }
 
-void			ft_print_str(char *str1, char *str2, char *str3)
+void	*error_star(char *str)
 {
-	ft_putstr(str1);
-	ft_putstr(str2);
-	ft_putstr(str3);
-}
-
-void			ft_putstr(const char *str)
-{
-	if (str)
-		write(1, str, ft_strlen(str));
+	ft_print_str("Error : ", str, "\n");
+	return (NULL);
 }

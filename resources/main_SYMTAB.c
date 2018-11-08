@@ -5,14 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 20:38:41 by lgiacalo         ###   ########.fr       */
+/*   Created: 2018/11/06 21:43:18 by lgiacalo          #+#    #+#             */
+/*   Updated: 2018/11/08 17:02:54 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include <stdio.h>
+#include <sys/mman.h>
+#include <mach-o/loader.h>
+#include <mach-o/nlist.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <stdlib.h>
 
-/*
 void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 {
 	int				i;
@@ -104,62 +109,4 @@ int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
-}
-*/
-
-t_env	*env(void)
-{
-	static t_env	e;
-
-	return (&e);
-}
-
-void	ft_check_file(int fd)
-{
-	struct stat	buf;
-
-	if (fstat(fd, &buf) < 0)
-		error_void("fstat");
-	else
-	{
-		printf("Nbr fstat_size = %llu\n", buf.st_size);
-	}
-}
-
-void	ft_init_env(void)
-{
-	t_env	*e;
-
-	e = env();
-	e->fstat_size = 0;
-	e->ptr = NULL;
-	e->magic_number = 0;
-}
-
-void	ft_open_close(int argc, char **argv)
-{
-	int	fd;
-	int	i;
-
-	i = 1;
-	while (i < argc || i == 1)
-	{
-		if ((fd = open((argc == 1) ? "a.out" : argv[i], O_RDONLY)) < 0)
-			error_void((argc == 1) ? "a.out" : argv[i]);
-		else
-		{
-			ft_check_file(fd);
-			if (close(fd) < 0)
-				error_void((argc == 1) ? "a.out" : argv[i]);
-		}
-		i++;
-	}
-	return ;
-}
-
-int		main(int argc, char **argv)
-{
-	printf("Debut projet NM_OTOOL\n");
-	ft_open_close(argc, argv);
-	return (0);
 }

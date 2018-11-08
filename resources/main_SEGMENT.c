@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:43:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/07 00:36:54 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2018/11/08 12:03:31 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+/*
 void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 {
 	int				i;
@@ -26,21 +27,51 @@ void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 
 	array = (void *)ptr + symoff;
 	strtable = (void *)ptr + stroff;
+	printf("Sizeof nlist_64 = %lu\n", sizeof(struct nlist_64));
+	printf("LC_SYMYAB : stroff = %d / symoff = %d\n\n", stroff, symoff);
 	while (i < nsyms)
 	{
-		printf("%s\n", strtable + array[i].n_un.n_strx);
+		printf("%s\t", strtable + array[i].n_un.n_strx);
+		printf("\t +%d <= n_strx\n", array[i].n_un.n_strx);
 		i++;
+	}
+	printf("LASt %s\t", strtable + array[i].n_un.n_strx);
+	printf("\t +%d <= n_strx\n", array[i].n_un.n_strx);
+}
+*/
+
+void	print_output(char *ptr, struct section_64 *sect)
+{
+
+	printf("%d\n", sect->reserved1);
+	printf("%d\n", sect->reserved2);
+	printf("%d\n", sect->reserved3);
+}
+
+void	handle_section(char *ptr, struct segment_command_64 *seg)
+{
+	int					i;
+	struct section_64	*sect;
+
+	printf("Nbr sections : %d\n", seg->nsects);
+	i = 0;
+	sect = (void *)seg + sizeof(struct segment_command_64);
+	while (i < seg->nsects)
+	{
+		printf("\tSectname = %s\n", sect->sectname);
+		print_output(ptr, sect);
+		i++;
+		sect = (void *)sect + sizeof(struct section_64);
 	}
 }
 
 void	handle_64(char *ptr)
 {
-	int						i;
-	int						ncmds;
-	struct mach_header_64	*header64;
-	struct load_command		*lc;
-	struct symtab_command	*sym;
-	struct dysymtab_command	*dysym;
+	int							i;
+	int							ncmds;
+	struct mach_header_64		*header64;
+	struct load_command			*lc;
+	struct segment_command_64	*seg;
 
 	header64 = (struct mach_header_64 *)ptr;
 	ncmds = header64->ncmds;
@@ -49,18 +80,11 @@ void	handle_64(char *ptr)
 	lc = (void *)ptr + sizeof(struct mach_header_64);
 	while (i < ncmds)
 	{
-		if (lc->cmd == LC_SYMTAB)
+		if (lc->cmd == LC_SEGMENT_64)
 		{
-			sym = (struct symtab_command *)lc;
-			printf("Trouveeee LC_SYMTAB : nb symboles = %d\n", sym->nsyms);
-			print_output(ptr, sym->nsyms, sym->symoff, sym->stroff);
-			break;
-		}
-		if (lc->cmd == LC_DYSYMTAB)
-		{
-			dysym = (struct dysymtab_command *)lc;
-			print_output(ptr, dysym->nsyms, dysym->symoff, dysym->stroff);
-			break;
+			seg = (struct segment_command_64 *)lc;
+			printf("Trouveeee LC_SEGMENT : name : %s\n", seg->segname);
+			handle_section(ptr, seg);
 		}
 		lc  = (void *)lc + lc->cmdsize;
 		i++;
