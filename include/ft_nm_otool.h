@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 20:38:23 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2018/12/15 19:31:11 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,28 @@
 
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
-//# include <mach-o/fat.h>
+# include <mach-o/fat.h>
 
 # define BASE16_U			"0123456789ABCDEF"
 # define BASE16_L			"0123456789abcdef"
+
+/*
+**	OPTION NM
+*/
+
+# define OPT_G				(1 << 0)				
+# define OPT_H				(1 << 1)
+# define OPT_J				(1 << 2)	
+# define OPT_U				(1 << 3)
+# define OPT_M				(1 << 4)
 
 # define EXIT_SUCCESS		1
 # define EXIT_FAILURE		0
 
 typedef struct				s_env
 {
-	long long				fstat_size;
+	int						opt;			//bits
+	unsigned long long		fstat_size;
 	void					*ptr;
 	int						magic_number;
 }							t_env;
