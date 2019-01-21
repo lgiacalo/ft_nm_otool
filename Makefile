@@ -24,7 +24,7 @@ OPT			=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= @
+SPY			= 
 
 ################################################################################
 
@@ -47,24 +47,30 @@ INC	= $(addprefix $(INC_PATH)/, $(INC_NAME))
 
 ################################################################################
 
-ifeq ($(DEBUG), info)
+ifeq ($(option), debug)
 	OPT += -g
 endif
-ifeq ($(DEBUG), alloc)
+ifeq ($(option), alloc)
 	OPT += -g -fsanitize=address
 endif
-ifeq ($(DEBUG), opti)
+ifeq ($(option), opti)
 	OPT += -O3
 endif
+ifeq ($(option), dev)
+	CFLAGS = -g
+endif
+
 
 ########################### OPTIONS ############################################
 
-ifeq ($(DEBUG), yes)
+ifeq ($(option), debug)
 	$(SPY)echo "================ DEBUG avec $(OPT) ! ================"
-else ifeq ($(ALLOC), yes)
+ifeq ($(option), alloc)
 	$(SPY)echo "=========== ALLOC verification avec $(OPT) ! =========="
-else ifeq ($(DEBUG), yes)
+ifeq ($(option), opti)
 	$(SPY)echo "================ OPTIMISATION $(OPT) ! ================"
+ifeq ($(option), dev)
+	$(SPY)echo "================ DEV $(OPT) ! ================"
 endif
 
 ################################################################################
