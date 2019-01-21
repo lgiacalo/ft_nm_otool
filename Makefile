@@ -24,7 +24,7 @@ OPT			=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= 
+SPY			= @
 
 ################################################################################
 
@@ -65,11 +65,11 @@ endif
 
 ifeq ($(option), debug)
 	$(SPY)echo "================ DEBUG avec $(OPT) ! ================"
-ifeq ($(option), alloc)
+else ifeq ($(option), alloc)
 	$(SPY)echo "=========== ALLOC verification avec $(OPT) ! =========="
-ifeq ($(option), opti)
+else ifeq ($(option), opti)
 	$(SPY)echo "================ OPTIMISATION $(OPT) ! ================"
-ifeq ($(option), dev)
+else ifeq ($(option), dev)
 	$(SPY)echo "================ DEV $(OPT) ! ================"
 endif
 
