@@ -1,3 +1,6 @@
+.*.swo
 .*.swp
+**/.*.swo
 **/.*.swp
 obj/
+ft_nm_otool
