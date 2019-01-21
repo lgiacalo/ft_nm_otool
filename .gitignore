@@ -4,3 +4,6 @@
 **/.*.swp
 obj/
 ft_nm_otool
+.DS_Store
+resources/.DS_Store
+resources/tests/.DS_Store
