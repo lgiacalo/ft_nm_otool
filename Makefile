@@ -24,7 +24,7 @@ OPT			=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= @
+SPY			= 
 
 ################################################################################
 
@@ -32,8 +32,7 @@ SRC_PATH	=	src
 INC_PATH	=	include
 OBJ_PATH	=	obj
 
-SRC_NAME	=	main.c\
-				error.c\
+SRC_NAME	=	main.c env.c error.c\
 				function_nbr.c function_str.c
 
 INC_NAME	=	ft_nm_otool.h

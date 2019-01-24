@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 17:06:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/01/24 22:27:20 by lgiacalo         ###   ########.fr       */
+/*   Created: 2019/01/24 22:24:59 by lgiacalo          #+#    #+#             */
+/*   Updated: 2019/01/24 22:40:44 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-void	ft_error_void(char *str)
+t_env	*env(void)
 {
-	ft_print_str("Error : ", str, "\n");
-	return ;
+	static t_env	e;
+
+	return (&e);
 }
 
-int		ft_error_int(char *str)
+t_env	*ft_init_env(void)
 {
-	ft_print_str("Error : ", str, "\n");
-	return (EXIT_FAILURE);
+	t_env	*e;
+
+	e = env();
+	e->fstat_size = 0;
+	e->ptr = NULL;
+	e->magic_number = 0;
+	return (e);
 }
 
-void	*ft_error_star(char *str)
-{
-	ft_print_str("Error : ", str, "\n");
-	return (NULL);
-}

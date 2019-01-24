@@ -30,9 +30,9 @@
 **	OPTION NM
 */
 
-# define OPT_G				(1 << 0)				
+# define OPT_G				(1 << 0)
 # define OPT_H				(1 << 1)
-# define OPT_J				(1 << 2)	
+# define OPT_J				(1 << 2)
 # define OPT_U				(1 << 3)
 # define OPT_M				(1 << 4)
 
@@ -61,11 +61,19 @@ void						ft_print_int(char *str1, long long int nbr, char *str2);
 void						ft_print_int16(char *str1, unsigned long long int nbr, char *str2);
 
 /*
+** Env
+*/
+
+t_env						*env(void);
+t_env						*ft_init_env(void);
+
+
+/*
 ** Error
 */
 
-void						error_void(char *str);
-int							error_int(char *str);
-void						*error_star(char *str);
+void						ft_error_void(char *str);
+int							ft_error_int(char *str);
+void						*ft_error_star(char *str);
 
 #endif
