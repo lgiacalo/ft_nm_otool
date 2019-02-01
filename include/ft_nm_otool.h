@@ -29,12 +29,19 @@
 /*
 **	OPTION NM
 */
+# define OPT_G				(1 << 0)	//Display symbols extern (only majuscule)
+# define OPT_J				(1 << 1)	//Display only name of symbol (name function)
+# define OPT_U				(1 << 2) + (OPT_J)	//Display only symbols undefined (U, u)
+# define OPT_UU				(1 << 3)	//Display all except symbols undefined
+# define OPT_R				(1 << 4)	//Order inverse
 
-# define OPT_G				(1 << 0)
-# define OPT_H				(1 << 1)
-# define OPT_J				(1 << 2)
-# define OPT_U				(1 << 3)
-# define OPT_M				(1 << 4)
+
+/*
+**	OPTION NM
+*/
+# define OPT_H				(1 << 0)	//Display header (.a -> tous les headers)
+										//	+ (verif pour les fats contenant ou non l'archi courante)
+
 
 # define EXIT_SUCCESS		1
 # define EXIT_FAILURE		0
