@@ -6,18 +6,18 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:43:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 18:49:52 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/01 19:46:06 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-static void		ft_putchar(char c)
+static void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-static void		ft_print_ligne(unsigned char *str, size_t i, size_t size)
+static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 {
 	size_t	k;
 
@@ -85,7 +85,7 @@ void		ft_putnbr16(unsigned long long int n)
 	}
 }
 
-void	ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
+void		ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
 {
 	ft_putstr(str1);
 	ft_putstr("0x");

@@ -97,6 +97,8 @@ int							ft_usage_otool(void);
 ** Function libft
 */
 
+size_t						ft_strlen(const char *s);
+int							ft_strcmp(const char *s1, const char *s2);
 int							ft_chrstr_ind(char c, char *str);
 
 #endif

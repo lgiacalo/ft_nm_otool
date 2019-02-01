@@ -57,17 +57,25 @@ int		ft_parse_option(int argc, char **argv, char *list_opt)
 {
 	int opt;
 	int	nb;
+	int	i;
 
 	if (argc == 1)
 		return (1);
 	nb = 1;
 	while (nb < argc && argv[nb])
 	{
-		if (argv[nb][0] != '-')
+		i = 0;
+		if (argv[nb][i] != '-' || !ft_strcmp(argv[nb], "--"))
 			return (1);
-		if ((opt = ft_chrstr_ind(argv[nb][1], list_opt)) < 0)
+		else if (ft_strlen(argv[nb]) < 2)
 			return (0);
-		env()->opt |= (1 << opt);
+		while (argv[nb][i + 1])
+		{
+			if ((opt = ft_chrstr_ind(argv[nb][i + 1], list_opt)) < 0)
+				return (0);
+			env()->opt |= (1 << opt);
+			i++;
+		}
 		nb++;
 	}
 	return (1);
