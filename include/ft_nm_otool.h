@@ -83,4 +83,7 @@ void						ft_error_void(char *str);
 int							ft_error_int(char *str);
 void						*ft_error_star(char *str);
 
+int							ft_usage_nm(void);
+int							ft_usage_otool(void);
+
 #endif

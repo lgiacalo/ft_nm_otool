@@ -6,11 +6,31 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:06:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/01/24 22:27:20 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/01 15:53:28 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
+
+
+int		ft_usage_nm(void)
+{
+	ft_putstr("\nUSAGE: nm [options] <input files>\n\n"); 
+	ft_putstr("OPTIONS:\n");
+	ft_putstr("\t-g\t\t- Display only global (external) symbols\n");
+	ft_putstr("\t-j\t\t- Just display the symbol names (no value or type)\n");
+	ft_putstr("\t-u\t\t- Display only undefined symbols\n");
+	ft_putstr("\t-U\t\t- Don't display undefined symbols\n");
+	ft_putstr("\t-r\t\t- Sort in reverse order (The output is sorted alphabetically by default)\n");
+
+	return (EXIT_FAILURE);
+}
+
+int		ft_usage_otool(void)
+{
+	ft_putstr("USAGE: otool [options] <input files>\n"); 
+	return (EXIT_FAILURE);
+}
 
 void	ft_error_void(char *str)
 {
