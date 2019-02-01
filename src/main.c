@@ -53,25 +53,24 @@ void	ft_open_close(int argc, char **argv)
 **	A REFAIRE
 */
 
-int		ft_parse_option(int argc, char **argv)
+int		ft_parse_option(int argc, char **argv, char *list_opt)
 {
-	int	dec;
+	int opt;
+	int	nb;
 
-	dec = 1;
-	if (argc < 2)
-		return (dec);
-	while (argv && argv[dec])
+	if (argc == 1)
+		return (1);
+	nb = 1;
+	while (nb < argc && argv[nb])
 	{
-		if (argv[dec][0] == '-')
-		{
-			if (argv[dec][1] == 'h')
-				return (0);
-			dec++;
-		}
-		else
-			return (dec);
+		if (argv[nb][0] != '-')
+			return (1);
+		if ((opt = ft_chrstr_ind(argv[nb][1], list_opt)) < 0)
+			return (0);
+		env()->opt |= (1 << opt);
+		nb++;
 	}
-	return ((dec > 1) ? dec : 0);
+	return (1);
 }
 
 /*
@@ -84,8 +83,12 @@ int		main(int argc, char **argv)
 
 	printf("Debut projet NM\n");
 	e = ft_init_env();		
-	if (!ft_parse_option(argc, argv))
+	if (!ft_parse_option(argc, argv, OPT_NM))
 		return (ft_usage_nm());
+
+	if (env()->opt & OPT_U)
+		env()->opt |= OPT_J;
+
 //	ft_open_close(argc, argv);
 	return (0);
 }

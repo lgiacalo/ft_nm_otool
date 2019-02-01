@@ -33,7 +33,8 @@ INC_PATH	=	include
 OBJ_PATH	=	obj
 
 SRC_NAME	=	main.c env.c error.c\
-				function_nbr.c function_str.c
+				function_nbr.c function_str.c print_info.c\
+				func1_libft.c
 
 INC_NAME	=	ft_nm_otool.h
 OBJ_NAME	=	$(SRC_NAME:.c=.o)

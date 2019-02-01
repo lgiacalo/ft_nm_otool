@@ -31,10 +31,10 @@
 */
 # define OPT_G				(1 << 0)	//Display symbols extern (only majuscule)
 # define OPT_J				(1 << 1)	//Display only name of symbol (name function)
-# define OPT_U				(1 << 2) + (OPT_J)	//Display only symbols undefined (U, u)
+# define OPT_U				(1 << 2)	//Display only symbols undefined (U, u)
 # define OPT_UU				(1 << 3)	//Display all except symbols undefined
 # define OPT_R				(1 << 4)	//Order inverse
-
+# define OPT_NM				"gjuUr"
 
 /*
 **	OPTION NM
@@ -76,6 +76,12 @@ t_env						*ft_init_env(void);
 
 
 /*
+** Print
+*/
+
+void						ft_print_option_nm(void);
+
+/*
 ** Error
 */
 
@@ -85,5 +91,12 @@ void						*ft_error_star(char *str);
 
 int							ft_usage_nm(void);
 int							ft_usage_otool(void);
+
+
+/*
+** Function libft
+*/
+
+int							ft_chrstr_ind(char c, char *str);
 
 #endif
