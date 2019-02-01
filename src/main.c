@@ -83,7 +83,6 @@ int		main(int argc, char **argv)
 	t_env 	*e;
 
 	printf("Debut projet NM\n");
-	ft_usage_nm();
 	e = ft_init_env();		
 	if (!ft_parse_option(argc, argv))
 		return (ft_usage_nm());
