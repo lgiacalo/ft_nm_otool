@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/12/15 19:31:11 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/01 19:41:50 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct				s_env
 	int						opt;			//bits
 	unsigned long long		fstat_size;
 	void					*ptr;
-	int						magic_number;
+	uint32_t				magic_number;
 }							t_env;
 
 /*
