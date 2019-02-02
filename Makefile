@@ -22,16 +22,7 @@ option		=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= 
-
-################################################################################
-
-SRC_NAME_P	=	function_nbr.c function_str.c\
-				func1_libft.c
-INC_NAME_P	=	ft_nm_otool.h
-
-export SRC_NAME_P
-export INC_NAME_P
+SPY			= @
 
 ################################################################################
 
@@ -52,12 +43,14 @@ export OPT
 
 all: $(OTOOL) $(NM)
 
-$(OTOOL):
-	$(SPY)make -C otool/
+$(OTOOL): Makefile
+	$(SPY)mv $(OTOOL) ./otool/ 2> /dev/null || true
+	$(SPY)make $(OTOOL) -C otool/
 	$(SPY)mv otool/$(OTOOL) ./ 2> /dev/null || true
 
-$(NM):
-	$(SPY)make -C nm/
+$(NM): Makefile
+	$(SPY)mv $(NM) ./nm/ 2> /dev/null || true
+	$(SPY)make $(NM) -C nm/
 	$(SPY)mv nm/$(NM) ./ 2> /dev/null || true
 
 mv:
@@ -81,6 +74,6 @@ norme:
 	$(SPY)make norme -C nm/
 
 
-.PHONY : all clean fclean re norme
+.PHONY : all clean fclean re norme $(NM) $(OTOOL)
 
 ################################################################################

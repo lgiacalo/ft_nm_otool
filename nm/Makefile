@@ -23,7 +23,7 @@ CPPFLAGS	= -Iinclude -I ../include
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= 
+SPY			= @
 
 ################################################################################
 
@@ -45,14 +45,17 @@ INC	= $(addprefix $(INC_PATH)/, $(INC_NAME))
 
 ################################################################################
 
+SRC_NAME_P	=	function_nbr.c function_str.c\
+				func1_libft.c
+INC_NAME_P	=	ft_nm_otool.h
+
 SRC_PATH_P	=	../src
 INC_PATH_P	=	../include
-OBJ_PATH_P	=	obj
 
 OBJ_NAME_P	=	$(SRC_NAME_P:.c=.o) 
 
 SRC_P		=	$(addprefix $(SRC_PATH_P)/, $(SRC_NAME_P))
-OBJ_P		=	$(addprefix $(OBJ_PATH_P)/, $(OBJ_NAME_P))
+OBJ_P		=	$(addprefix $(OBJ_PATH)/, $(OBJ_NAME_P))
 INC_P		=	$(addprefix $(INC_PATH_P)/, $(INC_NAME_P))
 
 ################################################################################
@@ -78,7 +81,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC) $(INC_P)
 
 $(NAME): $(OBJ_PATH) $(OBJ_P) $(OBJ) Makefile
 	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) $(OBJ_P) $(OBJ) -o $(NAME)
-	$(SPY)echo "$(COLOR)$(NAME) \t\t[OK]$(FINCOLOR)"
+	$(SPY)echo "$(COLOR)$(NAME) \t\t\t[OK]$(FINCOLOR)"
 
 clean:
 	$(SPY)/bin/rm -rf $(OBJ) $(OBJ_P)
