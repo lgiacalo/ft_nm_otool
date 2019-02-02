@@ -48,40 +48,6 @@ void	ft_open_close(int argc, char **argv)
 }
 
 /*
-**	Parsing Option
-**		Erreur si : doublon, ou inconnu
-**	A REFAIRE
-*/
-
-int		ft_parse_option(int argc, char **argv, char *list_opt)
-{
-	int opt;
-	int	nb;
-	int	i;
-
-	if (argc == 1)
-		return (1);
-	nb = 1;
-	while (nb < argc && argv[nb])
-	{
-		i = 0;
-		if (argv[nb][i] != '-' || !ft_strcmp(argv[nb], "--"))
-			return (1);
-		else if (ft_strlen(argv[nb]) < 2)
-			return (0);
-		while (argv[nb][i + 1])
-		{
-			if ((opt = ft_chrstr_ind(argv[nb][i + 1], list_opt)) < 0)
-				return (0);
-			env()->opt |= (1 << opt);
-			i++;
-		}
-		nb++;
-	}
-	return (1);
-}
-
-/*
 ** Commande NM
 */
 
@@ -91,7 +57,7 @@ int		main(int argc, char **argv)
 
 	printf("Debut projet NM\n");
 	e = ft_init_env();		
-	if (!ft_parse_option(argc, argv, OPT_OTOOL))
+	if (!ft_parse_option(argc, argv, OPT_OTOOL, &(env()->opt)))
 		return (ft_usage_otool());
 
 	ft_print_option_otool();

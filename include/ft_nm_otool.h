@@ -29,6 +29,13 @@
 # define EXIT_SUCCESS		1
 # define EXIT_FAILURE		0
 
+
+/*
+** Option
+*/
+
+int							ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt);
+
 /*
 ** Prints
 */

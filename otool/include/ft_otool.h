@@ -6,22 +6,12 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/02 17:53:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/02 18:46:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_OTOOL_H
 # define FT_OTOOL_H
-
-# include <sys/mman.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stdio.h> // a retirer - printf
-
-# include <mach-o/loader.h>
-# include <mach-o/nlist.h>
-# include <mach-o/fat.h>
 
 # include "ft_nm_otool.h"
 
