@@ -6,11 +6,26 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 18:35:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/02 18:41:08 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/02 22:29:17 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
+
+int		ft_check_file(int fd, char *file, char *exec, size_t *size)
+{
+	struct stat	stat;
+
+	if (fstat(fd, &stat) < 0)
+		return (ft_error_int("function fstat"));
+	else
+	{
+		*size = stat.st_size;
+		if (!(S_ISREG(stat.st_mode)) && !(S_ISLNK(stat.st_mode)))
+			return (ft_error_int3(exec, file, ERROR1));
+	}
+	return (1);
+}
 
 int		ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt)
 {

@@ -23,43 +23,50 @@
 # include <mach-o/nlist.h>
 # include <mach-o/fat.h>
 
-# define BASE16_U			"0123456789ABCDEF"
-# define BASE16_L			"0123456789abcdef"
+# define BASE16_U		"0123456789ABCDEF"
+# define BASE16_L		"0123456789abcdef"
 
-# define EXIT_SUCCESS		1
-# define EXIT_FAILURE		0
+# define EXIT_SUCCESS	1
+# define EXIT_FAILURE	0
 
+# define ERROR1			"The file was not recognized as a valid object file"
+# define ERROR2			": No such file or directory"
+
+/*
+** File
+*/
+int						ft_check_file(int fd, char *file, char *exec, size_t *size);
 
 /*
 ** Option
 */
-
-int							ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt);
+int						ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt);
 
 /*
 ** Prints
 */
-void						ft_putnbr(long long int n);
-void						ft_putnbr16(unsigned long long int n);
-void						print_memory(const void *addr, size_t size);
+void					ft_putnbr(long long int n);
+void					ft_putnbr16(unsigned long long int n);
+void					print_memory(const void *addr, size_t size);
 
-void						ft_putstr(const char *s);
-void						ft_print_str(char *str1, char *str2, char *str3);
-void						ft_print_int(char *str1, long long int nbr, char *str2);
-void						ft_print_int16(char *str1, unsigned long long int nbr, char *str2);
+void					ft_putstr(const char *s);
+void					ft_print_str(char *str1, char *str2, char *str3);
+void					ft_print_int(char *str1, long long int nbr, char *str2);
+void					ft_print_int16(char *str1, unsigned long long int nbr, char *str2);
 
 /*
 ** Error
 */
-void						ft_error_void(char *str);
-int							ft_error_int(char *str);
-void						*ft_error_star(char *str);
+void					ft_error_void(char *str);
+int						ft_error_int(char *str);
+int						ft_error_int3(char *str1, char *str2, char *str3);
+void					*ft_error_star(char *str);
 
 /*
 ** Function libft
 */
-size_t						ft_strlen(const char *s);
-int							ft_strcmp(const char *s1, const char *s2);
-int							ft_chrstr_ind(char c, char *str);
+size_t					ft_strlen(const char *s);
+int						ft_strcmp(const char *s1, const char *s2);
+int						ft_chrstr_ind(char c, char *str);
 
 #endif

@@ -31,7 +31,7 @@ SRC_PATH	=	src
 INC_PATH	=	include
 OBJ_PATH	=	obj
 
-SRC_NAME	=	main.c env.c error.c\
+SRC_NAME	=	main.c env.c usage.c\
 				print_info.c
 
 INC_NAME	=	ft_nm.h
@@ -46,7 +46,7 @@ INC	= $(addprefix $(INC_PATH)/, $(INC_NAME))
 ################################################################################
 
 SRC_NAME_P	=	function_nbr.c function_str.c\
-				func1_libft.c ft_option.c
+				func1_libft.c ft_option.c error.c
 INC_NAME_P	=	ft_nm_otool.h
 
 SRC_PATH_P	=	../src

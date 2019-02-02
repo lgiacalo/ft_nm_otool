@@ -2,8 +2,11 @@
 .*.swp
 **/.*.swo
 **/.*.swp
-obj/
-ft_nm_otool
+obj
+ft_nm
+ft_otool
+nm/ft_nm
+otool/ft_nm
 .DS_Store
 resources/.DS_Store
 resources/tests/.DS_Store

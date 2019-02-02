@@ -16,8 +16,10 @@
 # include "ft_nm_otool.h"
 
 /*
-**	OPTION NM
+**	OPTION OTOOL
 */
+# define OTOOL				"ft_otool: "
+
 # define OPT_H				(1 << 0)	//Display header (.a -> tous les headers)
 # define OPT_T				(1 << 1)		//	+ (verif pour les fats contenant ou non l'archi courante)
 # define OPT_D				(1 << 2)
@@ -26,7 +28,8 @@
 typedef struct				s_env
 {
 	int						opt;			//bits
-	unsigned long long		fstat_size;
+	char					*file_name;
+	size_t					fstat_size;
 	void					*ptr;
 	uint32_t				magic_number;
 }							t_env;

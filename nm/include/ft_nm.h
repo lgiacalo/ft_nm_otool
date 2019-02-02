@@ -18,6 +18,8 @@
 /*
 **	OPTION NM
 */
+# define NM					"ft_nm: "
+
 # define OPT_G				(1 << 0)	//Display symbols extern (only majuscule)
 # define OPT_J				(1 << 1)	//Display only name of symbol (name function)
 # define OPT_U				(1 << 2)	//Display only symbols undefined (U, u)
@@ -28,7 +30,8 @@
 typedef struct				s_env
 {
 	int						opt;			//bits
-	unsigned long long		fstat_size;
+	char					*file_name;
+	size_t					fstat_size;
 	void					*ptr;
 	uint32_t				magic_number;
 }							t_env;
@@ -44,6 +47,7 @@ t_env						*ft_init_env(void);
 ** Print
 */
 void						ft_print_option_nm(void);
+void						ft_print_env(void);
 
 /*
 ** Usage

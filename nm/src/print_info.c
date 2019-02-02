@@ -14,10 +14,10 @@
 
 void	ft_print_option_nm(void)
 {
-	ft_putstr("Info NM - Option\n");
+	ft_putstr("Info NM ---- OPTION -------\n");
 	if (!(env()->opt))
 	{
-		ft_putstr("Aucune option\n");
+		ft_putstr("Aucune option\n\n");
 		return ;
 	}
 	ft_print_str("-g:\t", (env()->opt & OPT_G) ? "Yes" : "No", "\n");
@@ -25,5 +25,15 @@ void	ft_print_option_nm(void)
 	ft_print_str("-u:\t", (env()->opt & OPT_U) ? "Yes" : "No", "\n");
 	ft_print_str("-U:\t", (env()->opt & OPT_UU) ? "Yes" : "No", "\n");
 	ft_print_str("-r:\t", (env()->opt & OPT_R) ? "Yes" : "No", "\n");
-	ft_print_int("Variable opt = ", env()->opt, "\n");
+	ft_print_int("Variable opt = ", env()->opt, "\n\n");
+}
+
+void	ft_print_env(void)
+{
+	t_env	*e;
+
+	e = env();
+	ft_putstr("Info NM ----- ENV ---------\n");
+	ft_print_str("File_name: \t", e->file_name, "\n");
+	ft_print_int("File_sie: \t", e->fstat_size, "\n\n");
 }

@@ -6,25 +6,11 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/02 15:41:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/02 22:33:00 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_otool.h"
-
-void	ft_check_file(int fd)
-{
-	struct stat	buf;
-
-	if (fstat(fd, &buf) < 0)
-		ft_error_void("fstat");
-	else
-	{
-		printf("Nbr fstat_size = %llu\n", buf.st_size);
-		if ((buf.st_mode & S_IFMT) == S_IFREG)
-			printf("fichier regulier\n");
-	}
-}
 
 void	ft_open_close(int argc, char **argv)
 {
@@ -38,7 +24,7 @@ void	ft_open_close(int argc, char **argv)
 			ft_error_void((argc == 1) ? "a.out" : argv[i]);
 		else
 		{
-			ft_check_file(fd);
+			ft_check_file(fd, (argc == 1) ? "a.out" : argv[i], OTOOL, &(env()->fstat_size));
 			if (close(fd) < 0)
 				ft_error_void((argc == 1) ? "a.out" : argv[i]);
 		}
