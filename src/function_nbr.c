@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_otool.h"
+#include "ft_nm_otool.h"
 
 static void	ft_putchar(char c)
 {

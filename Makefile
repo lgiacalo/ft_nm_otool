@@ -22,7 +22,16 @@ option		=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= @
+SPY			= 
+
+################################################################################
+
+SRC_NAME_P	=	function_nbr.c function_str.c\
+				func1_libft.c
+INC_NAME_P	=	ft_nm_otool.h
+
+export SRC_NAME_P
+export INC_NAME_P
 
 ################################################################################
 
