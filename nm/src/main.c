@@ -54,10 +54,13 @@ void	ft_open_close(int argc, char **argv)
 int		main(int argc, char **argv)
 {
 	t_env 	*e;
+	int		ind;
 
 	printf("Debut projet NM\n");
-	e = ft_init_env();		
-	if (!ft_parse_option(argc, argv, OPT_NM, &(env()->opt)))
+
+	e = ft_init_env();
+	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
+	if (!ind || ind == argc)
 		return (ft_usage_nm());
 
 	if (env()->opt & OPT_U)

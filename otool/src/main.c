@@ -55,7 +55,7 @@ int		main(int argc, char **argv)
 {
 	t_env 	*e;
 
-	printf("Debut projet NM\n");
+	printf("Debut projet OTOOL\n");
 	e = ft_init_env();		
 	if (!ft_parse_option(argc, argv, OPT_OTOOL, &(env()->opt)))
 		return (ft_usage_otool());
