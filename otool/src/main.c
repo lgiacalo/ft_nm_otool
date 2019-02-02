@@ -6,11 +6,11 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:41:11 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/02 15:41:03 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_otool.h"
 
 void	ft_check_file(int fd)
 {
@@ -91,12 +91,10 @@ int		main(int argc, char **argv)
 
 	printf("Debut projet NM\n");
 	e = ft_init_env();		
-	if (!ft_parse_option(argc, argv, OPT_NM))
-		return (ft_usage_nm());
+	if (!ft_parse_option(argc, argv, OPT_OTOOL))
+		return (ft_usage_otool());
 
-	if (env()->opt & OPT_U)
-		env()->opt |= OPT_J;
-
+	ft_print_option_otool();
 //	ft_open_close(argc, argv);
 	return (0);
 }

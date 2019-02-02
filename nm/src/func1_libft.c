@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_nm.h"
 
 int		ft_strcmp(const char *s1, const char *s2)
 {

@@ -6,11 +6,11 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:06:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:45:09 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/02 15:36:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_nm.h"
 
 int		ft_usage_nm(void)
 {
@@ -21,14 +21,6 @@ int		ft_usage_nm(void)
 	ft_putstr("\t-u\t\t- Display only undefined symbols\n");
 	ft_putstr("\t-U\t\t- Don't display undefined symbols\n");
 	ft_putstr("\t-r\t\t- Sort in reverse order (alphabetically by default)\n");
-	return (EXIT_FAILURE);
-}
-
-int		ft_usage_otool(void)
-{
-	ft_putstr("\nUSAGE: ft_otool [options] <input files>\n\n");
-	ft_putstr("OPTIONS:\n");
-	ft_putstr("\t-h\t\t- Print the mach header\n");
 	return (EXIT_FAILURE);
 }
 

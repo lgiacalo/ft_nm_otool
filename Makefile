@@ -11,39 +11,18 @@
 #* ************************************************************************** *#
 
 
+
+OTOOL		= ft_otool
+NM			= ft_nm
+
 ################################################################################
 
-NAME 		= ft_nm_otool
-
-################################################################################
-
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
-CPPFLAGS	= -Iinclude
 OPT			=
+option		=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= 
-
-################################################################################
-
-SRC_PATH	=	src
-INC_PATH	=	include
-OBJ_PATH	=	obj
-
-SRC_NAME	=	main.c env.c error.c\
-				function_nbr.c function_str.c print_info.c\
-				func1_libft.c
-
-INC_NAME	=	ft_nm_otool.h
-OBJ_NAME	=	$(SRC_NAME:.c=.o)
-
-################################################################################
-
-SRC	= $(addprefix $(SRC_PATH)/, $(SRC_NAME))
-OBJ	= $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
-INC	= $(addprefix $(INC_PATH)/, $(INC_NAME))
+SPY			= @
 
 ################################################################################
 
@@ -56,56 +35,41 @@ endif
 ifeq ($(option), opti)
 	OPT += -O3
 endif
-ifeq ($(option), dev)
-	CFLAGS = -g
-endif
 
-
-########################### OPTIONS ############################################
-
-ifeq ($(option), debug)
-	$(SPY)echo "================ DEBUG avec $(OPT) ! ================"
-else ifeq ($(option), alloc)
-	$(SPY)echo "=========== ALLOC verification avec $(OPT) ! =========="
-else ifeq ($(option), opti)
-	$(SPY)echo "================ OPTIMISATION $(OPT) ! ================"
-else ifeq ($(option), dev)
-	$(SPY)echo "================ DEV $(OPT) ! ================"
-endif
+export option
+export OPT
 
 ################################################################################
 
+all: $(OTOOL) $(NM)
 
-all: $(NAME)
+$(OTOOL):
+	$(SPY)make -C otool/
+	$(SPY)mv otool/$(OTOOL) ./ 2> /dev/null || true
 
-$(OBJ_PATH):
-	$(SPY)mkdir $(OBJ_PATH) 2> /dev/null || true
+$(NM):
+	$(SPY)make -C nm/
+	$(SPY)mv nm/$(NM) ./ 2> /dev/null || true
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
-	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ -I $(INC)
+mv:
+	$(SPY)mv $(OTOOL) otool/ 2> /dev/null || true
+	$(SPY)mv $(NM) nm/ 2> /dev/null || true
 
-$(NAME): $(OBJ_PATH) $(OBJ) Makefile
-	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) $(OBJ) -o $(NAME)
-	$(SPY)echo "$(COLOR)$(NAME) \t\t[OK]$(FINCOLOR)"
+clean: 
+	$(SPY)make clean -C otool/
+	$(SPY)make clean -C nm/
 
-clean:
-	$(SPY)/bin/rm -rf $(OBJ)
-	$(SPY)rmdir $(OBJ_PATH) 2> /dev/null || true
-	$(SPY)echo "$(COLOR)Suppression *.o$(FINCOLOR)"
-
-fclean:
-	$(SPY)/bin/rm -rf $(OBJ)
-	$(SPY)rmdir $(OBJ_PATH) 2> /dev/null || true
-	$(SPY)echo "$(COLOR)Suppression *.o$(FINCOLOR)"
-	$(SPY)/bin/rm -rf $(NAME)
-	$(SPY)echo "$(COLOR)Suppression $(NAME)$(FINCOLOR)"
+fclean: mv
+	$(SPY)make fclean -C otool/
+	$(SPY)make fclean -C nm/
 
 re: fclean all
 
 norme:
-	$(SPY)echo "$(COLOR)\tNORMINETTE : $(NAME)\n$(FINCOLOR)"
-	$(SPY)norminette $(SRC)
-	$(SPY)norminette include/*.h
+	$(SPY)echo "$(COLOR)\tNORMINETTE : $(OTOOL) - $(NM)\n$(FINCOLOR)"
+	$(SPY)norminette include/*.h src/*.c
+	$(SPY)make norme -C otool/
+	$(SPY)make norme -C nm/
 
 
 .PHONY : all clean fclean re norme

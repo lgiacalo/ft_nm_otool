@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_otool.h"
 
 void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 {

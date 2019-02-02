@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_nm.h"
 
 void	ft_print_int(char *str1, long long int nbr, char *str2)
 {
