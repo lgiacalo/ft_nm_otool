@@ -6,11 +6,17 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 17:29:52 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/03 19:58:04 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
+
+void	ft_print()
+{
+	ft_print_env();
+	ft_print_file();
+}
 
 void	ft_start_nm(char *name)
 {
@@ -32,8 +38,7 @@ void	ft_loop_args(int argc, char **argv, int ind)
 			{
 				if (ft_mmap_file(fd, env()->fstat_size, &(env()->ptr)))
 					ft_start_nm(argv[ind]);
-				ft_print_env();
-				ft_print_file();
+				ft_print();
 				ft_munmap_file(env()->fstat_size, &(env()->ptr));
 			}
 			ft_close_file(NM, argv[ind], fd);
