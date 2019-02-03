@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/02 22:51:55 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:29:52 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_start_nm(char *name)
 
 	e = env();
 	e->file_name = name;
-	ft_print_env();
 }
 
 void	ft_loop_args(int argc, char **argv, int ind)
@@ -27,21 +26,20 @@ void	ft_loop_args(int argc, char **argv, int ind)
 
 	while (ind < argc)
 	{
-		if ((fd = open(argv[ind], O_RDONLY)) < 0)
-			ft_error_int3(NM, argv[ind], ERROR2);
-		else
+		if (ft_open_file(NM, argv[ind], &fd))
 		{
 			if (ft_check_file(fd, argv[ind], NM, &(env()->fstat_size)))
 			{
-				//mmap avec fd !!
-				ft_start_nm(argv[ind]);
+				if (ft_mmap_file(fd, env()->fstat_size, &(env()->ptr)))
+					ft_start_nm(argv[ind]);
+				ft_print_env();
+				ft_print_file();
+				ft_munmap_file(env()->fstat_size, &(env()->ptr));
 			}
-			if (close(fd) < 0)
-				ft_error_void(argv[ind]);
+			ft_close_file(NM, argv[ind], fd);
 		}
 		ind++;
 	}
-	return ;
 }
 
 /*

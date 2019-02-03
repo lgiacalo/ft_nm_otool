@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:41:50 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:16:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,17 @@
 # define EXIT_SUCCESS	1
 # define EXIT_FAILURE	0
 
-# define ERROR1			"The file was not recognized as a valid object file"
+# define ERROR1			" The file was not recognized as a valid object file"
 # define ERROR2			": No such file or directory"
 
 /*
 ** File
 */
+int						ft_open_file(char *cmd, char *file, int *fd);
+int						ft_close_file(char *cmd, char *file, int fd);
 int						ft_check_file(int fd, char *file, char *exec, size_t *size);
+int						ft_mmap_file(int fd, size_t size, void **ptr);
+int						ft_munmap_file(size_t size, void **ptr);
 
 /*
 ** Option

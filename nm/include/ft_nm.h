@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/02 20:21:04 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/03 16:34:37 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_env						*ft_init_env(void);
 */
 void						ft_print_option_nm(void);
 void						ft_print_env(void);
+void						ft_print_file(void);
 
 /*
 ** Usage
