@@ -42,6 +42,15 @@ int						ft_mmap_file(int fd, size_t size, void **ptr);
 int						ft_munmap_file(size_t size, void **ptr);
 
 /*
+**  Type file
+*/
+int           ft_swap(uint32_t magic);
+int           ft_is_64(uint32_t magic);
+int           ft_is_mh(uint32_t magic);
+int           ft_is_fat(uint32_t magic);
+int           ft_is_arc(char *arc);
+
+/*
 ** Option
 */
 int						ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt);

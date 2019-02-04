@@ -18,12 +18,28 @@ void	ft_print()
 //	ft_print_file();
 }
 
-void	ft_start_nm(char *name)
+void	ft_next()
+{
+	ft_print();
+}
+
+void	ft_reading_file(char *name)
 {
 	t_env	*e;
 
 	e = env();
 	e->file_name = name;
+	e->magic = *((uint32_t *)(e->ptr));
+	if (ft_is_mh(e->magic))
+		return (ft_next());
+	else if (ft_is_fat(e->magic))
+		return (ft_next());
+	else if (ft_is_arc((char *)(e->ptr)))
+	{
+		e->magic = 0;
+		return (ft_next());
+	}
+	return (ft_error_void3(e->cmd, name, ERROR1));
 }
 
 void	ft_loop_args(int argc, char **argv, int ind)
