@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 18:38:48 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 21:31:08 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int						ft_munmap_file(size_t size, void **ptr);
 /*
 **  Type file
 */
-int           ft_swap(uint32_t magic);
-int           ft_is_64(uint32_t magic);
-int           ft_is_mh(uint32_t magic);
-int           ft_is_fat(uint32_t magic);
-int           ft_is_arc(char *arc);
+int						ft_swap(uint32_t magic);
+int						ft_is_64(uint32_t magic);
+int						ft_is_mh(uint32_t magic);
+int						ft_is_fat(uint32_t magic);
+int						ft_is_arc(char *arc);
 
 /*
 ** Option
@@ -73,7 +73,7 @@ void					ft_print_int16(char *str1, unsigned long long int nbr, char *str2);
 ** Error
 */
 void					ft_error_void(char *str);
-void          ft_error_void3(char *str1, char *str2, char *str3);
+void					ft_error_void3(char *str1, char *str2, char *str3);
 int						ft_error_int(char *str);
 int						ft_error_int3(char *str1, char *str2, char *str3);
 void					*ft_error_star(char *str);

@@ -77,7 +77,7 @@ void	ft_loop_args(int argc, char **argv, int ind)
 
 int		main(int argc, char **argv)
 {
-	t_env 	*e;
+	t_env	*e;
 	int		ind;
 
 	e = ft_init_env();
@@ -85,10 +85,8 @@ int		main(int argc, char **argv)
 	if (!ind || ind == argc)
 		return (ft_usage_nm());
 	e->print_name = ft_multi_args(ind, argc);
-
 	if (env()->opt & OPT_U)
 		env()->opt |= OPT_J;
-
 	ft_print_option_nm();
 	ft_loop_args(argc, argv, ind);
 	return (0);

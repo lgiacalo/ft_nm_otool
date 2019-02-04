@@ -70,8 +70,8 @@ re: fclean all
 norme:
 	$(SPY)echo "$(COLOR)\tNORMINETTE : $(OTOOL) - $(NM)\n$(FINCOLOR)"
 	$(SPY)norminette include/*.h src/*.c
-	$(SPY)make norme -C otool/
 	$(SPY)make norme -C nm/
+	$(SPY)make norme -C otool/
 
 
 .PHONY : all clean fclean re norme $(NM) $(OTOOL)

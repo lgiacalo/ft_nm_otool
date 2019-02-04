@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:47:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 18:37:39 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:49:29 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	ft_print_env(void)
 	ft_print_str("File_name: \t", e->file_name, "\n");
 	ft_print_int("File_size: \t", e->file_size, "\n");
 	ft_print_int16("File_ptr: \t", (unsigned long long int)e->ptr, "\n");
-	ft_print_int16("Magic number: \t", (unsigned long long int)((uint32_t)*((uint32_t*)(e->ptr))), "\n");
-	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n\n");
+	ft_print_int16("Magic number: \t", (unsigned long long int)
+			((uint32_t)*((uint32_t*)(e->ptr))), "\n");
+	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic),
+			"\n\n");
 }
 
 void	ft_print_file(void)
