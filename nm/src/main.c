@@ -6,25 +6,23 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 18:46:09 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 21:46:46 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void	ft_print()
+void	ft_print(void)
 {
 	ft_print_env();
-//	ft_print_file();
 }
 
-void	ft_next()
+void	ft_archive_static(void)
 {
 	ft_print();
-//	ft_print_file();
+	if (!ft_verif_header_line((void *)((char *)env()->ptr + 8)))
+		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }
-
-
 
 void	ft_reading_file(char *name)
 {
@@ -34,13 +32,13 @@ void	ft_reading_file(char *name)
 	e->file_name = name;
 	e->magic = *((uint32_t *)(e->ptr));
 	if (ft_is_mh(e->magic))
-		return (ft_next());
+		return (ft_print());
 	else if (ft_is_fat(e->magic))
-		return (ft_next());
+		return (ft_print());
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
-		return (ft_next());
+		return (ft_archive_static());
 	}
 	return (ft_error_void3(e->cmd, name, ERROR1));
 }

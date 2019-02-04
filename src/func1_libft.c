@@ -6,11 +6,35 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:03:20 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:45:37 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 21:19:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
+
+int	ft_atoi(const char *str)
+{
+	int resultat;
+	int signe;
+
+	signe = 1;
+	resultat = 0;
+	while (*str == '\n' || *str == '\t' || *str == '\v'
+		|| *str == '\f' || *str == '\r' || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			signe *= -1;
+		str++;
+	}
+	while (*str <= '9' && *str >= '0')
+	{
+		resultat = 10 * resultat + (*str - '0');
+		str++;
+	}
+	return (resultat * signe);
+}
 
 int		ft_strcmp(const char *s1, const char *s2)
 {

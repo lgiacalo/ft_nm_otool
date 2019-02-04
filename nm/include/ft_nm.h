@@ -38,6 +38,12 @@ typedef struct				s_env
 	uint32_t				magic;
 }							t_env;
 
+typedef struct				s_arc
+{
+	char					*name;
+	size_t					size;
+}							t_arc;
+
 /*
 ** Env
 */
@@ -45,6 +51,11 @@ t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
 
+/*
+**	Verif ptr in file
+*/
+int							ft_is_safe(void *ptr, size_t size);
+int							ft_verif_header_line(void *ptr);
 
 /*
 ** Print

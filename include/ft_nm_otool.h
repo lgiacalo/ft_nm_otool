@@ -31,6 +31,7 @@
 
 # define ERROR1			" The file was not recognized as a valid object file"
 # define ERROR2			": No such file or directory"
+# define ERROR3			": truncated or malformed archive"
 
 /*
 ** File
@@ -82,7 +83,8 @@ void					*ft_error_star(char *str);
 */
 size_t					ft_strlen(const char *s);
 int						ft_strcmp(const char *s1, const char *s2);
-int	          ft_strncmp(const char *s1, const char *s2, size_t n);
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
+int						ft_atoi(const char *str);
 int						ft_chrstr_ind(char c, char *str);
 
 #endif

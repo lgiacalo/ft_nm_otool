@@ -44,7 +44,7 @@ int		ft_is_fat(uint32_t magic)
 	return (EXIT_FAILURE);
 }
 
-int		ft_is_arc(char *arc)
+int	ft_is_arc(char *arc)
 {
 	if (!ft_strncmp(arc, "!<arch>\n", 8))
 		return (EXIT_SUCCESS);
