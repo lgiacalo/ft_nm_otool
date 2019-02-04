@@ -24,8 +24,10 @@ t_env	*ft_init_env(void)
 	t_env	*e;
 
 	e = env();
-	e->fstat_size = 0;
+	e->cmd = OTOOL;
+	e->opt = 0;
+	e->file_size = 0;
 	e->ptr = NULL;
-	e->magic_number = 0;
+	e->magic = 0;
 	return (e);
 }

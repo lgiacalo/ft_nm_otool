@@ -29,11 +29,12 @@
 
 typedef struct				s_env
 {
+	char					*cmd;
 	int						opt;			//bits
 	char					*file_name;
-	size_t					fstat_size;
+	size_t					file_size;
 	void					*ptr;
-	uint32_t				magic_number;
+	uint32_t				magic;
 }							t_env;
 
 /*

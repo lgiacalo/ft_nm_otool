@@ -15,7 +15,7 @@
 void	ft_print()
 {
 	ft_print_env();
-	ft_print_file();
+//	ft_print_file();
 }
 
 void	ft_start_nm(char *name)
@@ -28,22 +28,27 @@ void	ft_start_nm(char *name)
 
 void	ft_loop_args(int argc, char **argv, int ind)
 {
-	int	fd;
+	int		fd;
+	int		i;
+	char	*file;
 
-	while (ind < argc)
+	i = ind - 1;
+	while (++i < argc || ind == argc)
 	{
-		if (ft_open_file(NM, argv[ind], &fd))
+		file = (ind == argc) ? "a.out" : argv[ind];
+		if (ft_open_file(env()->cmd, file, &fd))
 		{
-			if (ft_check_file(fd, argv[ind], NM, &(env()->fstat_size)))
+			if (ft_check_file(fd, file, env()->cmd, &(env()->file_size)))
 			{
-				if (ft_mmap_file(fd, env()->fstat_size, &(env()->ptr)))
-					ft_start_nm(argv[ind]);
-				ft_print();
-				ft_munmap_file(env()->fstat_size, &(env()->ptr));
+				if (ft_mmap_file(fd, env()->file_size, &(env()->ptr)))
+				{
+					ft_print();
+					ft_reading_file(file);
+				}
+				ft_munmap_file(env()->file_size, &(env()->ptr));
 			}
-			ft_close_file(NM, argv[ind], fd);
+			ft_close_file(env()->cmd, file, fd);
 		}
-		ind++;
 	}
 }
 
@@ -59,7 +64,7 @@ int		main(int argc, char **argv)
 	printf("Debut projet NM\n");
 
 	e = ft_init_env();
-	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
+	ind = ft_parse_option(argc, argv, e->cmd, &(e->opt));
 	if (!ind || ind == argc)
 		return (ft_usage_nm());
 

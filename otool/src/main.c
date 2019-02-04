@@ -24,7 +24,7 @@ void	ft_open_close(int argc, char **argv)
 			ft_error_void((argc == 1) ? "a.out" : argv[i]);
 		else
 		{
-			ft_check_file(fd, (argc == 1) ? "a.out" : argv[i], OTOOL, &(env()->fstat_size));
+			ft_check_file(fd, (argc == 1) ? "a.out" : argv[i], OTOOL, &(env()->file_size));
 			if (close(fd) < 0)
 				ft_error_void((argc == 1) ? "a.out" : argv[i]);
 		}

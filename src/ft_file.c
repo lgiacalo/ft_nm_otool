@@ -52,7 +52,7 @@ int		ft_close_file(char *cmd, char *file, int fd)
 	return (EXIT_SUCCESS);
 }
 
-int		ft_check_file(int fd, char *file, char *exec, size_t *size)
+int		ft_check_file(int fd, char *file, char *cmd, size_t *size)
 {
 	struct stat	stat;
 
@@ -60,8 +60,8 @@ int		ft_check_file(int fd, char *file, char *exec, size_t *size)
 		return (ft_error_int("function fstat"));
 	*size = stat.st_size;
 	if (!(S_ISREG(stat.st_mode)) && !(S_ISLNK(stat.st_mode)))
-		return (ft_error_int3(exec, file, ERROR1));
+		return (ft_error_int3(cmd, file, ERROR1));
 	if (*size <= 0)
-		return (ft_error_int3(exec, file, ERROR1));
+		return (ft_error_int3(cmd, file, ERROR1));
 	return (EXIT_SUCCESS);
 }

@@ -35,7 +35,7 @@ SRC_NAME	=	main.c env.c usage.c\
 				print_info.c
 
 INC_NAME	=	ft_otool.h
-OBJ_NAME	=	$(SRC_NAME:.c=.o) 
+OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
 ################################################################################
 
@@ -54,7 +54,7 @@ INC_NAME_P	=	ft_nm_otool.h
 SRC_PATH_P	=	../src
 INC_PATH_P	=	../include
 
-OBJ_NAME_P	=	$(SRC_NAME_P:.c=.o) 
+OBJ_NAME_P	=	$(SRC_NAME_P:.c=.o)
 
 SRC_P		=	$(addprefix $(SRC_PATH_P)/, $(SRC_NAME_P))
 OBJ_P		=	$(addprefix $(OBJ_PATH)/, $(OBJ_NAME_P))

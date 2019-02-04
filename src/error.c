@@ -36,3 +36,10 @@ int		ft_error_int3(char *str1, char *str2, char *str3)
 	ft_putstr("\n");
 	return (EXIT_FAILURE);
 }
+
+void	ft_error_void3(char *str1, char *str2, char *str3)
+{
+	ft_print_str(str1, str2, str3);
+	ft_putstr("\n");
+	return ;
+}

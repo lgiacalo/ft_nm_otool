@@ -37,7 +37,7 @@
 */
 int						ft_open_file(char *cmd, char *file, int *fd);
 int						ft_close_file(char *cmd, char *file, int fd);
-int						ft_check_file(int fd, char *file, char *exec, size_t *size);
+int						ft_check_file(int fd, char *file, char *cmd, size_t *size);
 int						ft_mmap_file(int fd, size_t size, void **ptr);
 int						ft_munmap_file(size_t size, void **ptr);
 
@@ -62,6 +62,7 @@ void					ft_print_int16(char *str1, unsigned long long int nbr, char *str2);
 ** Error
 */
 void					ft_error_void(char *str);
+void          ft_error_void3(char *str1, char *str2, char *str3);
 int						ft_error_int(char *str);
 int						ft_error_int3(char *str1, char *str2, char *str3);
 void					*ft_error_star(char *str);
@@ -71,6 +72,7 @@ void					*ft_error_star(char *str);
 */
 size_t					ft_strlen(const char *s);
 int						ft_strcmp(const char *s1, const char *s2);
+int	          ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_chrstr_ind(char c, char *str);
 
 #endif

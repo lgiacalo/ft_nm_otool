@@ -63,10 +63,10 @@ void	handle_64(char *ptr)
 
 void	ft_nm(char *ptr)
 {
-	int	magic_number;
+	int	magic;
 	
-	magic_number = *(int *)ptr;
-	if (magic_number == MH_MAGIC_64)
+	magic = *(int *)ptr;
+	if (magic == MH_MAGIC_64)
 		handle_64(ptr);
 }
 
