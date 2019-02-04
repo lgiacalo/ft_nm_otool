@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 16:34:37 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:49:14 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct				s_env
 */
 t_env						*env(void);
 t_env						*ft_init_env(void);
+void						ft_reinit_env(void);
 
 
 /*

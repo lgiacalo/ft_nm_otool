@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 19:58:04 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:55:35 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_print()
 void	ft_next()
 {
 	ft_print();
+	ft_print_file();
 }
 
 void	ft_reading_file(char *name)
@@ -51,7 +52,8 @@ void	ft_loop_args(int argc, char **argv, int ind)
 	i = ind - 1;
 	while (++i < argc || ind == argc)
 	{
-		file = (ind == argc) ? "a.out" : argv[ind];
+		ft_reinit_env();
+		file = (ind == argc) ? "a.out" : argv[i];
 		if (ft_open_file(env()->cmd, file, &fd))
 		{
 			if (ft_check_file(fd, file, env()->cmd, &(env()->file_size)))
