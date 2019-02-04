@@ -6,11 +6,18 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 18:35:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 17:37:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:46:21 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
+
+int		ft_multi_args(int ind, int argc)
+{
+	if ((argc - ind) > 1)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
 
 int		ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt)
 {

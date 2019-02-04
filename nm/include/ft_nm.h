@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 13:49:14 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:39:38 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct				s_env
 {
 	char					*cmd;
 	int						opt;			//bits
+	uint8_t					print_name;
 	char					*file_name;
 	size_t					file_size;
 	void					*ptr;

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 17:16:19 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:38:48 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int           ft_is_arc(char *arc);
 /*
 ** Option
 */
+int						ft_multi_args(int ind, int argc);
 int						ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt);
 
 /*

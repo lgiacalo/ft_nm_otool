@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:47:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/03 17:08:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:37:39 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_print_env(void)
 
 	e = env();
 	ft_putstr("Info NM ----- ENV ---------\n");
+	ft_print_str("Cmd: \t", e->cmd, "\n");
+	ft_print_str("Print_name: \t", (e->print_name) ? "yes" : "non", "\n");
 	ft_print_str("File_name: \t", e->file_name, "\n");
 	ft_print_int("File_size: \t", e->file_size, "\n");
 	ft_print_int16("File_ptr: \t", (unsigned long long int)e->ptr, "\n");
