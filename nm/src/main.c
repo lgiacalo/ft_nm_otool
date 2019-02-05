@@ -28,14 +28,19 @@ void	ft_fatbinary(void)
 {
 	struct fat_header	header;
 	struct fat_arch_64	arch;
+	uint8_t							i;
 
 	ft_print();
-	header = ft_record_fat_header(env()->ptr);
+	ft_record_fat_header(env()->ptr, &header);
 	ft_print_fat_header(&header);
-	arch = ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header));
-	ft_print_fat_arch_64(&arch);
-	arch = ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header) + sizeof(struct fat_arch));
-	ft_print_fat_arch_64(&arch);
+
+	i = -1;
+	while (++i < header.nfat_arch)
+	{
+		ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
+			+ i * sizeof(struct fat_arch), &arch);
+		ft_print_fat_arch_64(&arch);
+	}
 }
 
 void	ft_reading_file(char *name)
@@ -45,7 +50,7 @@ void	ft_reading_file(char *name)
 	e = env();
 	e->file_name = name;
 	e->magic = *((uint32_t *)(e->ptr));
-	e->swap = ft_swap(e->magic);
+	e->swap = ft_is_swap(e->magic);
 	if (ft_is_mh(e->magic))
 		return (ft_print());
 	else if (ft_is_fat(e->magic))

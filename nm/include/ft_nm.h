@@ -58,12 +58,18 @@ void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
 /*
 **	Record structs
 */
-struct fat_header			ft_record_fat_header(void *header);
-struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
+int			ft_record_fat_header(void *header, struct fat_header *ret);
+
+int 	ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst);
+//struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
+struct fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
 
 /*
 **	Swap
 */
+struct fat_arch_64			*ft_swap_fat_arch_64(uint32_t magic, struct fat_arch_64 *arch);
+struct fat_arch					*ft_swap_fat_arch(uint32_t magic, struct fat_arch *arch);
+
 
 uint16_t					ft_swap16(uint32_t magic, uint16_t nb);
 uint32_t					ft_swap32(uint32_t magic, uint32_t nb);

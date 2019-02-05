@@ -20,7 +20,7 @@ int	ft_is_64(uint32_t magic)
 	return (EXIT_FAILURE);
 }
 
-int	ft_swap(uint32_t magic)
+int	ft_is_swap(uint32_t magic)
 {
 	if (magic == FAT_CIGAM || magic == MH_CIGAM
 		|| magic == FAT_CIGAM_64 || magic == MH_CIGAM_64)
