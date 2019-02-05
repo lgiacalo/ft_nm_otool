@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 14:14:35 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:08:48 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,21 @@ t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
 
 void						ft_init_fat_header(struct fat_header *header);
+void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
 
 /*
 **	Record structs
 */
-struct fat_header			ft_record_fat_header(struct fat_header *header);
+struct fat_header			ft_record_fat_header(void *header);
+struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
 
 /*
 **	Swap
 */
-size_t						ft_swap_fat_header(struct fat_header *header);
+
+uint16_t					ft_swap16(uint32_t magic, uint16_t nb);
+uint32_t					ft_swap32(uint32_t magic, uint32_t nb);
+uint64_t					ft_swap64(uint32_t magic, uint64_t nb);
 
 /*
 **	Verif ptr in file
@@ -78,6 +83,7 @@ void						ft_print_option_nm(void);
 void						ft_print_env(void);
 void						ft_print_file(void);
 void						ft_print_fat_header(struct fat_header *header);
+void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
 
 /*
 ** Usage
