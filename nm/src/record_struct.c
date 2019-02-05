@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:13:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:06:24 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:48:36 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct fat_arch_64	ft_record_fat_arch_64(uint32_t magic, void *arch)
 	ft_init_fat_arch_64(&ret);
 	is_64 = ft_is_64(magic);
 	is_swap = ft_swap(magic);
-	if (!(arch = ft_safe(arch, (is_64) 
+	if (!(arch = ft_safe(arch, (is_64)
 					? sizeof(struct fat_arch_64) : sizeof(struct fat_arch))))
 		ft_error_int3(env()->cmd, env()->file_name, ERROR3);
 	else
@@ -32,12 +32,7 @@ struct fat_arch_64	ft_record_fat_arch_64(uint32_t magic, void *arch)
 		{
 			src = ((struct fat_arch *)arch);
 			ret.cputype = ft_swap32(magic, src->cputype);
-			if (ret.cputype == CPU_TYPE_X86_64)
-				printf("CPU_TYPE_X86_64 : yes = %d!!\n", CPU_TYPE_X86_64);
 			ret.cpusubtype = ft_swap32(magic, src->cpusubtype);
-			if ((ret.cpusubtype & ~CPU_SUBTYPE_MASK) == CPU_SUBTYPE_X86_64_ALL)
-				printf("CPU_SUBTYPE_X86_64_ALL : yes = %d!!\n", CPU_SUBTYPE_X86_64_ALL);
-			printf("CPU_SUBTYPE_X86_64_ALL : yes = %d!!\n", CPU_SUBTYPE_X86_64_ALL);
 			ret.offset = ft_swap32(magic, src->offset);
 			ret.size = ft_swap32(magic, src->size);
 			ret.align = ft_swap32(magic, src->align);
@@ -46,7 +41,6 @@ struct fat_arch_64	ft_record_fat_arch_64(uint32_t magic, void *arch)
 	}
 	return (ret);
 }
-
 
 struct fat_header	ft_record_fat_header(void *header)
 {

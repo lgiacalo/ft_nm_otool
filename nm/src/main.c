@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:07:23 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:45:36 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void	ft_fatbinary(void)
 {
 	struct fat_header	header;
 	struct fat_arch_64	arch;
- 
+
 	ft_print();
 	header = ft_record_fat_header(env()->ptr);
 	ft_print_fat_header(&header);
-
 	arch = ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header));
 	ft_print_fat_arch_64(&arch);
 	arch = ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header) + sizeof(struct fat_arch));

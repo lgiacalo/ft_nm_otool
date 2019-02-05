@@ -6,13 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:03:20 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 21:19:55 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:43:33 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	int resultat;
 	int signe;

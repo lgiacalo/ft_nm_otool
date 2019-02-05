@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 13:22:17 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 16:25:02 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:44:51 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,3 @@ uint64_t	ft_swap64(uint32_t magic, uint64_t nb)
 {
 	return ((ft_swap(magic)) ? OSSwapInt64(nb) : nb);
 }
-
-

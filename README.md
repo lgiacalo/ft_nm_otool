@@ -6,3 +6,10 @@
 
 A Penser : 
 - fichier object vide dans lib
+
+A faire : 
+- Verifier les name cpu
+- ft_record_fat_arch ! decouper fonction - au niveau de la copie selon arch_64 ou pas et swap ou pas
+- Penser a une fonction de deplacement pour chaque structure si struct 64 !
+- Jamais oublier le SAFE !!
+

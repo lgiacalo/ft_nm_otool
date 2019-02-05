@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 22:24:59 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 14:45:56 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:45:13 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_init_fat_arch_64(struct fat_arch_64 *arch)
 	arch->cpusubtype = 0;
 	arch->offset = 0;
 	arch->size = 0;
-	arch->align = 0 ;
+	arch->align = 0;
 	arch->reserved = 0;
 }
 

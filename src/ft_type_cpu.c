@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 17:10:21 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:35:22 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:48:31 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ char	*ft_get_name_cpu(int cputype, int cpusubtype)
 	unsigned int	i;
 	unsigned int	j;
 
+
+	if (cputype == CPU_TYPE_X86_64)
+		printf("CPU_TYPE_X86_64 : yes = %d!!\n", CPU_TYPE_X86_64);
+	if ((cpusubtype & ~CPU_SUBTYPE_MASK) == CPU_SUBTYPE_X86_64_ALL)
+		printf("CPU_SUBTYPE_X86_64_ALL : yes = %d!!\n", CPU_SUBTYPE_X86_64_ALL);
 	i = -1;
 	while (++i < 52)
 	{
