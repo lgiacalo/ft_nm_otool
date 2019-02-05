@@ -47,7 +47,7 @@ INC	= $(addprefix $(INC_PATH)/, $(INC_NAME))
 
 SRC_NAME_P	=	function_nbr.c function_str.c\
 				func1_libft.c ft_option.c error.c\
-				ft_file.c ft_type_file.c
+				ft_file.c ft_type_file.c ft_type_cpu.c
 
 INC_NAME_P	=	ft_nm_otool.h
 
