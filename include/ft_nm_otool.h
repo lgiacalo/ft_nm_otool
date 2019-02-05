@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 21:31:08 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 13:42:46 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define ERROR1			" The file was not recognized as a valid object file"
 # define ERROR2			": No such file or directory"
 # define ERROR3			": truncated or malformed archive"
+
+# define MY_ARCHI		CPU_TYPE_X86_64
 
 /*
 ** File

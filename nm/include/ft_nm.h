@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 12:31:19 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:14:35 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct				s_env
 	size_t					file_size;
 	void					*ptr;
 	uint32_t				magic;
+	uint8_t					swap;
 }							t_env;
 
 typedef struct				s_arc
@@ -50,6 +51,18 @@ typedef struct				s_arc
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
+
+void						ft_init_fat_header(struct fat_header *header);
+
+/*
+**	Record structs
+*/
+struct fat_header			ft_record_fat_header(struct fat_header *header);
+
+/*
+**	Swap
+*/
+size_t						ft_swap_fat_header(struct fat_header *header);
 
 /*
 **	Verif ptr in file

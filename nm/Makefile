@@ -31,7 +31,7 @@ SRC_PATH	=	src
 INC_PATH	=	include
 OBJ_PATH	=	obj
 
-SRC_NAME	=	main.c env.c verif.c usage.c\
+SRC_NAME	=	main.c env.c verif.c usage.c swap.c record_struct.c\
 				print_info.c
 
 INC_NAME	=	ft_nm.h
