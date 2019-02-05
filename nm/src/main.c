@@ -39,6 +39,7 @@ void	ft_fatbinary(void)
 	{
 		ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
 			+ i * sizeof(struct fat_arch), &arch);
+		//TODO: modifiez sizeof(struct fat_arch) en prenant en compte si fat_arch64
 		ft_print_fat_arch_64(&arch);
 	}
 }
