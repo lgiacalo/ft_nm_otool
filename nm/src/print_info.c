@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:47:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 20:49:29 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:31:11 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	ft_print_env(void)
 			((uint32_t)*((uint32_t*)(e->ptr))), "\n");
 	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic),
 			"\n\n");
+}
+
+void	ft_print_fat_header(struct fat_header *header)
+{
+	if (!header)
+		return ;
+	ft_putstr("Info NM ----- FAT_HEADER ---------\n");
+	ft_print_int16("Magic number: \t", header->magic, "\n");
+	ft_print_int("Nb struct fat_arch: \t", header->nfat_arch, "\n\n");
 }
 
 void	ft_print_file(void)

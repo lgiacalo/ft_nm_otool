@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 21:46:46 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:32:18 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ void	ft_archive_static(void)
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }
 
+void	ft_fatbinary(void)
+{
+	struct fat_header	*header_f;
+ 
+	// inverser header si besoin ! look magic number 
+	ft_print();
+	if (!(header_f = (ft_safe(env()->ptr, sizeof(struct fat_header)))))
+		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
+	ft_print_fat_header(header_f);
+}
+
 void	ft_reading_file(char *name)
 {
 	t_env	*e;
@@ -34,7 +45,7 @@ void	ft_reading_file(char *name)
 	if (ft_is_mh(e->magic))
 		return (ft_print());
 	else if (ft_is_fat(e->magic))
-		return (ft_print());
+		return (ft_fatbinary());
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 20:59:03 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:31:19 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void						ft_reinit_env(void);
 **	Verif ptr in file
 */
 int							ft_is_safe(void *ptr, size_t size);
+void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
 
 /*
@@ -63,6 +64,7 @@ int							ft_verif_header_line(void *ptr);
 void						ft_print_option_nm(void);
 void						ft_print_env(void);
 void						ft_print_file(void);
+void						ft_print_fat_header(struct fat_header *header);
 
 /*
 ** Usage
