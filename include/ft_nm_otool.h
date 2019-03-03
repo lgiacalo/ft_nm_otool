@@ -96,5 +96,7 @@ int						ft_strcmp(const char *s1, const char *s2);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_atoi(const char *str);
 int						ft_chrstr_ind(char c, char *str);
+int						ft_power(int nb, int power);
+
 
 #endif

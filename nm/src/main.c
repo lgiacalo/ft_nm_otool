@@ -14,35 +14,49 @@
 
 void	ft_print(void)
 {
-	ft_print_env();
+	//ft_print_env();
 }
 
 void	ft_archive_static(void)
 {
-	ft_print();
 	if (!ft_verif_header_line((void *)((char *)env()->ptr + 8)))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }
+
+/*
+**	Gestion fat binary
+**		Lecture Fat_header
+**			+ boucle sur n (fat_header.nfat_arch) fat_arch(64 ?)
+*/
 
 void	ft_fatbinary(void)
 {
 	struct fat_header	header;
 	struct fat_arch_64	arch;
 	uint8_t							i;
+	size_t							size_struct_arch;
 
-	ft_print();
 	ft_record_fat_header(env()->ptr, &header);
 	ft_print_fat_header(&header);
 
 	i = -1;
+	size_struct_arch = (ft_is_64(header.magic)
+			? sizeof(struct fat_arch_64) : sizeof(struct fat_arch));
 	while (++i < header.nfat_arch)
 	{
 		ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
-			+ i * sizeof(struct fat_arch), &arch);
-		//TODO: modifiez sizeof(struct fat_arch) en prenant en compte si fat_arch64
+			+ i * size_struct_arch, &arch);
 		ft_print_fat_arch_64(&arch);
+		// arch a gerer, deplacement, recuperer mach65fat_header
+		//	 et renvoyer sur gestion mh
 	}
 }
+
+/*
+**	Lecture file
+**		upd env : file_name + magic + swap
+**		redirection file selon type (fat, archive, obj)
+*/
 
 void	ft_reading_file(char *name)
 {
@@ -52,6 +66,7 @@ void	ft_reading_file(char *name)
 	e->file_name = name;
 	e->magic = *((uint32_t *)(e->ptr));
 	e->swap = ft_is_swap(e->magic);
+	ft_print_env();
 	if (ft_is_mh(e->magic))
 		return (ft_print());
 	else if (ft_is_fat(e->magic))
@@ -63,6 +78,12 @@ void	ft_reading_file(char *name)
 	}
 	return (ft_error_void3(e->cmd, name, ERROR1));
 }
+
+/*
+**	Boucle sur tous les arguments	avec verif + enregistrement du fichier
+**		struct env reinit a chaque tour
+**		update env : file_size + ptr
+*/
 
 void	ft_loop_args(int argc, char **argv, int ind)
 {
@@ -82,7 +103,6 @@ void	ft_loop_args(int argc, char **argv, int ind)
 			{
 				if (ft_mmap_file(fd, env()->file_size, &(env()->ptr)))
 				{
-					ft_print();
 					ft_reading_file(file);
 				}
 				ft_munmap_file(env()->file_size, &(env()->ptr));

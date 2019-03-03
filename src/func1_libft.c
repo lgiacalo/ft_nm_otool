@@ -12,6 +12,19 @@
 
 #include "ft_nm_otool.h"
 
+int	ft_power(int nb, int power)
+{
+	int resultat;
+
+	resultat = 1;
+	if (power < 0)
+		return (0);
+	if (power == 0)
+		return (1);
+	resultat = ft_power(nb, power - 1) * nb;
+	return (resultat);
+}
+
 int		ft_atoi(const char *str)
 {
 	int resultat;

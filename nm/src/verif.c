@@ -14,7 +14,7 @@
 
 int		ft_is_safe(void *ptr, size_t size)
 {
-	if (env()->ptr <= ptr
+	if (ptr && env()->ptr <= ptr
 			&& (env()->ptr + env()->file_size) >= (ptr + size))
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
@@ -22,7 +22,7 @@ int		ft_is_safe(void *ptr, size_t size)
 
 void	*ft_safe(void *ptr, size_t size)
 {
-	if (env()->ptr <= ptr
+	if (ptr && env()->ptr <= ptr
 			&& (env()->ptr + env()->file_size) >= (ptr + size))
 		return (ptr);
 	return (NULL);

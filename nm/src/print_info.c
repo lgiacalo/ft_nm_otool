@@ -22,7 +22,8 @@ void	ft_print_fat_arch_64(struct fat_arch_64 *arch)
 	ft_print_str(ft_get_name_cpu(arch->cputype, (uint16_t)arch->cpusubtype), ")", "\n");
 	ft_print_int("Offset: \t", arch->offset, "\n");
 	ft_print_int("Size: \t\t", arch->size, "\n");
-	ft_print_int("Align: \t\t", arch->align, "\n");
+	ft_print_int("Align: \t\t", ft_power(2, arch->align), " (2^");
+	ft_print_int("", arch->align, ")\n");
 	ft_print_int("Reserved: \t", arch->reserved, "\n\n");
 }
 
