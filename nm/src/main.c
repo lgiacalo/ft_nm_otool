@@ -24,32 +24,43 @@ void	ft_archive_static(void)
 }
 
 /*
+**	gestion de chaque types darch du fat
+*/
+
+void ft_gestion_arch_fat(struct fat_arch_64 *arch)
+{
+	(void)arch;
+	ft_print_fat_arch_64(arch);
+}
+
+
+/*
 **	Gestion fat binary
 **		Lecture Fat_header
 **			+ boucle sur n (fat_header.nfat_arch) fat_arch(64 ?)
 */
 
-void	ft_fatbinary(void)
+void	ft_fatbinary(int my_arch)
 {
 	struct fat_header	header;
 	struct fat_arch_64	arch;
 	uint8_t							i;
-	size_t							size_struct_arch;
-
-	ft_record_fat_header(env()->ptr, &header);
-	ft_print_fat_header(&header);
 
 	i = -1;
-	size_struct_arch = (ft_is_64(header.magic)
-			? sizeof(struct fat_arch_64) : sizeof(struct fat_arch));
+	ft_record_fat_header(env()->ptr, &header);
+	(!my_arch) ? ft_print_fat_header(&header) : 0;
 	while (++i < header.nfat_arch)
 	{
 		ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
-			+ i * size_struct_arch, &arch);
-		ft_print_fat_arch_64(&arch);
-		// arch a gerer, deplacement, recuperer mach65fat_header
-		//	 et renvoyer sur gestion mh
+			+ i * (ft_is_64(header.magic) ? sizeof(struct fat_arch_64)
+			: sizeof(struct fat_arch)), &arch);
+		if (MY_ARCHI == arch.cputype)
+			return (ft_gestion_arch_fat(&arch));
+		(my_arch) ? ft_gestion_arch_fat(&arch) : 0;
 	}
+	if (!my_arch)
+		ft_fatbinary(1);
+	return ;
 }
 
 /*
@@ -70,7 +81,7 @@ void	ft_reading_file(char *name)
 	if (ft_is_mh(e->magic))
 		return (ft_print());
 	else if (ft_is_fat(e->magic))
-		return (ft_fatbinary());
+		return (ft_fatbinary(0));
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;

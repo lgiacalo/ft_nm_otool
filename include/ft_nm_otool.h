@@ -22,6 +22,7 @@
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
 # include <mach-o/fat.h>
+# include <mach-o/arch.h> // a retirer
 
 # define BASE16_U		"0123456789ABCDEF"
 # define BASE16_L		"0123456789abcdef"
