@@ -12,10 +12,18 @@
 
 #include "ft_nm.h"
 
-void	ft_mach_header_64(void	*ptr)
+void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 {
 	//ft_print_env();
 	struct mach_header_64	*mach_header;
+	size_t								size_struct;
+
+	// Ne pas oublier de swap  les structures si besoin !!
+	env()->magic_mh = magic_mh;
+	size_struct = ft_is_64(magic_mh)
+		? sizeof(struct mach_header_64) : sizeof(struct mach_header);
+	if (!ptr || !ft_is_safe(ptr, size_struct))
+		return ;
 
 	(void)mach_header; // copy and/or swap if need
 	// verif safe selon struct avec magic_to_mach_header
@@ -44,9 +52,9 @@ void	ft_reading_file(char *name)
 	e->swap = ft_is_swap(e->magic);
 	ft_print_env();
 	if (ft_is_mh(e->magic))
-		return (ft_mach_header_64(e->ptr));
+		return (ft_mach_header_64(e->ptr, e->magic));
 	else if (ft_is_fat(e->magic))
-		return (ft_fatbinary(1)); // TODO: remettre a 0
+		return (ft_fatbinary(0)); // TODO: remettre a 0
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;

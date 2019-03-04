@@ -36,6 +36,7 @@ typedef struct				s_env
 	size_t					file_size;
 	void					*ptr;
 	uint32_t				magic;
+	uint32_t				magic_mh;
 	uint8_t					swap;
 }							t_env;
 
@@ -60,7 +61,7 @@ void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
 */
 
 void						ft_fatbinary(int my_arch);
-void						ft_mach_header_64(void	*ptr);
+void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 
 /*
 **	Record structs
@@ -88,6 +89,7 @@ uint64_t					ft_swap64(uint32_t magic, uint64_t nb);
 int							ft_is_safe(void *ptr, size_t size);
 void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
+size_t					ft_align(size_t nb, size_t modulo);
 
 /*
 ** Print

@@ -24,17 +24,25 @@ void ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	//creer variable magic_to_mach_header in env ! a remplir ici
 	// et tester dans ft_mach_header_64
 
-	if (!arch || !ft_is_safe(env()->ptr, arch->offset))
-		return ; // + taille de la struct mach_header 64 ou pas !
+	//Ajoutez alignement pour verifier la taille !!! align que sur size ?
+	if (!arch || !ft_is_safe(env()->ptr,
+		ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
+		return ;
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	ft_print_fat_arch_64(arch);
 
 	if (ft_is_mh(magic))
-	 ft_mach_header_64((env()->ptr + arch->offset));
+	 ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
 		printf("its archive static !!\n");
+	else  if (ft_is_fat(magic))
+		printf("Its fat !!! encore ?? !!\n"); // normalement pas possible !
 	else
-		printf("I dont know !!");
+	{
+		//attention magic number inexistant
+		printf("Piege probleme magic number !!\n");
+		ft_print_mach_header_64((struct mach_header_64 *)(env()->ptr + arch->offset));
+	}
 }
 
 /*
@@ -51,7 +59,7 @@ void	ft_fatbinary(int my_arch)
 
 	i = -1;
 	ft_record_fat_header(env()->ptr, &header);
-	(!my_arch) ? ft_print_fat_header(&header) : 0;
+	(!my_arch) ? ft_print_fat_header(&header) : 0; //TODO: a retirer
 	while (++i < header.nfat_arch)
 	{
 		if (!ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)

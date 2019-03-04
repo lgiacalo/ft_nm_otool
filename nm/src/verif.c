@@ -12,6 +12,13 @@
 
 #include "ft_nm.h"
 
+size_t	ft_align(size_t nb, size_t modulo)
+{
+	if ((nb % modulo) == 0)
+		return (nb);
+	return (((nb / modulo) + 1) * modulo);
+}
+
 int		ft_is_safe(void *ptr, size_t size)
 {
 	if (ptr && env()->ptr <= ptr

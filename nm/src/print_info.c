@@ -74,13 +74,15 @@ void	ft_print_env(void)
 
 	e = env();
 	ft_putstr("Info NM ----- ENV ---------\n");
-	ft_print_str("Cmd: \t", e->cmd, "\n");
+	ft_print_str("Cmd: \t\t", e->cmd, "\n");
 	ft_print_str("Print_name: \t", (e->print_name) ? "yes" : "non", "\n");
 	ft_print_str("File_name: \t", e->file_name, "\n");
 	ft_print_int("File_size: \t", e->file_size, "\n");
 	ft_print_int16("File_ptr: \t", (unsigned long long int)e->ptr, "\n");
-	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic),
-			"\n\n");
+	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n");
+	ft_print_int16("Magic_mh number: \t", (unsigned long long int)(e->magic_mh), "\n");
+	ft_print_int("Swap: \t\t", e->swap, "\n\n");
+
 }
 
 void	ft_print_file(void)
