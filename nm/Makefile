@@ -23,7 +23,7 @@ CPPFLAGS	= -Iinclude -I ../include
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= 
+SPY			=
 
 ################################################################################
 
@@ -32,6 +32,7 @@ INC_PATH	=	include
 OBJ_PATH	=	obj
 
 SRC_NAME	=	main.c env.c verif.c usage.c swap.c record_struct.c\
+				fatbinary.c\
 				print_info.c
 
 INC_NAME	=	ft_nm.h

@@ -12,6 +12,22 @@
 
 #include "ft_nm.h"
 
+void	ft_print_mach_header_64(struct mach_header_64	*mach_header)
+{
+	if (!mach_header)
+		return ;
+	ft_putstr("Info NM ----- MACH_HEADER_64 ---------\n");
+	ft_print_int16("Magic number: \t", (unsigned long long int)mach_header->magic, "\n");
+	ft_print_int("CpuType: \t", mach_header->cputype, " (");
+	ft_print_str((char *)(NXGetArchInfoFromCpuType(mach_header->cputype, mach_header->cpusubtype)->name), ")", "\n");
+	ft_print_int16("CpuSubType: \t", (uint16_t)mach_header->cpusubtype, "\n");
+	ft_print_int("File Type: \t", mach_header->filetype, "\n");
+	ft_print_int("Ncmds: \t\t", mach_header->ncmds, "\n");
+	ft_print_int("SizeofCmds: \t", mach_header->sizeofcmds, "\n");
+	ft_print_int16("Flags: \t\t", mach_header->flags, "\n");
+	ft_putstr("\n");
+}
+
 void	ft_print_fat_arch_64(struct fat_arch_64 *arch)
 {
 	if (!arch)
@@ -22,8 +38,8 @@ void	ft_print_fat_arch_64(struct fat_arch_64 *arch)
 	ft_print_int16("CpuSubType: \t", (uint16_t)arch->cpusubtype, "\n");
 	ft_print_int("Offset: \t", arch->offset, "\n");
 	ft_print_int("Size: \t\t", arch->size, "\n");
-	ft_print_int("Align: \t\t", ft_power(2, arch->align), " (2^");
-	ft_print_int("", arch->align, ")\n");
+	ft_print_int("Align: \t\t2^", arch->align, "");
+	ft_print_int(" (", ft_power(2, arch->align), ")\n");
 	ft_print_int("Reserved: \t", arch->reserved, "\n\n");
 }
 
@@ -63,8 +79,6 @@ void	ft_print_env(void)
 	ft_print_str("File_name: \t", e->file_name, "\n");
 	ft_print_int("File_size: \t", e->file_size, "\n");
 	ft_print_int16("File_ptr: \t", (unsigned long long int)e->ptr, "\n");
-	ft_print_int16("Magic number: \t", (unsigned long long int)
-			((uint32_t)*((uint32_t*)(e->ptr))), "\n");
 	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic),
 			"\n\n");
 }

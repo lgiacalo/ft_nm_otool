@@ -12,55 +12,20 @@
 
 #include "ft_nm.h"
 
-void	ft_print(void)
+void	ft_mach_header_64(void	*ptr)
 {
 	//ft_print_env();
+	struct mach_header_64	*mach_header;
+
+	(void)mach_header; // copy and/or swap if need
+	// verif safe selon struct avec magic_to_mach_header
+	ft_print_mach_header_64((struct mach_header_64 *)ptr);
 }
 
 void	ft_archive_static(void)
 {
 	if (!ft_verif_header_line((void *)((char *)env()->ptr + 8)))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
-}
-
-/*
-**	gestion de chaque types darch du fat
-*/
-
-void ft_gestion_arch_fat(struct fat_arch_64 *arch)
-{
-	(void)arch;
-	ft_print_fat_arch_64(arch);
-}
-
-
-/*
-**	Gestion fat binary
-**		Lecture Fat_header
-**			+ boucle sur n (fat_header.nfat_arch) fat_arch(64 ?)
-*/
-
-void	ft_fatbinary(int my_arch)
-{
-	struct fat_header	header;
-	struct fat_arch_64	arch;
-	uint8_t							i;
-
-	i = -1;
-	ft_record_fat_header(env()->ptr, &header);
-	(!my_arch) ? ft_print_fat_header(&header) : 0;
-	while (++i < header.nfat_arch)
-	{
-		ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
-			+ i * (ft_is_64(header.magic) ? sizeof(struct fat_arch_64)
-			: sizeof(struct fat_arch)), &arch);
-		if (MY_ARCHI == arch.cputype)
-			return (ft_gestion_arch_fat(&arch));
-		(my_arch) ? ft_gestion_arch_fat(&arch) : 0;
-	}
-	if (!my_arch)
-		ft_fatbinary(1);
-	return ;
 }
 
 /*
@@ -79,9 +44,9 @@ void	ft_reading_file(char *name)
 	e->swap = ft_is_swap(e->magic);
 	ft_print_env();
 	if (ft_is_mh(e->magic))
-		return (ft_print());
+		return (ft_mach_header_64(e->ptr));
 	else if (ft_is_fat(e->magic))
-		return (ft_fatbinary(0));
+		return (ft_fatbinary(1)); // TODO: remettre a 0
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;

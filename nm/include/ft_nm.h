@@ -56,6 +56,13 @@ void						ft_init_fat_header(struct fat_header *header);
 void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
 
 /*
+**	Gestion fichier
+*/
+
+void						ft_fatbinary(int my_arch);
+void						ft_mach_header_64(void	*ptr);
+
+/*
 **	Record structs
 */
 int			ft_record_fat_header(void *header, struct fat_header *ret);
@@ -90,6 +97,7 @@ void						ft_print_env(void);
 void						ft_print_file(void);
 void						ft_print_fat_header(struct fat_header *header);
 void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
+void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
 
 /*
 ** Usage
