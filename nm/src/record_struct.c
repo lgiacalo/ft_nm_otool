@@ -18,7 +18,7 @@ int 	ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst)
 
 	if (!(arch = ft_safe(arch, (ft_is_64(magic))
 					? sizeof(struct fat_arch_64) : sizeof(struct fat_arch))))
-		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	else
 	{
 			*dst = *((struct fat_arch_64 *)arch);
@@ -36,7 +36,7 @@ int 	ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst)
 int		ft_record_fat_header(void *header, struct fat_header *ret)
 {
 	if (!(header = (ft_safe(header, sizeof(struct fat_header)))))
-		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	else
 	{
 		*ret = *((struct fat_header *)(header));

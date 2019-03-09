@@ -28,6 +28,7 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 	(void)mach_header; // copy and/or swap if need
 	// verif safe selon struct avec magic_to_mach_header
 	ft_print_mach_header_64((struct mach_header_64 *)ptr);
+	printf("Good \n");
 }
 
 void	ft_archive_static(void)

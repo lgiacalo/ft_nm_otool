@@ -32,7 +32,7 @@ void	ft_print_fat_arch_64(struct fat_arch_64 *arch)
 {
 	if (!arch)
 		return ;
-	ft_putstr("Info NM ----- FAT_ARCH_64 ---------\n");
+	ft_putstr("\nInfo NM --------------------- FAT_ARCH_64 ---------------------\n");
 	ft_print_int("CpuType: \t", arch->cputype, " (");
 	ft_print_str((char *)(NXGetArchInfoFromCpuType(arch->cputype, arch->cpusubtype)->name), ")", "\n");
 	ft_print_int16("CpuSubType: \t", (uint16_t)arch->cpusubtype, "\n");

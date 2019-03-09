@@ -33,6 +33,9 @@
 # define ERROR1			" The file was not recognized as a valid object file"
 # define ERROR2			": No such file or directory"
 # define ERROR3			": truncated or malformed archive"
+# define ERROR4			": truncated or malformed fat file"
+# define ERROR5			" for architecture x86_64 is not a Mach-O file or an archive file."
+
 
 # define MY_ARCHI		CPU_TYPE_X86_64
 
