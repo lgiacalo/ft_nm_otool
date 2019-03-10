@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/10 20:05:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    verifier si mh, or .a archive (fat d'archives)
 */
 
-int ft_gestion_arch_fat(struct fat_arch_64 *arch)
+int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 {
 	uint32_t magic;
 	//TODO:align
@@ -29,7 +29,7 @@ int ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	ft_print_fat_arch_64(arch);
 	if (ft_is_mh(magic))
-	 ft_mach_header_64((env()->ptr + arch->offset), magic);
+		ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
 		printf("its archive static !!\n");
 	else  if (ft_is_fat(magic))
@@ -73,8 +73,8 @@ void	ft_fatbinary(int my_arch)
 {
 	struct fat_header	header;
 	struct fat_arch_64	arch;
-	uint8_t							i;
-	size_t							overlaps;
+	uint8_t				i;
+	size_t				overlaps;
 
 	i = -1;
 	ft_record_fat_header(env()->ptr, &header);
@@ -89,6 +89,6 @@ void	ft_fatbinary(int my_arch)
 		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
 			return ;
 	}
-	(!my_arch) ? ft_fatbinary(1) : 0;
+ss	(!my_arch) ? ft_fatbinary(1) : 0;
 	return ;
 }
