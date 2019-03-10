@@ -31,7 +31,7 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	if (ft_is_mh(magic))
 		ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
-		printf("its archive static !!\n");
+		ft_archive_static(env()->ptr + arch->offset);
 	else  if (ft_is_fat(magic))
 		printf("Its fat !!! encore ?? !!\n"); // normalement pas possible !
 	else

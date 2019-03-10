@@ -31,13 +31,6 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 	printf("Good \n");
 }
 
-void	ft_archive_static(void)
-{
-	printf("File Archive static \n");
-	if (!ft_verif_header_line((void *)((char *)env()->ptr + 8)))
-		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
-}
-
 /*
 **	Lecture file
 **		upd env : file_name + magic + swap
@@ -60,7 +53,7 @@ void	ft_reading_file(char *name)
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
-		return (ft_archive_static());
+		return (ft_archive_static(e->ptr));
 	}
 	return (ft_error_void3(e->cmd, name, ERROR1));
 }
