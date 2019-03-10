@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/10 20:05:42 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/10 20:05:21 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ void	ft_fatbinary(int my_arch)
 		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
 			return ;
 	}
-ss	(!my_arch) ? ft_fatbinary(1) : 0;
+	(!my_arch) ? ft_fatbinary(1) : 0;
 	return ;
 }
