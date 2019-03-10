@@ -20,17 +20,14 @@
 int ft_gestion_arch_fat(struct fat_arch_64 *arch)
 {
 	uint32_t magic;
-
-	//creer variable magic_to_mach_header in env ! a remplir ici
-	// et tester dans ft_mach_header_64
-
+	//TODO:align
 	//Ajoutez alignement pour verifier la taille !!! align que sur size ?
+	//Probleme alignement memoire avec resources/tests/archTest/998_valid_x86-64_i386.out
 	if (!arch || !ft_is_safe(env()->ptr,
 		ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	ft_print_fat_arch_64(arch);
-
 	if (ft_is_mh(magic))
 	 ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
@@ -39,11 +36,30 @@ int ft_gestion_arch_fat(struct fat_arch_64 *arch)
 		printf("Its fat !!! encore ?? !!\n"); // normalement pas possible !
 	else
 	{
-		//attention magic number inexistant
 		printf("Piege probleme magic number !!\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR5));
-		ft_print_mach_header_64((struct mach_header_64 *)(env()->ptr + arch->offset));
 	}
+	return (EXIT_SUCCESS);
+}
+
+/*
+**	Gestion fat binary2
+**		Verif overlaps offset
+**			+ call ft_gestion_arch_fat()
+*/
+
+int		ft_fatbinary2(int ind, size_t *overlaps, struct fat_arch_64 *arch, int my_arch)
+{
+	if (ind && arch->offset < *overlaps)
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
+	*overlaps = ft_align(arch->offset + arch->size, ft_power(2, arch->align));
+	if (!my_arch && MY_ARCHI == arch->cputype)
+	{
+		ft_gestion_arch_fat(arch);
+		return (EXIT_FAILURE);
+	}
+	if (my_arch && !ft_gestion_arch_fat(arch))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -58,7 +74,7 @@ void	ft_fatbinary(int my_arch)
 	struct fat_header	header;
 	struct fat_arch_64	arch;
 	uint8_t							i;
-	size_t							overlaps = 0;
+	size_t							overlaps;
 
 	i = -1;
 	ft_record_fat_header(env()->ptr, &header);
@@ -67,18 +83,11 @@ void	ft_fatbinary(int my_arch)
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR4));
 	while (++i < header.nfat_arch)
 	{
-		if (!ft_record_fat_arch_64(header.magic, env()->ptr + sizeof(struct fat_header)
-			+ i * (ft_is_64(header.magic) ? sizeof(struct fat_arch_64)
-			: sizeof(struct fat_arch)), &arch) || (i && arch.offset < overlaps))
-			return (ft_error_void3(env()->cmd, env()->file_name, ERROR4));
-		if (!my_arch && MY_ARCHI == arch.cputype)
-			return (ft_gestion_arch_fat(&arch));
-		if (my_arch)
-			if (ft_)
-		(my_arch) ? ft_gestion_arch_fat(&arch) : 0;
-		printf("Valeur overlaps = %zu || offset = %llu\n", overlaps, arch.offset);
-
-		overlaps = ft_align(arch.offset + arch.size, ft_power(2, arch.align));
+		if (!ft_record_fat_arch_64(header.magic, env()->ptr +
+		sizeof(struct fat_header) + i * (ft_is_64(header.magic) ?
+		sizeof(struct fat_arch_64) : sizeof(struct fat_arch)), &arch) ||
+		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
+			return ;
 	}
 	(!my_arch) ? ft_fatbinary(1) : 0;
 	return ;

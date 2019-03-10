@@ -79,7 +79,10 @@ void	ft_print_env(void)
 	ft_print_str("File_name: \t", e->file_name, "\n");
 	ft_print_int("File_size: \t", e->file_size, "\n");
 	ft_print_int16("File_ptr: \t", (unsigned long long int)e->ptr, "\n");
-	ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n");
+	if (ft_is_arc((char *)(e->ptr)))
+		ft_print_str("Magic number: \t", "archive", "\n");
+	else
+		ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n");
 	ft_print_int16("Magic_mh number: \t", (unsigned long long int)(e->magic_mh), "\n");
 	ft_print_int("Swap: \t\t", e->swap, "\n\n");
 

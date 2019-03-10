@@ -33,6 +33,7 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 
 void	ft_archive_static(void)
 {
+	printf("File Archive static \n");
 	if (!ft_verif_header_line((void *)((char *)env()->ptr + 8)))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }
