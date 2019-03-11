@@ -21,4 +21,6 @@ void	ft_archive_static(void *ptr)
 	printf("File Archive static \n");
 	if (!ft_verif_header_line((void *)((char *)ptr + 8)))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
+
+	ft_print_symtab_header(ptr + 8);
 }

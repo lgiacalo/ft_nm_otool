@@ -18,6 +18,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h> // a retirer - printf
+# include <time.h> // a retirer - ctime
 
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>

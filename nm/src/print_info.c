@@ -12,6 +12,24 @@
 
 #include "ft_nm.h"
 
+void 	ft_print_symtab_header(void *ptr)
+{
+	time_t	t;
+
+	if (!ptr)
+		return ;
+	t = (ft_atoi((char *)(ptr + 16)));
+	ft_putstr("Info NM --- SYMTAB HEADER lib.a (Header Line)----\n");
+	ft_print_str("Header line: \t", (char *)ptr, "\n");
+	if (*(char *)ptr == '#')
+		ft_print_str("Name:\t\t", (char *)(ptr + 60), "\n");
+	else
+		ft_print_str("Name:\t\t", (char *)ptr, "\n");
+	ft_print_str("Date:\t\t", ctime(&t), "\n");
+	ft_print_str("User ID:\t", ((char *)(ptr + 28)), "\n");
+	ft_print_str("Group ID:\t", ((char *)(ptr + 34)), "\n");
+}
+
 void	ft_print_mach_header_64(struct mach_header_64	*mach_header)
 {
 	if (!mach_header)

@@ -101,6 +101,7 @@ void						ft_print_file(void);
 void						ft_print_fat_header(struct fat_header *header);
 void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
 void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
+void						ft_print_symtab_header(void *ptr);
 
 /*
 ** Usage
