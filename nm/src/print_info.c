@@ -12,7 +12,29 @@
 
 #include "ft_nm.h"
 
-void 	ft_print_symtab_header(void *ptr)
+void 	ft_print_symtab_header(t_symtab_header *sym_h)
+{
+	time_t	t;
+
+	if (!sym_h)
+		return ;
+	t = ft_atoi(sym_h->date);
+	ft_putstr("Info NM --- SYMTAB HEADER lib.a (Header Line)----\n");
+	ft_print_str("Name:\t\t", sym_h->name, "\n");
+	ft_print_str("Date:\t\t", ctime(&t), "");
+	ft_print_int("User ID:\t", (sym_h->userId), "\n");
+	ft_print_int("Group ID:\t", (sym_h->groupId), "\n");
+	ft_print_int("Mode:\t\t", (sym_h->mode), "\n");
+	ft_print_int("Size:\t\t", (sym_h->size), "\n");
+	ft_print_int("Decalage:\t", sym_h->next, "\n");
+	ft_putstr("End Header:\t  `\\n\n\n");
+}
+
+/*
+** Sans la structure t_symtab_header *
+*/
+
+void 	ft_print_symtab_header2(void *ptr)
 {
 	time_t	t;
 
@@ -20,15 +42,19 @@ void 	ft_print_symtab_header(void *ptr)
 		return ;
 	t = (ft_atoi((char *)(ptr + 16)));
 	ft_putstr("Info NM --- SYMTAB HEADER lib.a (Header Line)----\n");
-	ft_print_str("Header line: \t", (char *)ptr, "\n");
 	if (*(char *)ptr == '#')
 		ft_print_str("Name:\t\t", (char *)(ptr + 60), "\n");
 	else
 		ft_print_str("Name:\t\t", (char *)ptr, "\n");
-	ft_print_str("Date:\t\t", ctime(&t), "\n");
-	ft_print_str("User ID:\t", ((char *)(ptr + 28)), "\n");
-	ft_print_str("Group ID:\t", ((char *)(ptr + 34)), "\n");
+	ft_print_str("Date:\t\t", ctime(&t), "");
+	ft_print_int("User ID:\t", ft_atoi((char *)(ptr + 28)), "\n");
+	ft_print_int("Group ID:\t", ft_atoi((char *)(ptr + 34)), "\n");
+	ft_print_int("Mode:\t\t", ft_atoi((char *)(ptr + 40)), "\n");
+	ft_print_int("Size:\t\t", ft_atoi((char *)(ptr + 48)), "\n");
+	ft_putstr("End Header:\t  `\\n\n\n");
+	ft_print_str("Header line: \t", (char *)ptr, "\n\n");
 }
+
 
 void	ft_print_mach_header_64(struct mach_header_64	*mach_header)
 {
@@ -37,7 +63,7 @@ void	ft_print_mach_header_64(struct mach_header_64	*mach_header)
 	ft_putstr("Info NM ----- MACH_HEADER_64 ---------\n");
 	ft_print_int16("Magic number: \t", (unsigned long long int)mach_header->magic, "\n");
 	ft_print_int("CpuType: \t", mach_header->cputype, " (");
-	ft_print_str((char *)(NXGetArchInfoFromCpuType(mach_header->cputype, mach_header->cpusubtype)->name), ")", "\n");
+//	ft_print_str((char *)(NXGetArchInfoFromCpuType(mach_header->cputype, mach_header->cpusubtype)->name), ")", "\n");
 	ft_print_int16("CpuSubType: \t", (uint16_t)mach_header->cpusubtype, "\n");
 	ft_print_int("File Type: \t", mach_header->filetype, "\n");
 	ft_print_int("Ncmds: \t\t", mach_header->ncmds, "\n");
@@ -103,7 +129,6 @@ void	ft_print_env(void)
 		ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n");
 	ft_print_int16("Magic_mh number: \t", (unsigned long long int)(e->magic_mh), "\n");
 	ft_print_int("Swap: \t\t", e->swap, "\n\n");
-
 }
 
 void	ft_print_file(void)

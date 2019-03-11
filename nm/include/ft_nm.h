@@ -46,6 +46,17 @@ typedef struct				s_arc
 	size_t					size;
 }							t_arc;
 
+typedef struct				s_symtab_header
+{
+	char					*name;
+	char					*date;
+	int						userId;
+	int						groupId;
+	int						mode;
+	int						size;
+	int						next;
+}											t_symtab_header;
+
 /*
 ** Env
 */
@@ -72,6 +83,7 @@ int			ft_record_fat_header(void *header, struct fat_header *ret);
 int 	ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst);
 //struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
 struct fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
+int		ft_record_symtab_header(t_symtab_header *sym_h, void *ptr);
 
 /*
 **	Swap
@@ -90,6 +102,7 @@ uint64_t					ft_swap64(uint32_t magic, uint64_t nb);
 int							ft_is_safe(void *ptr, size_t size);
 void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
+int							ft_get_len_name_header_line(void *ptr);
 size_t					ft_align(size_t nb, size_t modulo);
 
 /*
@@ -101,7 +114,9 @@ void						ft_print_file(void);
 void						ft_print_fat_header(struct fat_header *header);
 void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
 void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
-void						ft_print_symtab_header(void *ptr);
+void						ft_print_symtab_header(t_symtab_header *sym_h);
+void						ft_print_symtab_header2(void *ptr);
+
 
 /*
 ** Usage

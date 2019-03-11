@@ -18,9 +18,13 @@
 
 void	ft_archive_static(void *ptr)
 {
-	printf("File Archive static \n");
-	if (!ft_verif_header_line((void *)((char *)ptr + 8)))
-		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
+	t_symtab_header	sym_h;
 
-	ft_print_symtab_header(ptr + 8);
+	if (!ft_record_symtab_header(&sym_h, ptr + 8))
+		return ;
+	ft_print_symtab_header(&sym_h);
+
+
+	// ft_print_symtab_header2((ptr + 68 + sym_h.size));
+//	ft_print_mach_header_64();
 }
