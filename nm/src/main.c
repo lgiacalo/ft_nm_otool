@@ -100,6 +100,7 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		ind;
 
+	printf("\n\n---------------------------- NM ------------------------------------ NM -----------------------------------------------------------\n");
 	e = ft_init_env();
 	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
 	if (!ind || ind == argc)

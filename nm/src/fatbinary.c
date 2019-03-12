@@ -24,7 +24,8 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	//Ajoutez alignement pour verifier la taille !!! align que sur size ?
 	//Probleme alignement memoire avec resources/tests/archTest/998_valid_x86-64_i386.out
 	if (!arch || !ft_is_safe(env()->ptr,
-		ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
+		arch->offset + arch->size))
+		// ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	ft_print_fat_arch_64(arch);
@@ -33,10 +34,14 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
 		ft_archive_static(env()->ptr + arch->offset);
 	else  if (ft_is_fat(magic))
-		printf("Its fat !!! encore ?? !!\n"); // normalement pas possible !
+	{
+		// ft_print_fat_header((struct fat_header *)(env()->ptr + arch->offset));
+		ft_print_int16("Its fat !!! encore ?? Magic number: \t", (unsigned long long int)magic, "\n");
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
+	}
 	else
 	{
-		printf("Piege probleme magic number !!\n");
+		ft_print_int16("Piege probleme magic number ? Magic number: \t", (unsigned long long int)magic, "\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR5));
 	}
 	return (EXIT_SUCCESS);
@@ -89,6 +94,7 @@ void	ft_fatbinary(int my_arch)
 		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
 			return ;
 	}
-	(!my_arch) ? ft_fatbinary(1) : 0;
+	// (!my_arch) ? ft_fatbinary(1) : 0;
+	(!my_arch) ? ft_fatbinary(1) : ft_print_fat_header(&header);
 	return ;
 }

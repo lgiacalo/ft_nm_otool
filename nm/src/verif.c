@@ -35,6 +35,22 @@ void	*ft_safe(void *ptr, size_t size)
 	return (NULL);
 }
 
+int		ft_verif_base(char *str, int base, int len)
+{
+	int	i;
+
+	if (!str || base < 2 || len <= 0)
+		return (EXIT_SUCCESS);
+	i = 0;
+	while (i < len)
+	{
+		if (((str[i] - '0') < 0 || (str[i] - '0') >= base) && str[i] != ' ')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int		ft_get_len_name_header_line(void *ptr)
 {
 	int	nb;
@@ -53,11 +69,13 @@ int		ft_verif_header_line(void *ptr)
 	s = (char *)ptr;
 	if (s[58] != 0x60 || s[59] != 0x0A)
 		return (EXIT_FAILURE);
-	if (s[0] == '#')
+	if (s[0] == '#' && s[1] == '1' && s[2] == '/')
 	{
 		nb = ft_get_len_name_header_line(ptr);
-		if (!ft_is_safe((void *)(s + 60), nb))
+		if (!ft_is_safe((void *)(s + 60), nb) || !ft_verif_base(s + 3, 10, 2))
 			return (EXIT_FAILURE);
 	}
+	else
+		return(EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

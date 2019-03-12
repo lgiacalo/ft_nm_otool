@@ -104,6 +104,7 @@ void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
 int							ft_get_len_name_header_line(void *ptr);
 size_t					ft_align(size_t nb, size_t modulo);
+int							ft_verif_base(char *str, int base, int len);
 
 /*
 ** Print

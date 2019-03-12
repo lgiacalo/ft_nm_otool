@@ -46,6 +46,7 @@ typedef struct			s_1s2n
 	int		n1;
 	int		n2;
 }						t_1s2n;
+
 char					*ft_get_name_cpu(int cputype, int cpusubtype);
 
 /*

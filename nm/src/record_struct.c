@@ -16,10 +16,14 @@ int		ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 {
 	if (!ft_verif_header_line((void *)((char *)ptr)))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
+	printf("Header line : %s\n", (char *)ptr);
 	if (*(char *)ptr == '#')
 		sym_h->name = (char *)(ptr + 60);
 	else
 		sym_h->name = (char *)ptr;
+	if (!ft_verif_base((char *)ptr + 16, 10, 42) ||
+		!ft_verif_base((char *)ptr + 40, 8, 8)) //TODO: a verifier
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
 	sym_h->date = (char *)(ptr + 16);
 	sym_h->userId = ft_atoi((char *)(ptr + 28));
 	sym_h->groupId = ft_atoi((char *)(ptr + 34));
