@@ -72,7 +72,7 @@ void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
 */
 
 void						ft_fatbinary(int my_arch);
-void						ft_archive_static(void *ptr);
+void						ft_archive_static(void *ptr, int max);
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 
 /*

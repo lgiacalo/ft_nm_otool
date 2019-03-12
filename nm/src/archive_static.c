@@ -14,17 +14,33 @@
 
 /*
 **  File archive static X.a
+**		Faire verif et envoyer a ft_mach_header_64
+**		Boucle pour envoyer tous les .o
 */
 
-void	ft_archive_static(void *ptr)
+void	ft_archive_static(void *ptr, int max)
 {
 	t_symtab_header	sym_h;
+	void						*tmp;
 
-	if (!ft_record_symtab_header(&sym_h, ptr + 8))
-		return ;
+	if (!ft_record_symtab_header(&sym_h, ptr + 8) && !ft_is_safe(ptr + 68, sym_h.size))
+		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
+	printf("Max size archive : %d\n\n", max);
 	ft_print_symtab_header(&sym_h);
-
-
-	// ft_print_symtab_header2((ptr + 68 + sym_h.size));
-//	ft_print_mach_header_64();
+	tmp = ptr + 68 + sym_h.size;
+	while (tmp < (ptr + max))
+	{
+		printf("\n\n------------------------------ BOUCLE ARCHIVE .O -------------------------\n");
+		printf("Valeur tmp = %ld\n", (ptr + max - tmp));
+		if (!ft_record_symtab_header(&sym_h, tmp))
+			return ;
+		ft_print_symtab_header(&sym_h);
+		if (!ft_is_safe(tmp + 60, sym_h.size))
+			return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
+		ft_print_mach_header_64((struct mach_header_64 *)((char *)tmp + sym_h.next));
+		//TODO: envoyer a ft_mach_header_64 !!
+		tmp = tmp + 60 + sym_h.size;
+	}
+	if (tmp != (ptr + max))
+		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }

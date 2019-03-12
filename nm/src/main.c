@@ -53,7 +53,7 @@ void	ft_reading_file(char *name)
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
-		return (ft_archive_static(e->ptr));
+		return (ft_archive_static(e->ptr, e->file_size));
 	}
 	return (ft_error_void3(e->cmd, name, ERROR1));
 }

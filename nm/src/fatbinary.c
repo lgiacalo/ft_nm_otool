@@ -32,7 +32,7 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	if (ft_is_mh(magic))
 		ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
-		ft_archive_static(env()->ptr + arch->offset);
+		ft_archive_static(env()->ptr + arch->offset, arch->size);
 	else  if (ft_is_fat(magic))
 	{
 		// ft_print_fat_header((struct fat_header *)(env()->ptr + arch->offset));
@@ -94,7 +94,6 @@ void	ft_fatbinary(int my_arch)
 		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
 			return ;
 	}
-	// (!my_arch) ? ft_fatbinary(1) : 0;
-	(!my_arch) ? ft_fatbinary(1) : ft_print_fat_header(&header);
+	(!my_arch) ? ft_fatbinary(1) : 0;
 	return ;
 }
