@@ -83,8 +83,8 @@ void	ft_loop_args(int argc, char **argv, int ind)
 				if (ft_mmap_file(fd, env()->file_size, &(env()->ptr)))
 				{
 					ft_reading_file(file);
+					ft_munmap_file(env()->file_size, &(env()->ptr));
 				}
-				ft_munmap_file(env()->file_size, &(env()->ptr));
 			}
 			ft_close_file(env()->cmd, file, fd);
 		}

@@ -4,10 +4,10 @@
 - TESTS -> https://github.com/mguillau42/unit_test_nm_otool
 
 
-A Penser : 
+A Penser :
 - fichier object vide dans lib
 
-A faire : 
+A faire :
 - Verifier les name cpu
 - ft_record_fat_arch ! decouper fonction - au niveau de la copie selon arch_64 ou pas et swap ou pas
 - Penser a une fonction de deplacement pour chaque structure si struct 64 !
@@ -15,3 +15,5 @@ A faire :
 
 
 reprendre au test 016 !!
+
+voir ft_printf pour afficher n caractere dune chaine 

@@ -33,7 +33,7 @@ void	ft_archive_static(void *ptr, int max)
 		printf("\n\n------------------------------ BOUCLE ARCHIVE .O -------------------------\n");
 		printf("Valeur tmp = %ld\n", (ptr + max - tmp));
 		if (!ft_record_symtab_header(&sym_h, tmp))
-			return ;
+			return ; // TODO: ajouter erreur ou dans la fonction ft_record_symtab_header
 		ft_print_symtab_header(&sym_h);
 		if (!ft_is_safe(tmp + 60, sym_h.size))
 			return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
