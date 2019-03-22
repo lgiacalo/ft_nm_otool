@@ -1,0 +1,129 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_nm.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
+/*   Updated: 2019/03/22 20:09:58 by lgiacalo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#ifndef FT_NM_H
+# define FT_NM_H
+
+# include "ft_nm_otool.h"
+static int FDD = 1; // TODO: a retirer
+
+/*
+**	OPTION NM
+*/
+# define NM					"ft_nm: "
+
+# define OPT_G				(1 << 0)	//Display symbols extern (only majuscule)
+# define OPT_J				(1 << 1)	//Display only name of symbol (name function)
+# define OPT_U				(1 << 2)	//Display only symbols undefined (U, u)
+# define OPT_UU				(1 << 3)	//Display all except symbols undefined
+# define OPT_R				(1 << 4)	//Order inverse
+# define OPT_NM				"gjuUr"
+
+typedef struct				s_env
+{
+	char					*cmd;
+	int						opt;
+	uint8_t					print_name;
+	char					*file_name;
+	size_t					file_size;
+	void					*ptr;
+	uint32_t				magic;
+	uint32_t				magic_mh;
+	uint8_t					swap;
+}							t_env;
+
+typedef struct				s_arc
+{
+	char					*name;
+	size_t					size;
+}							t_arc;
+
+typedef struct				s_symtab_header
+{
+	char					*name;
+	char					*date;
+	int						userId;
+	int						groupId;
+	int						mode;
+	int						size;
+	int						next;
+}											t_symtab_header;
+
+/*
+** Env
+*/
+t_env						*env(void);
+t_env						*ft_init_env(void);
+void						ft_reinit_env(void);
+
+void						ft_init_fat_header(struct fat_header *header);
+void						ft_init_fat_arch_64(struct fat_arch_64 *arch);
+
+/*
+**	Gestion fichier
+*/
+
+void						ft_fatbinary(int my_arch);
+void						ft_archive_static(void *ptr, int max);
+void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
+
+/*
+**	Record structs
+*/
+int							ft_record_fat_header(void *header, struct fat_header *ret);
+
+int 						ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst);
+//struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
+struct 					fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
+int							ft_record_symtab_header(t_symtab_header *sym_h, void *ptr);
+
+/*
+**	Swap
+*/
+struct fat_arch_64			*ft_swap_fat_arch_64(uint32_t magic, struct fat_arch_64 *arch);
+struct fat_arch					*ft_swap_fat_arch(uint32_t magic, struct fat_arch *arch);
+
+
+uint16_t					ft_swap16(uint32_t magic, uint16_t nb);
+uint32_t					ft_swap32(uint32_t magic, uint32_t nb);
+uint64_t					ft_swap64(uint32_t magic, uint64_t nb);
+
+/*
+**	Verif ptr in file
+*/
+int							ft_is_safe(void *ptr, size_t size);
+void						*ft_safe(void *ptr, size_t size);
+int							ft_verif_header_line(void *ptr);
+int							ft_get_len_name_header_line(void *ptr);
+size_t					ft_align(size_t nb, size_t modulo);
+int							ft_verif_base_nm(char *str, int base, int len);
+
+/*
+** Print
+*/
+void						ft_print_option_nm(void);
+void						ft_print_env(void);
+void						ft_print_file(void);
+void						ft_print_fat_header(struct fat_header *header);
+void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
+void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
+void						ft_print_symtab_header(t_symtab_header *sym_h);
+void						ft_print_symtab_header2(void *ptr);
+
+
+/*
+** Usage
+*/
+int							ft_usage_nm(void);
+
+#endif

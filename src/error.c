@@ -21,7 +21,7 @@ void	ft_error_void(char *str)
 int		ft_error_int(char *str)
 {
 	ft_print_str("Error : ", str, "\n");
-	return (EXIT_FAILURE);
+	return (EXIT_FAILUR);
 }
 
 void	*ft_error_star(char *str)
@@ -34,7 +34,7 @@ int		ft_error_int3(char *str1, char *str2, char *str3)
 {
 	ft_print_str(str1, str2, str3);
 	ft_putstr("\n");
-	return (EXIT_FAILURE);
+	return (EXIT_FAILUR);
 }
 
 void	ft_error_void3(char *str1, char *str2, char *str3)

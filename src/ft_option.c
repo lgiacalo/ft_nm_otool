@@ -15,8 +15,8 @@
 int		ft_multi_args(int ind, int argc)
 {
 	if ((argc - ind) > 1)
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
+		return (EXIT_SUCCES);
+	return (EXIT_FAILUR);
 }
 
 int		ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt)
@@ -34,11 +34,11 @@ int		ft_parse_option(int argc, char **argv, char *list_opt, int *env_opt)
 		if (argv[nb][i] != '-' || !ft_strcmp(argv[nb], "--"))
 			return ((argv[nb][i] != '-') ? nb : nb + 1);
 		else if (ft_strlen(argv[nb]) < 2)
-			return (EXIT_FAILURE);
+			return (EXIT_FAILUR);
 		while (argv[nb][i + 1])
 		{
 			if ((opt = ft_chrstr_ind(argv[nb][i + 1], list_opt)) < 0)
-				return (EXIT_FAILURE);
+				return (EXIT_FAILUR);
 			*(env_opt) |= (1 << opt);
 			i++;
 		}

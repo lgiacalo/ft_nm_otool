@@ -12,11 +12,6 @@
 
 #include "ft_nm_otool.h"
 
-static void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 {
 	size_t	k;
@@ -52,7 +47,7 @@ void		print_memory(const void *addr, size_t size)
 	}
 }
 
-void		ft_putnbr(long long int n)
+void		ft_putnbr_long(long long int n)
 {
 	long long int	nbr;
 
@@ -66,8 +61,8 @@ void		ft_putnbr(long long int n)
 		ft_putchar(nbr + '0');
 	if (nbr >= 10)
 	{
-		ft_putnbr(nbr / 10);
-		ft_putnbr(nbr % 10);
+		ft_putnbr_long(nbr / 10);
+		ft_putnbr_long(nbr % 10);
 	}
 }
 

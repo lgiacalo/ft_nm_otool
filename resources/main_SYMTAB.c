@@ -108,5 +108,5 @@ int		main(int argc, char **argv)
 		perror("munmap");
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }

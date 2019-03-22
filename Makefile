@@ -1,28 +1,59 @@
-#* ************************************************************************** *#
-#*                                                                            *#
-#*                                                        :::      ::::::::   *#
-#*   Makefile                                           :+:      :+:    :+:   *#
-#*                                                    +:+ +:+         +:+     *#
-#*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        *#
-#*                                                +#+#+#+#+#+   +#+           *#
-#*   Created: 2016/12/19 22:14:00 by lgiacalo          #+#    #+#             *#
-#*   Updated: 2017/09/01 00:52:40 by lgiacalo         ###   ########.fr       *#
-#*                                                                            *#
-#* ************************************************************************** *#
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/03/22 19:28:04 by lgiacalo          #+#    #+#              #
+#    Updated: 2019/03/22 20:18:14 by lgiacalo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-
-
-OTOOL		= ft_otool
 NM			= ft_nm
+
 
 ################################################################################
 
+
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+CPPFLAGS	= -Iinclude -Ilibft/include
 OPT			=
-option		=
 
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
-SPY			= @
+
+SPY			=
+
+
+################################################################################
+
+
+SRC_PATH	= src
+INC_PATH	= include
+OBJ_PATH	= obj
+
+
+SRC_NM		= main.c ft_option.c print_info.c\
+				env.c verif.c usage.c error.c\
+				ft_file.c ft_type_file.c ft_type_cpu.c\
+				record_struct.c swap.c\
+				fatbinary.c archive_static.c\
+				function_nbr.c function_str.c
+
+INC_NM		= ft_nm_otool.h ft_nm.h
+OBJ_NM		= $(SRC_NM:.c=.o)
+
+
+################################################################################
+
+
+SRC	= $(addprefix $(SRC_PATH)/,$(SRC_NM))
+OBJ	= $(addprefix $(OBJ_PATH)/,$(OBJ_NM))
+INC = $(addprefix $(INC_PATH)/,$(INC_NM))
+
+LIB	= libft/libft.a
 
 ################################################################################
 
@@ -35,45 +66,58 @@ endif
 ifeq ($(option), opti)
 	OPT += -O3
 endif
+ifeq ($(option), dev)
+	CFLAGS = -g
+endif
 
-export option
 export OPT
 
 ################################################################################
 
-all: $(OTOOL) $(NM)
+all: lib $(NM)
 
-$(OTOOL): Makefile
-	$(SPY)mv $(OTOOL) ./otool/ 2> /dev/null || true
-	$(SPY)make $(OTOOL) -C otool/
-	$(SPY)mv otool/$(OTOOL) ./ 2> /dev/null || true
 
-$(NM): Makefile
-	$(SPY)mv $(NM) ./nm/ 2> /dev/null || true
-	$(SPY)make $(NM) -C nm/
-	$(SPY)mv nm/$(NM) ./ 2> /dev/null || true
+$(OBJ_PATH):
+	$(SPY)mkdir $(OBJ_PATH) 2> /dev/null || true
 
-mv:
-	$(SPY)mv $(OTOOL) otool/ 2> /dev/null || true
-	$(SPY)mv $(NM) nm/ 2> /dev/null || true
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC) $(LIB) Makefile
+	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-clean: 
-	$(SPY)make clean -C otool/
-	$(SPY)make clean -C nm/
 
-fclean: mv
-	$(SPY)make fclean -C otool/
-	$(SPY)make fclean -C nm/
+$(LIB):
+	$(SPY)make -C libft/
+
+lib :
+	$(SPY)make -C libft/
+
+
+$(NM): $(LIB) $(OBJ_PATH) $(OBJ)
+	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) -o $(NM) $(OBJ) $(LIB)
+	$(SPY)echo "$(COLOR)$(NM)\t\t\t[OK]$(FINCOLOR)"
+
+
+clean:
+	$(SPY)make clean -C libft/
+	$(SPY)/bin/rm -rf $(OBJ)
+	$(SPY)rmdir $(OBJ_PATH) 2> /dev/null || true
+	$(SPY)echo "$(COLOR)$(NM)\t\t\tSuppression *.o$(FINCOLOR)"
+
+
+fclean: clean
+	$(SPY)make fclean -C libft/
+	$(SPY)/bin/rm -rf $(NM)
+	$(SPY)echo "$(COLOR)$(NM)\t\t\tSuppression $(NM)$(FINCOLOR)"
+
 
 re: fclean all
 
+
 norme:
-	$(SPY)echo "$(COLOR)\tNORMINETTE : $(OTOOL) - $(NM)\n$(FINCOLOR)"
-	$(SPY)norminette include/*.h src/*.c
-	$(SPY)make norme -C nm/
-	$(SPY)make norme -C otool/
+	$(SPY)echo "$(COLOR)\tNORMINETTE : $(NM)\n$(FINCOLOR)"
+	$(SPY)norminette $(SRC)
+	$(SPY)norminette $(INC)
 
 
-.PHONY : all clean fclean re norme $(NM) $(OTOOL)
+.PHONY : all clean fclean re norme
 
 ################################################################################

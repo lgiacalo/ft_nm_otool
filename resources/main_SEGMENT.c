@@ -94,7 +94,7 @@ void	handle_64(char *ptr)
 void	ft_nm(char *ptr)
 {
 	int	magic;
-	
+
 	magic = *(int *)ptr;
 	if (magic == MH_MAGIC_64)
 		handle_64(ptr);
@@ -132,5 +132,5 @@ int		main(int argc, char **argv)
 		perror("munmap");
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }

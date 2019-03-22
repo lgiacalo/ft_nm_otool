@@ -15,41 +15,41 @@
 int		ft_mmap_file(int fd, size_t size, void **ptr)
 {
 	if (size <= 0 || !ptr)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILUR);
 	*ptr = mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (*ptr == MAP_FAILED)
 		return (ft_error_int("mmap()"));
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }
 
 int		ft_munmap_file(size_t size, void **ptr)
 {
 	if (!ptr || !(*ptr) || size <= 0)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILUR);
 	if (*ptr == MAP_FAILED || munmap(*ptr, size) == -1)
 		return (ft_error_int("munmap()"));
 	*ptr = NULL;
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }
 
 int		ft_open_file(char *cmd, char *file, int *fd)
 {
 	*fd = -1;
 	if (!file)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILUR);
 	*fd = open(file, O_RDONLY);
 	if ((*fd) < 0)
 		return (ft_error_int3(cmd, file, ERROR2));
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }
 
 int		ft_close_file(char *cmd, char *file, int fd)
 {
 	if (fd < 0)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILUR);
 	if (close(fd) < 0)
 		return (ft_error_int3(cmd, file, ": error to close file"));
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }
 
 int		ft_check_file(int fd, char *file, char *cmd, size_t *size)
@@ -63,5 +63,5 @@ int		ft_check_file(int fd, char *file, char *cmd, size_t *size)
 		return (ft_error_int3(cmd, file, ERROR1));
 	if (*size <= 0)
 		return (ft_error_int3(cmd, file, ERROR1));
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCES);
 }
