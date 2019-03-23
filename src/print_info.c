@@ -12,11 +12,11 @@
 
 #include "ft_nm.h"
 
-void	ft_print_load_command(struct load_command *lc)
+void	ft_print_load_command(struct load_command *lc, int numlc)
 {
 	if (!lc)
 		return ;
-	ft_fdprintf(FDD, "Info NM ----- LOAD_COMMAND ---------\n");
+	ft_fdprintf(FDD, "Info NM ----- LOAD_COMMAND n%d ---------\n", numlc);
 	ft_fdprintf(FDD, "Cmd:\t\t%d\n", (lc->cmd));
 	ft_fdprintf(FDD, "Cmdsize:\t%d\n\n", lc->cmdsize);
 }

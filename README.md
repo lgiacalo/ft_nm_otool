@@ -14,6 +14,5 @@ A faire :
 - Jamais oublier le SAFE !!
 
 
-reprendre au test 016 !!
 
-voir ft_printf pour afficher n caractere dune chaine 
+A faire : lire les bons load commands !!!
