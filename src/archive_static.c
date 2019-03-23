@@ -12,7 +12,6 @@
 
 #include "ft_nm.h"
 
-
 /*
 **  File archive static X.a
 **		Faire verif et envoyer a ft_mach_header_64

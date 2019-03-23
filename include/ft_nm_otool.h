@@ -20,6 +20,9 @@
 # include <stdio.h> // a retirer - printf
 # include <time.h> // a retirer - ctime
 
+int FDD; // TODO: a retirer
+void						fichier(void); //TODO a retirer !!
+
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
 # include <mach-o/fat.h>

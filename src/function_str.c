@@ -10,18 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_nm.h"
 
 void	ft_print_int(char *str1, long long int nbr, char *str2)
 {
-	ft_putstr(str1);
-	ft_putnbr_long(nbr);
-	ft_putstr(str2);
+	ft_fdprintf(FDD, "%s%lld%s", str1, nbr, str2);
 }
 
 void	ft_print_str(char *str1, char *str2, char *str3)
 {
-	ft_putstr(str1);
-	ft_putstr(str2);
-	ft_putstr(str3);
+	ft_fdprintf(FDD, "%s%s%s", str1, str2, str3);
 }

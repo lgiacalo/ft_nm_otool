@@ -15,7 +15,7 @@
 # define FT_NM_H
 
 # include "ft_nm_otool.h"
-static int FDD = 1; // TODO: a retirer
+
 
 /*
 **	OPTION NM

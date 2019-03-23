@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_nm.h"
 
 static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 {
@@ -82,8 +82,9 @@ void		ft_putnbr16(unsigned long long int n)
 
 void		ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
 {
-	ft_putstr(str1);
-	ft_putstr("0x");
-	ft_putnbr16(nbr);
-	ft_putstr(str2);
+	ft_fdprintf(FDD, "%s%llx%s", str1, nbr, str2);
+	// ft_putstr(str1);
+	// ft_putstr("0x");
+	// ft_putnbr16(nbr);
+	// ft_putstr(str2);
 }

@@ -29,6 +29,7 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 		return ;
 	// verif safe selon struct avec magic_to_mach_header
 	ft_print_mach_header_64(&mach_header);
+	//TODO: ft_is_safe ---> lc ? 
 	lc = (struct load_command*)(ptr + size_struct);
 	ft_print_load_command(lc);
 	ft_fdprintf(FDD, "Good \n");
@@ -103,6 +104,7 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		ind;
 
+	fichier(); //TODO: a retirer
 	ft_fdprintf(FDD, "\n\n---------------------------- NM ------------------------------------ NM -----------------------------------------------------------\n");
 	e = ft_init_env();
 	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
@@ -113,5 +115,16 @@ int		main(int argc, char **argv)
 		env()->opt |= OPT_J;
 	ft_print_option_nm();
 	ft_loop_args(argc, argv, ind);
+	ft_fdprintf(FDD, "\n\t\tFIN FIN FIN FIN\n\n\n\n");
 	return (0);
+}
+
+void		fichier(void)
+{
+	if ((FDD = open("log", O_RDWR | O_CREAT | O_APPEND)) == -1)
+	{
+		FDD = 1;
+		ft_fdprintf(FDD, "Error fichier open fichier log");
+	}
+	ft_fdprintf(FDD, "Valeur fd = %d\n", FDD);
 }
