@@ -99,16 +99,3 @@ char	*ft_get_name_cpu(int cputype, int cpusubtype)
 	}
 	return ("");
 }
-
-struct fat_arch_64	ft_copy_fat_arch_64(struct fat_arch *src)
-{
-	struct fat_arch_64	dst;
-
-	dst.cputype = src->cputype;
-	dst.cpusubtype = src->cpusubtype;
-	dst.offset = src->offset;
-	dst.size = src->size;
-	dst.align = src->align;
-	dst.reserved = 0;
-	return (dst);
-}

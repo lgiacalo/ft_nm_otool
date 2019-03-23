@@ -38,6 +38,7 @@
 # define ERROR3			": truncated or malformed archive"
 # define ERROR4			": truncated or malformed fat file"
 # define ERROR5			" for architecture x86_64 is not a Mach-O file or an archive file."
+# define ERROR6			": truncated or malformed object"
 
 
 # define MY_ARCHI		CPU_TYPE_X86_64

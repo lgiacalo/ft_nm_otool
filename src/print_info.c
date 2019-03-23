@@ -12,6 +12,17 @@
 
 #include "ft_nm.h"
 
+void	ft_print_load_command(struct load_command *lc)
+{
+	if (!lc)
+		return ;
+	ft_fdprintf(FDD, "Info NM ----- LOAD_COMMAND ---------\n");
+	ft_fdprintf(FDD, "Addresse ptr:\t%p\n", lc);
+	ft_print_int("Cmd:\t\t", lc->cmd, "\n");
+	ft_fdprintf(FDD, "Cmd:\t\t%d\n", lc->cmd);
+	ft_fdprintf(FDD, "Cmdsize:\t%d\n\n", lc->cmdsize);
+}
+
 void 	ft_print_symtab_header(t_symtab_header *sym_h)
 {
 	time_t	t;

@@ -35,19 +35,21 @@ typedef struct				s_env
 	int						opt;
 	uint8_t					print_name;
 	char					*file_name;
+	char					*file_name_mh;
 	size_t					file_size;
 	void					*ptr;
 	uint32_t				magic;
 	uint32_t				magic_mh;
 	uint8_t					swap;
 }							t_env;
+//
+// typedef struct				s_arc
+// {
+// 	char					*name;
+// 	size_t					size;
+// }							t_arc;
 
-typedef struct				s_arc
-{
-	char					*name;
-	size_t					size;
-}							t_arc;
-
+//TODO: car la structure n'existe pas !!
 typedef struct				s_symtab_header
 {
 	char					*name;
@@ -81,17 +83,22 @@ void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 **	Record structs
 */
 int							ft_record_fat_header(void *header, struct fat_header *ret);
-
 int 						ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst);
-//struct fat_arch_64			ft_record_fat_arch_64(uint32_t magic, void *arch);
-struct 					fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
 int							ft_record_symtab_header(t_symtab_header *sym_h, void *ptr);
+int							ft_record_mach_header_64(uint32_t magic, void *ptr, struct mach_header_64 *dst);
+
+struct 					fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
+struct 					mach_header_64	ft_copy_mach_header_64(struct mach_header *src);
+
 
 /*
 **	Swap
 */
 struct fat_arch_64			*ft_swap_fat_arch_64(uint32_t magic, struct fat_arch_64 *arch);
 struct fat_arch					*ft_swap_fat_arch(uint32_t magic, struct fat_arch *arch);
+
+struct mach_header_64		*ft_swap_mach_header_64(uint32_t magic, struct mach_header_64 *mach);
+struct mach_header			*ft_swap_mach_header(uint32_t magic, struct mach_header *mach);
 
 
 uint16_t					ft_swap16(uint32_t magic, uint16_t nb);
@@ -119,6 +126,7 @@ void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
 void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
 void						ft_print_symtab_header(t_symtab_header *sym_h);
 void						ft_print_symtab_header2(void *ptr);
+void						ft_print_load_command(struct load_command *lc);
 
 
 /*

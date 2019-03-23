@@ -15,19 +15,22 @@
 void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 {
 	//ft_print_env();
-	struct mach_header_64	*mach_header;
+	struct mach_header_64	mach_header;
+	struct load_command		*lc;
 	size_t								size_struct;
 
 	// Ne pas oublier de swap  les structures si besoin !!
 	env()->magic_mh = magic_mh;
-	size_struct = ft_is_64(magic_mh)
-		? sizeof(struct mach_header_64) : sizeof(struct mach_header);
-	if (!ptr || !ft_is_safe(ptr, size_struct))
-		return ;
+	size_struct = ft_is_64(magic_mh) ? sizeof(struct mach_header_64)
+	: sizeof(struct mach_header);
 
-	(void)mach_header; // copy and/or swap if need
+	//TODO: copy and/or swap if need
+	if (!ft_record_mach_header_64(magic_mh, ptr, &mach_header))
+		return ;
 	// verif safe selon struct avec magic_to_mach_header
-	ft_print_mach_header_64((struct mach_header_64 *)ptr);
+	ft_print_mach_header_64(&mach_header);
+	lc = (struct load_command*)(ptr + size_struct);
+	ft_print_load_command(lc);
 	ft_fdprintf(FDD, "Good \n");
 }
 

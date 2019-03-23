@@ -38,7 +38,7 @@ OBJ_PATH	= obj
 SRC_NM		= main.c ft_option.c print_info.c\
 				env.c verif.c usage.c error.c\
 				ft_file.c ft_type_file.c ft_type_cpu.c\
-				record_struct.c swap.c\
+				record_struct.c swap.c copy.c\
 				fatbinary.c archive_static.c\
 				function_nbr.c function_str.c
 

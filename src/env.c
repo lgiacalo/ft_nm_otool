@@ -25,9 +25,11 @@ void	ft_reinit_env(void)
 
 	e = env();
 	e->file_name = NULL;
+	e->file_name_mh = NULL;
 	e->file_size = 0;
 	e->ptr = NULL;
 	e->magic = 0;
+	e->magic_mh = 0;
 	e->swap = 0;
 }
 
@@ -40,12 +42,18 @@ t_env	*ft_init_env(void)
 	e->opt = 0;
 	e->print_name = 0;
 	e->file_name = NULL;
+	e->file_name_mh = NULL;
 	e->file_size = 0;
 	e->ptr = NULL;
 	e->magic = 0;
+	e->magic_mh = 0;
 	e->swap = 0;
 	return (e);
 }
+
+/*
+**	INUTILISE !!!
+*/
 
 void	ft_init_fat_arch_64(struct fat_arch_64 *arch)
 {
@@ -58,6 +66,10 @@ void	ft_init_fat_arch_64(struct fat_arch_64 *arch)
 	arch->align = 0;
 	arch->reserved = 0;
 }
+
+/*
+**	INUTILISE !!!
+*/
 
 void	ft_init_fat_header(struct fat_header *header)
 {

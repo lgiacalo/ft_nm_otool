@@ -12,6 +12,27 @@
 
 #include "ft_nm.h"
 
+int	ft_record_mach_header_64(uint32_t magic, void *ptr, struct mach_header_64 *dst)
+{
+	struct mach_header	ret;
+
+	if (!(ptr = ft_safe(ptr, (ft_is_64(magic)) ?
+					sizeof(struct mach_header_64) : sizeof(struct mach_header))))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	else
+	{
+		*dst = *((struct mach_header_64 *)ptr);
+		if (ft_is_64(magic))
+			ft_swap_mach_header_64(magic, dst);
+		else
+		{
+			ret = *((struct mach_header *)dst);
+			*dst = ft_copy_mach_header_64(ft_swap_mach_header(magic, &ret));
+		}
+	}
+	return (EXIT_SUCCES);
+}
+
 int		ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 {
 	if (!ft_verif_header_line((void *)((char *)ptr)))
@@ -19,8 +40,9 @@ int		ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 	ft_fdprintf(FDD, "Header line : %s\n", (char *)ptr);
 	if (*(char *)ptr == '#')
 		sym_h->name = (char *)(ptr + 60);
-	else
+	else	//TODO: a verifier pour les noms, a mon avis pas de '\0'
 		sym_h->name = (char *)ptr;
+//	env()->file_name_mh = sym_h->name;
 	if (!ft_verif_base_nm((char *)ptr + 16, 10, 42) ||
 		!ft_verif_base_nm((char *)ptr + 40, 8, 8)) //TODO: a verifier
 		return (EXIT_FAILUR);
