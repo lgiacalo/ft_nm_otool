@@ -18,3 +18,4 @@ A faire :
 A faire : lire les bons load commands !!!
 
 * PPC : empecher la lecture de l'archi ppc --> voir dans ft_fatbinary()
+* ATTENTION ==> fonctions non utilisees
