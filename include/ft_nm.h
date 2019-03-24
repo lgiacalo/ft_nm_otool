@@ -129,6 +129,9 @@ void						ft_print_mach_header_64(struct mach_header_64	*mach_header);
 void						ft_print_symtab_header(t_symtab_header *sym_h);
 void						ft_print_symtab_header2(void *ptr);
 void						ft_print_load_command(struct load_command *lc, int numlc);
+void						ft_print_segment_cmd_64(struct segment_command_64 *seg);
+void						ft_print_symtab_cmd(struct symtab_command *sym);
+
 
 
 /*

@@ -12,6 +12,37 @@
 
 #include "ft_nm.h"
 
+void	ft_print_symtab_cmd(struct symtab_command *sym)
+{
+	if (!sym)
+		return ;
+	ft_fdprintf(FDD, "Info NM ----- SYMTAB COMMAND ---------\n");
+	ft_fdprintf(FDD, "Cmd:\t\t%d\n", sym->cmd);
+	ft_fdprintf(FDD, "Cmdsize:\t%d\n", sym->cmdsize);
+	ft_fdprintf(FDD, "SymOff:\t\t%d\n", sym->symoff);
+	ft_fdprintf(FDD, "Nsyms:\t\t%d\n", sym->nsyms);
+	ft_fdprintf(FDD, "StrOff:\t\t%d\n", sym->stroff);
+	ft_fdprintf(FDD, "StrSize:\t%d\n\n\n", sym->strsize);
+}
+
+void	ft_print_segment_cmd_64(struct segment_command_64 *seg)
+{
+	if (!seg)
+		return ;
+	ft_fdprintf(FDD, "Info NM ----- SEGMENT_COMMAND_64 ---------\n");
+	ft_fdprintf(FDD, "Cmd:\t\t%d\n", seg->cmd);
+	ft_fdprintf(FDD, "Cmdsize:\t%d\n", seg->cmdsize);
+	ft_fdprintf(FDD, "Segname:\t%s\n", seg->segname);
+	ft_fdprintf(FDD, "VmAddr:\t\t%d\n", seg->vmaddr);
+	ft_fdprintf(FDD, "VmSize:\t\t%d\n", seg->vmsize);
+	ft_fdprintf(FDD, "FileOff:\t%d\n", seg->fileoff);
+	ft_fdprintf(FDD, "FileSize:\t%d\n", seg->filesize);
+	ft_fdprintf(FDD, "MaxProt:\t%d\n", seg->maxprot);
+	ft_fdprintf(FDD, "InitProt:\t%d\n", seg->initprot);
+	ft_fdprintf(FDD, "NSects:\t\t%d\n", seg->nsects);
+	ft_fdprintf(FDD, "Flags:\t\t%d\n\n\n", seg->flags);
+}
+
 void	ft_print_load_command(struct load_command *lc, int numlc)
 {
 	if (!lc)
