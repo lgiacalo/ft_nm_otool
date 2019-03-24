@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:43:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 12:03:31 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/24 15:01:17 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,5 @@ int		main(int argc, char **argv)
 		perror("munmap");
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCES);
+	return (EXIT_SUCCESS);
 }

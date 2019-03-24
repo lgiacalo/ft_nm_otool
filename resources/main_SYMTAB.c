@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:43:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2018/11/08 17:02:54 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/24 15:30:07 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 		if (!(array[i].n_type & N_STAB))
 		{
 			printf("%016llx %s\n", array[i].n_value, strtable + array[i].n_un.n_strx);
-			printf("\t +%d <= n_strx / i = %d\t / n_type = %#x\n", array[i].n_un.n_strx, i, array[i].n_type);
+			printf("\t +%d <= n_strx / i = %d\t / n_type = %#x / n_sect = %d\n\n\n", array[i].n_un.n_strx, i, array[i].n_type, array[i].n_sect);
 		}
 		i++;
 	}
@@ -108,5 +108,5 @@ int		main(int argc, char **argv)
 		perror("munmap");
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCES);
+	return (EXIT_SUCCESS);
 }
