@@ -25,9 +25,10 @@ void	ft_reinit_env(void)
 
 	e = env();
 	e->file_name = NULL;
-	e->file_name_mh = NULL;
+	e->file_name_mh = NULL; //TODO: a revoir !!
 	e->file_size = 0;
 	e->ptr = NULL;
+	e->ptr_mh = NULL;
 	e->magic = 0;
 	e->magic_mh = 0;
 	e->swap = 0;
@@ -45,6 +46,7 @@ t_env	*ft_init_env(void)
 	e->file_name_mh = NULL;
 	e->file_size = 0;
 	e->ptr = NULL;
+	e->ptr_mh = NULL;
 	e->magic = 0;
 	e->magic_mh = 0;
 	e->swap = 0;

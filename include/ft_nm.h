@@ -38,6 +38,7 @@ typedef struct				s_env
 	char					*file_name_mh;
 	size_t					file_size;
 	void					*ptr;
+	void					*ptr_mh;
 	uint32_t				magic;
 	uint32_t				magic_mh;
 	uint8_t					swap;
