@@ -21,43 +21,39 @@ char	*ft_record_name_symbole(char *name)
 	char	*str;
 
 	len = ft_strlen_nm(name);
-	str = ft_strndup(name, len);
+	str = ft_strndup(name, len); //TODO: attention exit() dans memalloc()
 	ft_fdprintf(FDD, "Name = %s\n", str);
 	return (str);
 }
 
-/*
-** Fonction a supprimer !! temporaire
-**		---> uniquement pour nlist_64 !!!!
-*/
-
-void	print_output(char *ptr, int nsyms, int symoff, int stroff)
+void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 {
-	int							i;
-	char						*strtable;
-	struct nlist_64	*array;
 	t_line					line;
 
-	i = -1;
-	array = (void *)ptr + symoff;
-	strtable = (void *)ptr + stroff;
-	ft_fdprintf(FDD, "Sizeof nlist_64 = %lu\n", sizeof(struct nlist_64));
-	ft_fdprintf(FDD, "LC_SYMYAB : stroff = %d / symoff = %d\n\n", stroff, symoff);
-	while (++i < nsyms)
-	{
-		if (!(array[i].n_type & N_STAB))
-		{
-			line.name = ft_record_name_symbole(strtable + array[i].n_un.n_strx);
-			ft_fdprintf(FDD, "%016llx %s\n", array[i].n_value, "name");
-			ft_fdprintf(FDD, "\t +%d <= n_strx / i = %d\t / n_type = %#x / n_sect = %d\n\n\n", array[i].n_un.n_strx, i, array[i].n_type, array[i].n_sect);
-		}
-	}
+	//TODO: enregistrement des infos dans struct line + send fonction add + tri to list chainee
+	line.name = ft_record_name_symbole(n_strx);
+	ft_fdprintf(FDD, "%016llx %s\n", n_value, "name");
+	ft_fdprintf(FDD, "\t n_type = %#x / n_sect = %d\n\n\n", n_type, n_sect);
 }
 
 void	ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 {
-	(void)ptr;
-	(void)sym;
+	uint32_t							i;
+	char						*strtable;
+	struct nlist_64	*a_64;
+	struct nlist		*a;
+
+	i = -1;
+	a_64 = (void *)ptr + sym->symoff;
+	a = (void *)ptr + sym->symoff;
+	strtable = (void *)ptr + sym->stroff;
+	while (++i < sym->nsyms)
+	{
+		if (ft_is_64(env()->magic_mh) && !(a_64[i].n_type & N_STAB))
+			ft_gestion_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type, a_64[i].n_sect, a_64[i].n_value);
+		else if (!(a[i].n_type & N_STAB))
+			ft_gestion_nlist(strtable + a[i].n_un.n_strx, a[i].n_type, a[i].n_sect, a[i].n_value);
+	}
 }
 
 /*
@@ -78,8 +74,8 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) : sizeof(struct nlist))) ||
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
-	// ft_gestion_symtab_command(env()->ptr_mh, sym);
-	print_output(env()->ptr_mh, sym->nsyms, sym->symoff, sym->stroff);//TODO: a retirer
+	ft_gestion_symtab_command(env()->ptr_mh, sym);
+//	print_output(env()->ptr_mh, sym->nsyms, sym->symoff, sym->stroff);//TODO: a retirer
 }
 
 /*
