@@ -12,6 +12,21 @@
 
 #include "ft_nm.h"
 
+int	ft_record_segment_cmd_64(uint32_t magic, void *ptr, struct segment_command_64 *dst)
+{
+	struct segment_command	ret;
+
+	if (!(ptr = ft_safe(ptr, ((struct load_command *)ptr)->cmdsize)))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	*dst = *((struct segment_command_64 *)ptr);
+	if (!ft_is_64(magic))
+	{
+		ret = *((struct segment_command *)dst);
+		*dst = ft_copy_segment_cmd_64(&ret);
+	}
+	return (EXIT_SUCCES);
+}
+
 int	ft_record_mach_header_64(uint32_t magic, void *ptr, struct mach_header_64 *dst)
 {
 	struct mach_header	ret;

@@ -80,28 +80,29 @@ void						ft_archive_static(void *ptr, int max);
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 void 						ft_load_command(void *ptr, int ncmds);
 
-
 /*
 **	Record structs
 */
+
 int							ft_record_fat_header(void *header, struct fat_header *ret);
 int 						ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst);
 int							ft_record_symtab_header(t_symtab_header *sym_h, void *ptr);
 int							ft_record_mach_header_64(uint32_t magic, void *ptr, struct mach_header_64 *dst);
+int							ft_record_segment_cmd_64(uint32_t magic, void *ptr, struct segment_command_64 *dst);
 
 struct 					fat_arch_64		ft_copy_fat_arch_64(struct fat_arch *src);
 struct 					mach_header_64	ft_copy_mach_header_64(struct mach_header *src);
-
+struct 					segment_command_64	ft_copy_segment_cmd_64(struct segment_command *src);
 
 /*
 **	Swap
 */
+
 struct fat_arch_64			*ft_swap_fat_arch_64(uint32_t magic, struct fat_arch_64 *arch);
 struct fat_arch					*ft_swap_fat_arch(uint32_t magic, struct fat_arch *arch);
 
 struct mach_header_64		*ft_swap_mach_header_64(uint32_t magic, struct mach_header_64 *mach);
 struct mach_header			*ft_swap_mach_header(uint32_t magic, struct mach_header *mach);
-
 
 uint16_t					ft_swap16(uint32_t magic, uint16_t nb);
 uint32_t					ft_swap32(uint32_t magic, uint32_t nb);
@@ -110,6 +111,7 @@ uint64_t					ft_swap64(uint32_t magic, uint64_t nb);
 /*
 **	Verif ptr in file
 */
+
 int							ft_is_safe(void *ptr, size_t size);
 void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
@@ -120,6 +122,7 @@ int							ft_verif_base_nm(char *str, int base, int len);
 /*
 ** Print
 */
+
 void						ft_print_option_nm(void);
 void						ft_print_env(void);
 void						ft_print_file(void);
@@ -132,11 +135,10 @@ void						ft_print_load_command(struct load_command *lc, int numlc);
 void						ft_print_segment_cmd_64(struct segment_command_64 *seg);
 void						ft_print_symtab_cmd(struct symtab_command *sym);
 
-
-
 /*
 ** Usage
 */
+
 int							ft_usage_nm(void);
 
 #endif

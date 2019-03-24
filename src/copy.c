@@ -12,6 +12,24 @@
 
 #include "ft_nm.h"
 
+struct segment_command_64	ft_copy_segment_cmd_64(struct segment_command *src)
+{
+	struct segment_command_64	dst;
+
+	dst.cmd = src->cmd;
+	dst.cmdsize = src->cmdsize;
+	ft_strncpy(dst.segname, src->segname, 16);
+	dst.vmaddr = src->vmaddr;
+	dst.vmsize = src->vmsize;
+	dst.fileoff = src->fileoff;
+	dst.filesize = src->filesize;
+	dst.maxprot = src->maxprot;
+	dst.initprot = src->initprot;
+	dst.nsects = src->nsects;
+	dst.flags = src->flags;
+	return (dst);
+}
+
 struct mach_header_64	ft_copy_mach_header_64(struct mach_header *src)
 {
 	struct mach_header_64	dst;
