@@ -43,12 +43,6 @@ typedef struct				s_env
 	uint32_t				magic_mh;
 	uint8_t					swap;
 }							t_env;
-//
-// typedef struct				s_arc
-// {
-// 	char					*name;
-// 	size_t					size;
-// }							t_arc;
 
 //TODO: car la structure n'existe pas !!
 typedef struct				s_symtab_header
@@ -62,9 +56,19 @@ typedef struct				s_symtab_header
 	int						next;
 }											t_symtab_header;
 
+//Structure pour enregistrer les symboles pour ensuiter les trier
+typedef struct				s_line
+{
+	uint64_t						addr;
+	char								sym;
+	char								*name; //malloc !!!
+	struct s_line				*next;
+}											t_line;
+
 /*
 ** Env
 */
+
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
@@ -119,6 +123,8 @@ int							ft_verif_header_line(void *ptr);
 int							ft_get_len_name_header_line(void *ptr);
 size_t					ft_align(size_t nb, size_t modulo);
 int							ft_verif_base_nm(char *str, int base, int len);
+int						 	ft_strlen_nm(char *str);
+char						*ft_strndup(char *s1, int len);
 
 /*
 ** Print

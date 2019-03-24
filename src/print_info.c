@@ -54,14 +54,14 @@ void	ft_print_load_command(struct load_command *lc, int numlc)
 
 void 	ft_print_symtab_header(t_symtab_header *sym_h)
 {
-	time_t	t;
+	// time_t	t;
 
 	if (!sym_h)
 		return ;
-	t = ft_atoi(sym_h->date);
+//	t = ft_atoi(sym_h->date);
 	ft_fdprintf(FDD, "Info NM --- SYMTAB HEADER lib.a (Header Line)----\n");
 	ft_print_str("Name:\t\t", sym_h->name, "\n");
-	ft_print_str("Date:\t\t", ctime(&t), "");
+//	ft_print_str("Date:\t\t", ctime(&t), "");
 	ft_print_int("User ID:\t", (sym_h->userId), "\n");
 	ft_print_int("Group ID:\t", (sym_h->groupId), "\n");
 	ft_print_int("Mode:\t\t", (sym_h->mode), "\n");
