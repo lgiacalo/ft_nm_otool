@@ -18,9 +18,14 @@ char	*ft_strndup(char *s1, int len)
 
 	if (!s1 || !len)
 		return (NULL);
-	ret = (char *)ft_memalloc(len + 2);
+	ret = (char *)ft_memalloc(len + 1);
 	return (ft_memcpy(ret, s1, len));
 }
+
+/*
+**	Fonction strlen special nm avec ft_is_safe()
+**		Mais comment savoir si str totalement en dehors du fichier ?
+*/
 
 int 	ft_strlen_nm(char *str)
 {

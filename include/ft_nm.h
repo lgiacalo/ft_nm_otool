@@ -57,6 +57,7 @@ typedef struct				s_symtab_header
 }											t_symtab_header;
 
 //Structure pour enregistrer les symboles pour ensuiter les trier
+//TODO: Doublement chainee pour tir -r inverse ? 
 typedef struct				s_line
 {
 	uint64_t						addr;
@@ -84,6 +85,9 @@ void						ft_fatbinary(int my_arch);
 void						ft_archive_static(void *ptr, int max);
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 void 						ft_load_command(void *ptr, int ncmds);
+
+void						ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value);
+
 
 /*
 **	Record structs

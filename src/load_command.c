@@ -12,30 +12,6 @@
 
 #include "ft_nm.h"
 
-//TODO: A faire fonction pour list t_line
-// attention si name == NULL pas de free !
-
-char	*ft_record_name_symbole(char *name)
-{
-	int	len;
-	char	*str;
-
-	len = ft_strlen_nm(name);
-	str = ft_strndup(name, len); //TODO: attention exit() dans memalloc()
-	ft_fdprintf(FDD, "Name = %s\n", str);
-	return (str);
-}
-
-void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
-{
-	t_line					line;
-
-	//TODO: enregistrement des infos dans struct line + send fonction add + tri to list chainee
-	line.name = ft_record_name_symbole(n_strx);
-	ft_fdprintf(FDD, "%016llx %s\n", n_value, "name");
-	ft_fdprintf(FDD, "\t n_type = %#x / n_sect = %d\n\n\n", n_type, n_sect);
-}
-
 void	ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 {
 	uint32_t							i;
@@ -75,7 +51,6 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_gestion_symtab_command(env()->ptr_mh, sym);
-//	print_output(env()->ptr_mh, sym->nsyms, sym->symoff, sym->stroff);//TODO: a retirer
 }
 
 /*
