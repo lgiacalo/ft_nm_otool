@@ -97,3 +97,5 @@ void	ft_fatbinary(int my_arch)
 	(!my_arch) ? ft_fatbinary(1) : 0;
 	return ;
 }
+
+//TODO: POWER PC (PPC) voir readme
