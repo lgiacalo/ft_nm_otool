@@ -97,7 +97,7 @@ void						ft_archive_static(void *ptr, int max);
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 void 						ft_load_command(void *ptr, int ncmds);
 
-void						ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value);
+int							ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value);
 
 
 /*

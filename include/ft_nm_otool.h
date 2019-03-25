@@ -42,6 +42,7 @@ void						fichier(void); //TODO a retirer !!
 # define ERROR4			": truncated or malformed fat file"
 # define ERROR5			" for architecture x86_64 is not a Mach-O file or an archive file."
 # define ERROR6			": truncated or malformed object"
+# define ERR_MALLOC	"Malloc"
 
 
 # define MY_ARCHI		CPU_TYPE_X86_64

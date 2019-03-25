@@ -19,7 +19,6 @@ A faire : lire les bons load commands !!!
 
 * PPC (audiodevice_pcc-32) : empecher la lecture de l'archi ppc --> voir dans ft_fatbinary()
 * ATTENTION ==> fonctions non utilisees
-* ATTENTION ====> exit() avec ft_memalloc
 * if same name alors tri value/addresse !!!
 * if 32, print 0x 8, if 64, print 0x 16
 * look hell/the_revengeance_of_python probleme !! doit sortir !!

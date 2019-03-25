@@ -21,8 +21,9 @@ char	*ft_record_name_symbol(char *name)
 	char	*str;
 
 	len = ft_strlen_nm(name);
-	str = ft_strndup(name, len); //TODO: attention exit() dans memalloc()
-	// si probleme malloc, remonter programme pour sortir !! et print ERROR !
+	str = ft_strndup(name, len);
+	if (len > 0 && !str)
+		return ((void *)-1);
 	return (str);
 }
 
@@ -64,15 +65,19 @@ char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	return (c);
 }
 
-void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
+int	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 {
 	t_line					line;
 	t_line 					*new;
 
 	//TODO: enregistrement des infos dans struct line + send fonction add + tri to list chainee
 	line.name = ft_record_name_symbol(n_strx);
+	if (line.name == (void *)-1)
+		return (ft_error_int(ERR_MALLOC));
 	line.addr = n_value;
 	line.sym = ft_record_symbol(n_type, n_sect, n_value);
-	new = ft_line_new(line);
+	if (!(new = ft_line_new(line)))
+		return ((ft_error_int(ERR_MALLOC)));
 	ft_line_add(new, ft_tri_ascii);
+	return (EXIT_SUCCES);
 }

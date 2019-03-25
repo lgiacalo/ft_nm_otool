@@ -18,7 +18,8 @@ char	*ft_strndup(char *s1, int len)
 
 	if (!s1 || !len)
 		return (NULL);
-	ret = (char *)ft_memalloc(len + 1);
+	if (!(ret = (char *)ft_memalloc(len + 1)))
+		return (NULL);
 	return (ft_memcpy(ret, s1, len));
 }
 
