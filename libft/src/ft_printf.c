@@ -31,7 +31,7 @@ static int	ft_search(const char *format, va_list ap, unsigned int *i, int fd)
 		return (0);
 	flags->conv = ft_flags_conv(format[*i]);
 	if (!(chaine = ft_strsub(format, k, (*i - k + 1))))
-		exit(EXIT_FAILURE);
+		return (-1);
 	ft_flags_init(flags, chaine, ap);
 	count = (ft_chrstr_ind(format[*i], FLAGS_CONV) >= 0)\
 		? ft_flags(ap, flags, fd) : ft_conv_c((int)(format[*i]), flags, fd);
@@ -69,6 +69,7 @@ int			ft_printf(const char *format, ...)
 	va_list			ap;
 	unsigned int	i;
 	int				len;
+	int				out;
 
 	i = 0;
 	len = 0;
@@ -76,7 +77,11 @@ int			ft_printf(const char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			len += ft_search(format, ap, &i, 0);
+		{
+			if ((out = ft_search(format, ap, &i, 0)) == -1)
+				return (-1);
+			len += out;
+		}
 		else if (format[i] == '{')
 			len += ft_color(format, &i, 0);
 		else

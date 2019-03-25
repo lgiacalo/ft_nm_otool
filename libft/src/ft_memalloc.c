@@ -19,7 +19,7 @@ void	*ft_memalloc(size_t size)
 
 	i = 0;
 	if (!(tab = (char*)malloc(sizeof(char) * size)))
-		exit(EXIT_FAILURE);
+		return (NULL);
 	while (i < size)
 	{
 		*(unsigned char*)(tab + i) = '\0';
