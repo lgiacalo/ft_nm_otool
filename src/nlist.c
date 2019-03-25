@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:13:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/10 20:07:38 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:23:27 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_record_name_symbol(char *name)
 {
-	int	len;
+	int		len;
 	char	*str;
 
 	len = ft_strlen_nm(name);
@@ -62,10 +62,10 @@ char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	return (c);
 }
 
-int	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
+int		ft_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 {
 	t_line					line;
-	t_line 					*new;
+	t_line					*new;
 
 	line.name = ft_record_name_symbol(n_strx);
 	if (line.name == (void *)-1)

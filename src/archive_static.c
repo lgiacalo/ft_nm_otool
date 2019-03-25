@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/22 20:08:56 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:55:26 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,20 @@
 void	ft_archive_static(void *ptr, int max)
 {
 	t_symtab_header	sym_h;
-	void						*tmp;
+	void			*tp;
 
-	if (!ft_record_symtab_header(&sym_h, ptr + 8) && !ft_is_safe(ptr + 68, sym_h.size))
+	if (!ft_record_symtab_header(&sym_h, ptr + 8) &&
+			!ft_is_safe(ptr + 68, sym_h.size))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
-	tmp = ptr + 68 + sym_h.size;
-	while (tmp < (ptr + max))
+	tp = ptr + 68 + sym_h.size;
+	while (tp < (ptr + max))
 	{
-		if (!ft_record_symtab_header(&sym_h, tmp) || !ft_is_safe(tmp + 60, sym_h.size))
+		if (!ft_record_symtab_header(&sym_h, tp) ||
+				!ft_is_safe(tp + 60, sym_h.size))
 			return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
-		ft_mach_header_64((tmp + sym_h.next), *((uint32_t *)(tmp + sym_h.next)));
-		tmp = tmp + 60 + sym_h.size;
+		ft_mach_header_64((tp + sym_h.next), *((uint32_t *)(tp + sym_h.next)));
+		tp = tp + 60 + sym_h.size;
 	}
-	if (tmp != (ptr + max))
+	if (tp != (ptr + max))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 }

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:55:53 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct segment_command_64	ft_copy_segment_cmd_64(struct segment_command *src)
 	return (dst);
 }
 
-struct mach_header_64	ft_copy_mach_header_64(struct mach_header *src)
+struct mach_header_64		ft_copy_mach_header_64(struct mach_header *src)
 {
 	struct mach_header_64	dst;
 
@@ -45,7 +45,7 @@ struct mach_header_64	ft_copy_mach_header_64(struct mach_header *src)
 	return (dst);
 }
 
-struct fat_arch_64	ft_copy_fat_arch_64(struct fat_arch *src)
+struct fat_arch_64			ft_copy_fat_arch_64(struct fat_arch *src)
 {
 	struct fat_arch_64	dst;
 

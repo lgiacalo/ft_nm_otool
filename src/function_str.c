@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:43:49 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:44:04 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:08:23 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ char	*ft_strndup(char *s1, int len)
 **		Mais comment savoir si str totalement en dehors du fichier ?
 */
 
-int 	ft_strlen_nm(char *str)
+int		ft_strlen_nm(char *str)
 {
 	int	i;
 
-	i = -1;
-	while (str && ft_is_safe(str, ++i) && str[i] != '\0');
+	i = 0;
+	while (str && ft_is_safe(str, i) && str[i] != '\0')
+		i++;
 	return (i);
 }
 

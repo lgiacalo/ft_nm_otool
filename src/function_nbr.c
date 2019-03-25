@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:43:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/01 19:46:06 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:03:10 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,4 @@ void		ft_putnbr16(unsigned long long int n)
 void		ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
 {
 	ft_fdprintf(FDD, "%s%llx%s", str1, nbr, str2);
-	// ft_putstr(str1);
-	// ft_putstr("0x");
-	// ft_putnbr16(nbr);
-	// ft_putstr(str2);
 }

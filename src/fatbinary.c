@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/10 20:05:21 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:00:21 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,34 @@
 /*
 **	gestion de chaque types darch du fat
 **    verifier si mh, or .a archive (fat d'archives)
+**	ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
+**		TODO: verifier align avec file 998...
+**	Ajoutez alignement pour verifier la taille !!! align que sur size ?
+**	BUG align memoire avec resources/tests/archTest/998_valid_x86-64_i386.out
 */
 
 int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 {
 	uint32_t magic;
-	//TODO:align
-	//Ajoutez alignement pour verifier la taille !!! align que sur size ?
-	//Probleme alignement memoire avec resources/tests/archTest/998_valid_x86-64_i386.out
+
 	if (!arch || !ft_is_safe(env()->ptr,
 		arch->offset + arch->size))
-		// ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	if (ft_is_mh(magic))
 		ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
 		ft_archive_static(env()->ptr + arch->offset, arch->size);
-	else  if (ft_is_fat(magic))
+	else if (ft_is_fat(magic))
 	{
-		// ft_print_fat_header((struct fat_header *)(env()->ptr + arch->offset));
-		ft_print_int16("Its fat !!! encore ?? Magic number: \t", (unsigned long long int)magic, "\n");
+		ft_print_int16("Its fat !!! encore ?? Magic number: \t",
+				(unsigned long long int)magic, "\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
 	}
 	else
 	{
-		ft_print_int16("Piege probleme magic number ? Magic number: \t", (unsigned long long int)magic, "\n");
+		ft_print_int16("Piege probleme magic number ? Magic number: \t",
+				(unsigned long long int)magic, "\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR5));
 	}
 	return (EXIT_SUCCES);
@@ -52,7 +54,8 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 **			+ call ft_gestion_arch_fat()
 */
 
-int		ft_fatbinary2(int ind, size_t *overlaps, struct fat_arch_64 *arch, int my_arch)
+int		ft_fatbinary2(int ind, size_t *overlaps, struct fat_arch_64 *arch,
+		int my_arch)
 {
 	if (ind && arch->offset < *overlaps)
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));

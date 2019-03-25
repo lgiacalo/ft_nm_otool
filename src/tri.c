@@ -6,16 +6,16 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 18:35:18 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/04 18:46:21 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:30:49 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void    ft_print_lst_line()
+void	ft_print_lst_line(void)
 {
-	t_line   *line;
-	int       i;
+	t_line	*line;
+	int		i;
 
 	line = env()->line;
 	i = 1;

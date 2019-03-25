@@ -12,10 +12,6 @@
 
 #include "ft_nm_otool.h"
 
-/*
-**	TODO: ajouter error here !!
-*/
-
 int		ft_mmap_file(int fd, size_t size, void **ptr)
 {
 	if (size <= 0 || !ptr)

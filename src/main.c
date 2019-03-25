@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:22:36 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 **		Verif size to load command safe
 */
 
-void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
+void	ft_mach_header_64(void *ptr, uint32_t magic_mh)
 {
 	struct mach_header_64	mach_header;
-	size_t								size_struct;
+	size_t					size_struct;
 
 	env()->magic_mh = magic_mh;
 	env()->ptr_mh = ptr;
@@ -33,7 +33,6 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 	if (!ft_is_safe(ptr + size_struct, mach_header.sizeofcmds))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_load_command(ptr + size_struct, mach_header.ncmds);
-	//output nm here + free list_line
 }
 
 /*
@@ -115,7 +114,7 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-void		fichier(void)
+void	fichier(void)
 {
 	if ((FDD = open("log", O_RDWR | O_CREAT | O_APPEND)) == -1)
 		FDD = 1;
