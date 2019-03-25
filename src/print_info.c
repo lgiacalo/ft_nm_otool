@@ -21,6 +21,7 @@ void 	ft_print_line(t_line *line, int i)
 		ft_fdprintf(1, "%*16s %c %s\n", 16, " ", line->sym, line->name);
 	else
 		ft_fdprintf(1, "%016llx %c %s\n", line->addr, line->sym, line->name);
+	(void)i;
 }
 
 void	ft_print_symtab_cmd(struct symtab_command *sym)
@@ -61,6 +62,7 @@ void	ft_print_load_command(struct load_command *lc, int numlc)
 	ft_fdprintf(FDD, "Info NM ----- LOAD_COMMAND n%d ---------\n", numlc);
 	ft_fdprintf(FDD, "Cmd:\t\t%d\n", (lc->cmd));
 	ft_fdprintf(FDD, "Cmdsize:\t%d\n\n", lc->cmdsize);
+	(void)numlc;
 }
 
 void 	ft_print_symtab_header(t_symtab_header *sym_h)

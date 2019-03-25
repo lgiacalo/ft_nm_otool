@@ -12,33 +12,6 @@
 
 #include "ft_nm.h"
 
-int		ft_tri_ascii(const char *s1, const char *s2)
-{
-	return (ft_strcmp(s1, s2));
-}
-
-int		ft_tri_ascii_r(const char *s1, const char *s2)
-{
-	return (-ft_strcmp(s1, s2));
-}
-
-void    ft_print_lst_line()
-{
-	t_line   *line;
-	int       i;
-
-	line = env()->line;
-	i = 1;
-	ft_fdprintf(1, "\n***** PRINT LIST LINE *****\n");
-	while (line)
-	{
-		ft_print_line(line, i);
-		line = line->next;
-		i++;
-	}
-	ft_fdprintf(1, "***** FIN PRINT LIST LINE *****\n\n");
-}
-
 t_line *ft_line_new(t_line new)
 {
 	t_line *ret;
@@ -54,6 +27,35 @@ t_line *ft_line_new(t_line new)
 	return (ret);
 }
 
+t_line  *ft_line_search_addr(t_line *n, int (*condition)(uint64_t, uint64_t))
+{
+	t_env *e;
+	t_line *tmp;
+	t_line  *prev;
+	int     comp;
+
+	e = env();
+	tmp = e->line;
+	prev = tmp;
+	while (tmp)
+	{
+		if (!ft_strcmp(n->name, tmp->name))
+		{
+			comp = (*condition)(n->addr, tmp->addr);
+			if (condition && comp < 0)
+				return ((e->line == tmp) ? NULL : prev);
+		}
+		else
+			if (prev != tmp && !ft_strcmp(n->name, prev->name))
+				return (prev);
+		if (!(tmp->next))
+			break;
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	return (tmp);
+}
+
 t_line  *ft_line_search(t_line *n, int (*condition)(const char *, const char *))
 {
 	t_env *e;
@@ -67,6 +69,8 @@ t_line  *ft_line_search(t_line *n, int (*condition)(const char *, const char *))
 	while (tmp)
 	{
 		comp = (*condition)(n->name, tmp->name);
+		if (!comp)
+			return (ft_line_search_addr(n, ((e->opt & OPT_R) ? ft_tri_r : ft_tri)));
 		ft_fdprintf(FDD, "Valeur cmp = %d - %s // %s\n", comp, n->name, tmp->name);
 		// if cmp == 0 !! alors tri par rapport au addresse
 		if (condition && comp < 0)

@@ -64,5 +64,5 @@ void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_v
 	ft_fdprintf(FDD, "%016llx %c %s\n", line.addr, line.sym, line.name);
 	ft_fdprintf(FDD, "\t n_type = %#x / n_sect = %d\n\n\n", n_type, n_sect);
 	new = ft_line_new(line);
-	ft_line_add(new, ft_tri_ascii_r);
+	ft_line_add(new, ft_tri_ascii);
 }

@@ -115,6 +115,8 @@ void    				ft_line_add(t_line *n, int (*condition)(const char *, const char *))
 
 int							ft_tri_ascii(const char *s1, const char *s2);
 int							ft_tri_ascii_r(const char *s1, const char *s2);
+int							ft_tri(uint64_t n1, uint64_t n2);
+int							ft_tri_r(uint64_t n1, uint64_t n2);
 
 
 /*

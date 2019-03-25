@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tri.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/02 18:35:18 by lgiacalo          #+#    #+#             */
+/*   Updated: 2019/02/04 18:46:21 by lgiacalo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_nm.h"
+
+void    ft_print_lst_line()
+{
+	t_line   *line;
+	int       i;
+
+	line = env()->line;
+	i = 1;
+	ft_fdprintf(1, "\n***** PRINT LIST LINE *****\n");
+	while (line)
+	{
+		ft_print_line(line, i);
+		line = line->next;
+		i++;
+	}
+	ft_fdprintf(1, "***** FIN PRINT LIST LINE *****\n\n");
+}
+
+int		ft_tri_ascii(const char *s1, const char *s2)
+{
+	return (ft_strcmp(s1, s2));
+}
+
+int		ft_tri_ascii_r(const char *s1, const char *s2)
+{
+	return (-ft_strcmp(s1, s2));
+}
+
+int		ft_tri(uint64_t n1, uint64_t n2)
+{
+	return (n1 - n2);
+}
+
+int		ft_tri_r(uint64_t n1, uint64_t n2)
+{
+	return (-ft_tri(n1, n2));
+}
