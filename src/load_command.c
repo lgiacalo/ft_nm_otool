@@ -49,14 +49,13 @@ int	ft_lc_symtab(struct load_command *lc)
 	struct symtab_command	*sym;
 
 	sym = (struct symtab_command *)lc;
-	// ft_print_load_command(lc, 0); // ft_print_symtab_cmd(sym);
 	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) : sizeof(struct nlist))) ||
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	if (!ft_gestion_symtab_command(env()->ptr_mh, sym))
 		return (EXIT_FAILUR);
-	//PRINT NM
+
 	ft_fdprintf(1, "\nFile : %s + %s", env()->file_name, env()->file_name_mh);
 	ft_print_lst_line();
 	ft_fdprintf(1, "\n");
@@ -66,7 +65,6 @@ int	ft_lc_symtab(struct load_command *lc)
 
 /*
 ** Lecture load command ==> segment_command
-**	* retirer parametre int i !!
 */
 
 void	ft_lc_segment_nm(struct load_command *lc)
@@ -119,7 +117,4 @@ void ft_load_command(void *ptr, int ncmds)
 				return ;
 		lc = (struct load_command *)((char *)lc + lc->cmdsize);
 	}
-
-
-	// ft_fdprintf(FDD, "Good \n");
 }

@@ -19,14 +19,14 @@ void    ft_print_lst_line()
 
 	line = env()->line;
 	i = 1;
-	ft_fdprintf(1, "\n***** PRINT LIST LINE *****\n");
+	ft_fdprintf(1, "\n");
 	while (line)
 	{
 		ft_print_line(line, i);
 		line = line->next;
 		i++;
 	}
-	ft_fdprintf(1, "***** FIN PRINT LIST LINE *****\n\n");
+	ft_fdprintf(1, "\n");
 }
 
 int		ft_tri_ascii(const char *s1, const char *s2)

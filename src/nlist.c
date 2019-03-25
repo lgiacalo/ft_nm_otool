@@ -12,9 +12,6 @@
 
 #include "ft_nm.h"
 
-//TODO: A faire fonction pour list t_line
-// attention si name == NULL pas de free !
-
 char	*ft_record_name_symbol(char *name)
 {
 	int	len;
@@ -70,7 +67,6 @@ int	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_va
 	t_line					line;
 	t_line 					*new;
 
-	//TODO: enregistrement des infos dans struct line + send fonction add + tri to list chainee
 	line.name = ft_record_name_symbol(n_strx);
 	if (line.name == (void *)-1)
 		return (ft_error_int(ERR_MALLOC));

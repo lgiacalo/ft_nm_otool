@@ -29,8 +29,6 @@
 # define OPT_R				(1 << 4)	//Order inverse
 # define OPT_NM				"gjuUr"
 
-//Structure pour enregistrer les symboles pour ensuiter les trier
-//TODO: Doublement chainee pour tir -r inverse ?
 typedef struct				s_line
 {
 	uint64_t						addr;
@@ -65,7 +63,6 @@ typedef struct				s_env
 
 }							t_env;
 
-//TODO: car la structure n'existe pas !!
 typedef struct				s_symtab_header
 {
 	char					*name;
