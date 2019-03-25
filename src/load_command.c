@@ -42,9 +42,8 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 	struct symtab_command	*sym;
 
 	sym = (struct symtab_command *)lc;
-	ft_fdprintf(FDD, "\n====> Fonction lc symtab \n");
-	ft_print_load_command(lc, i);
-	ft_print_symtab_cmd(sym);
+	// ft_print_load_command(lc, i);
+	// ft_print_symtab_cmd(sym);
 	// Verification Symbol + String Table !! OK
 	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) : sizeof(struct nlist))) ||
@@ -57,6 +56,7 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 	ft_print_lst_line();
 	ft_fdprintf(1, "\n");
 	env()->line = NULL; //Free list !!!!
+	(void)i;
 }
 
 /*
@@ -70,9 +70,10 @@ void	ft_lc_segment(struct load_command *lc, int i)
 
 	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg))
 		return ;
-	ft_fdprintf(FDD, "\n====> Fonction lc segment \n");
-	ft_print_load_command(lc, i);
-	ft_print_segment_cmd_64(&seg);
+	// ft_fdprintf(FDD, "\n====> Fonction lc segment \n");
+	// ft_print_load_command(lc, i);
+	// ft_print_segment_cmd_64(&seg);
+	(void)i;
 }
 
 /*
@@ -94,8 +95,8 @@ void ft_load_command(void *ptr, int ncmds)
 			ft_lc_segment(lc, i);
 		else if (lc->cmd == LC_SYMTAB)
 			ft_lc_symtab(lc, i);
-		else
-			ft_print_load_command(lc, i);
+		// else
+		// 	ft_print_load_command(lc, i);
 		lc = (struct load_command *)((char *)lc + lc->cmdsize);
 	}
 	ft_fdprintf(FDD, "Good \n");

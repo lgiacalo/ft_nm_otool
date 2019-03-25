@@ -51,7 +51,6 @@ int		ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 {
 	if (!ft_verif_header_line((void *)((char *)ptr)))
 		return (EXIT_FAILUR);
-	ft_fdprintf(FDD, "Header line : %s\n", (char *)ptr);
 	if (*(char *)ptr == '#')
 		sym_h->name = (char *)(ptr + 60);
 	else	//TODO: a verifier pour les noms, a mon avis pas de '\0'

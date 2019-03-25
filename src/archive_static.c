@@ -25,14 +25,14 @@ void	ft_archive_static(void *ptr, int max)
 
 	if (!ft_record_symtab_header(&sym_h, ptr + 8) && !ft_is_safe(ptr + 68, sym_h.size))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
-	ft_print_symtab_header(&sym_h);
+	// ft_print_symtab_header(&sym_h);
 	tmp = ptr + 68 + sym_h.size;
 	while (tmp < (ptr + max))
 	{
 		ft_fdprintf(FDD, "\n\n------------------------------ BOUCLE ARCHIVE .O -------------------------\n");
 		if (!ft_record_symtab_header(&sym_h, tmp) || !ft_is_safe(tmp + 60, sym_h.size))
 			return (ft_error_void3(env()->cmd, env()->file_name, ERROR3)); // TODO: ajouter erreur ou dans la fonction ft_record_symtab_header
-		ft_print_symtab_header(&sym_h);
+		// ft_print_symtab_header(&sym_h);
 		ft_mach_header_64((tmp + sym_h.next), *((uint32_t *)(tmp + sym_h.next)));
 		tmp = tmp + 60 + sym_h.size;
 	}

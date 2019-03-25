@@ -83,7 +83,7 @@ void	ft_fatbinary(int my_arch)
 
 	i = -1;
 	ft_record_fat_header(env()->ptr, &header);
-	(!my_arch) ? ft_print_fat_header(&header) : 0; //TODO: a retirer
+	// (!my_arch) ? ft_print_fat_header(&header) : 0; //TODO: a retirer
 	if (header.nfat_arch < 1)
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR4));
 	while (++i < header.nfat_arch)

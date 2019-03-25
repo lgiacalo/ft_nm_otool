@@ -21,9 +21,6 @@ t_line *ft_line_new(t_line new)
 		return (NULL);
 	*ret = new;
 	ret->next = NULL;
-	ft_fdprintf(FDD, "\nVerification new line\n");
-//	ft_print_line(ret, 0);
-	ft_fdprintf(FDD, "FIN Verification new line\n");
 	return (ret);
 }
 
@@ -71,8 +68,6 @@ t_line  *ft_line_search(t_line *n, int (*condition)(const char *, const char *))
 		comp = (*condition)(n->name, tmp->name);
 		if (!comp)
 			return (ft_line_search_addr(n, ((e->opt & OPT_R) ? ft_tri_r : ft_tri)));
-		ft_fdprintf(FDD, "Valeur cmp = %d - %s // %s\n", comp, n->name, tmp->name);
-		// if cmp == 0 !! alors tri par rapport au addresse
 		if (condition && comp < 0)
 			return ((e->line == tmp) ? NULL : prev);
 		if (!(tmp->next))

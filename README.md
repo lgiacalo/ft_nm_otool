@@ -22,4 +22,5 @@ A faire : lire les bons load commands !!!
 * ATTENTION ====> exit() avec ft_memalloc
 * if same name alors tri value/addresse !!!
 * if 32, print 0x 8, if 64, print 0x 16
-
+* look hell/the_revengeance_of_python probleme !! doit sortir !!
+* look hell/salam_i_like_cum !!! probleme tri avec chaine null ??

@@ -30,7 +30,7 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 	: sizeof(struct mach_header);
 	if (!ft_record_mach_header_64(magic_mh, ptr, &mach_header))
 		return ;
-	ft_print_mach_header_64(&mach_header);
+	// ft_print_mach_header_64(&mach_header);
 	if (!ft_is_safe(ptr + size_struct, mach_header.sizeofcmds))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_load_command(ptr + size_struct, mach_header.ncmds);
@@ -79,7 +79,7 @@ void	ft_loop_args(int argc, char **argv, int ind)
 	i = ind - 1;
 	while (++i < argc || ind == argc)
 	{
-		ft_fdprintf(FDD, "\n\n--------------------------------------------------\n");
+		// ft_fdprintf(FDD, "\n\n--------------------------------------------------\n");
 		ft_reinit_env();
 		file = (ind == argc) ? "a.out" : argv[i];
 		if (ft_open_file(env()->cmd, file, &fd))
@@ -115,7 +115,7 @@ int		main(int argc, char **argv)
 	e->print_name = ft_multi_args(ind, argc);
 	if (env()->opt & OPT_U)
 		env()->opt |= OPT_J;
-	ft_print_option_nm();
+	// ft_print_option_nm();
 	ft_loop_args(argc, argv, ind);
 	ft_fdprintf(FDD, "\n\t\tFIN FIN FIN FIN\n\n\n\n");
 	return (0);
