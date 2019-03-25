@@ -39,6 +39,13 @@ typedef struct				s_line
 	struct s_line				*next;
 }											t_line;
 
+typedef struct 				s_sym
+{
+	int 								t;
+	int 								d;
+	int 								b;
+}											t_sym;
+
 typedef struct				s_env
 {
 	char					*cmd;
@@ -51,7 +58,9 @@ typedef struct				s_env
 	void					*ptr_mh;
 	uint32_t				magic;
 	uint32_t				magic_mh;
+	uint32_t				dec;
 	uint8_t					swap;
+	t_sym						symbol;
 	t_line					*line;
 
 }							t_env;

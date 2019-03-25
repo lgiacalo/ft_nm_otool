@@ -14,12 +14,15 @@
 
 void 	ft_print_line(t_line *line, int i)
 {
+	int 	pad;
+
+	pad = ft_is_64(env()->magic_mh) ? 16 : 8;
 	if (!line)
 		return ;
 	if (!(line->addr) && line->sym == 'U')
-		ft_fdprintf(1, "%*16s %c %s\n", 16, " ", line->sym, line->name);
+		ft_fdprintf(1, "%*s %c %s\n", pad, " ", line->sym, line->name);
 	else
-		ft_fdprintf(1, "%016llx %c %s\n", line->addr, line->sym, line->name);
+		ft_fdprintf(1, "%0*llx %c %s\n", pad, line->addr, line->sym, line->name);
 	(void)i;
 }
 

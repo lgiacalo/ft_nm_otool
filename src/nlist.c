@@ -26,6 +26,20 @@ char	*ft_record_name_symbol(char *name)
 	return (str);
 }
 
+char	ft_record_symbol_section(uint8_t n_sect)
+{
+	t_sym	sym;
+
+	sym = env()->symbol;
+	if (sym.t == n_sect)
+		return ('t');
+	if (sym.d == n_sect)
+		return ('d');
+	if (sym.b == n_sect)
+		return ('b');
+	return ('s');
+}
+
 char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 {
 	char	c;
@@ -38,7 +52,7 @@ char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	else if (tmp == N_INDR)
 		c = 'i';
 	else if (tmp == N_SECT)
-		c = n_sect + '0';
+		c = ft_record_symbol_section(n_sect);
 	else if (tmp == N_UNDF)
 	{
 		if ((n_type & N_EXT) && n_value)
@@ -59,10 +73,6 @@ void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_v
 	line.name = ft_record_name_symbol(n_strx);
 	line.addr = n_value;
 	line.sym = ft_record_symbol(n_type, n_sect, n_value);
-
-	// ft_print_line(&line, 0);
-	// ft_fdprintf(FDD, "%016llx %c %s\n", line.addr, line.sym, line.name);
-	// ft_fdprintf(FDD, "\t n_type = %#x / n_sect = %d\n\n\n", n_type, n_sect);
 	new = ft_line_new(line);
 	ft_line_add(new, ft_tri_ascii);
 }

@@ -26,9 +26,11 @@ void	ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 	while (++i < sym->nsyms)
 	{
 		if (ft_is_64(env()->magic_mh) && !(a_64[i].n_type & N_STAB))
-			ft_gestion_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type, a_64[i].n_sect, a_64[i].n_value);
+			ft_gestion_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
+				a_64[i].n_sect, a_64[i].n_value);
 		else if (!(a[i].n_type & N_STAB))
-			ft_gestion_nlist(strtable + a[i].n_un.n_strx, a[i].n_type, a[i].n_sect, a[i].n_value);
+			ft_gestion_nlist(strtable + a[i].n_un.n_strx, a[i].n_type, a[i].n_sect,
+				a[i].n_value);
 	}
 }
 
@@ -37,26 +39,17 @@ void	ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 **	* retirer parametre int i !!
 */
 
-void	ft_lc_symtab(struct load_command *lc, int i)
+void	ft_lc_symtab(struct load_command *lc)
 {
 	struct symtab_command	*sym;
 
 	sym = (struct symtab_command *)lc;
-	// ft_print_load_command(lc, i);
-	// ft_print_symtab_cmd(sym);
-	// Verification Symbol + String Table !! OK
+	// ft_print_load_command(lc, 0); // ft_print_symtab_cmd(sym);
 	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) : sizeof(struct nlist))) ||
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_gestion_symtab_command(env()->ptr_mh, sym);
-
-//PRINT
-	ft_fdprintf(1, "\nFile : %s + %s", env()->file_name, env()->file_name_mh);
-	ft_print_lst_line();
-	ft_fdprintf(1, "\n");
-	env()->line = NULL; //Free list !!!!
-	(void)i;
 }
 
 /*
@@ -64,16 +57,32 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 **	* retirer parametre int i !!
 */
 
-void	ft_lc_segment(struct load_command *lc, int i)
+void	ft_lc_segment_nm(struct load_command *lc)
 {
 	struct segment_command_64	seg;
+	char 											*str;
+	int												k;
+	int 											st;
 
-	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg))
+	k = 0;
+	st = ft_is_64(env()->magic_mh);
+	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg) ||
+		seg.nsects == 0)
 		return ;
-	// ft_fdprintf(FDD, "\n====> Fonction lc segment \n");
-	// ft_print_load_command(lc, i);
-	// ft_print_segment_cmd_64(&seg);
-	(void)i;
+	while ((uint32_t)k < seg.nsects)
+	{
+		(env()->dec)++;
+		str = (char *)(((void *)lc + (st ? sizeof(struct segment_command_64) :
+		sizeof(struct segment_command))) + (k * (st ? sizeof(struct section_64) :
+		sizeof(struct section))));
+		if (!ft_strcmp("__text", str))
+			env()->symbol.t = env()->dec;
+		else if (!ft_strcmp("__data", str))
+			env()->symbol.d = env()->dec;
+		else if (!ft_strcmp("__bss", str))
+			env()->symbol.b = env()->dec;
+		k++;
+	}
 }
 
 /*
@@ -92,12 +101,15 @@ void ft_load_command(void *ptr, int ncmds)
 		if (!ft_is_safe(lc, lc->cmdsize))
 			return ft_error_void3(env()->cmd, env()->file_name, ERROR6);
 		if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
-			ft_lc_segment(lc, i);
+			ft_lc_segment_nm(lc);
 		else if (lc->cmd == LC_SYMTAB)
-			ft_lc_symtab(lc, i);
-		// else
-		// 	ft_print_load_command(lc, i);
+			ft_lc_symtab(lc);
 		lc = (struct load_command *)((char *)lc + lc->cmdsize);
 	}
-	ft_fdprintf(FDD, "Good \n");
+	ft_fdprintf(1, "\nFile : %s + %s", env()->file_name, env()->file_name_mh);
+	ft_print_lst_line();
+	ft_fdprintf(1, "\n");
+	env()->line = NULL; //TODO: Free list !!!!
+
+	// ft_fdprintf(FDD, "Good \n");
 }
