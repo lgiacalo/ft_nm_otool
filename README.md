@@ -17,6 +17,6 @@ A faire :
 
 A faire : lire les bons load commands !!!
 
-* PPC : empecher la lecture de l'archi ppc --> voir dans ft_fatbinary()
+* PPC (audiodevice_pcc-32) : empecher la lecture de l'archi ppc --> voir dans ft_fatbinary()
 * ATTENTION ==> fonctions non utilisees
 * ATTENTION ====> exit() avec ft_memalloc

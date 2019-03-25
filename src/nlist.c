@@ -23,8 +23,31 @@ char	*ft_record_name_symbol(char *name)
 	len = ft_strlen_nm(name);
 	str = ft_strndup(name, len); //TODO: attention exit() dans memalloc()
 	// si probleme malloc, remonter programme pour sortir !! et print ERROR !
-	ft_fdprintf(FDD, "Name = %s\n", str);
 	return (str);
+}
+
+char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
+{
+	char	c;
+	uint8_t	tmp;
+
+	c = '?';
+	tmp = n_type & N_TYPE;
+	if (tmp == N_ABS)
+		c = 'a';
+	else if (tmp == N_INDR)
+		c = 'i';
+	else if (tmp == N_SECT)
+		c = n_sect + '0';
+	else if (tmp == N_UNDF)
+	{
+		if ((n_type & N_EXT) && n_value)
+			return ('C');
+		c = 'u';
+	}
+	if (n_type & N_EXT)
+		c = ft_toupper(c);
+	return (c);
 }
 
 void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
@@ -33,6 +56,9 @@ void	ft_gestion_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_v
 
 	//TODO: enregistrement des infos dans struct line + send fonction add + tri to list chainee
 	line.name = ft_record_name_symbol(n_strx);
-	ft_fdprintf(FDD, "%016llx %s\n", n_value, "name");
+	line.addr = n_value;
+	line.sym = ft_record_symbol(n_type, n_sect, n_value);
+
+	ft_fdprintf(FDD, "%016llx %c %s\n", line.addr, line.sym, line.name);
 	ft_fdprintf(FDD, "\t n_type = %#x / n_sect = %d\n\n\n", n_type, n_sect);
 }

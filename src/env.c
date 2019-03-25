@@ -31,7 +31,8 @@ void	ft_reinit_env(void)
 	e->ptr_mh = NULL;
 	e->magic = 0;
 	e->magic_mh = 0;
-	e->swap = 0;
+	e->swap = 0; //TODO: Verificatoin utilisation ? 
+	e->line = NULL;
 }
 
 t_env	*ft_init_env(void)
@@ -50,6 +51,7 @@ t_env	*ft_init_env(void)
 	e->magic = 0;
 	e->magic_mh = 0;
 	e->swap = 0;
+	e->line = NULL;
 	return (e);
 }
 
