@@ -106,6 +106,15 @@ struct 					mach_header_64	ft_copy_mach_header_64(struct mach_header *src);
 struct 					segment_command_64	ft_copy_segment_cmd_64(struct segment_command *src);
 
 /*
+**	Fonction struct line
+*/
+
+t_line 					*ft_line_new(t_line new);
+t_line  				*ft_line_search(t_line *new, int (*condition)(char *, char *));
+void    				ft_line_add(t_line *new, int (*condition)(char *, char *));
+
+
+/*
 **	Swap
 */
 
@@ -147,6 +156,9 @@ void						ft_print_symtab_header2(void *ptr);
 void						ft_print_load_command(struct load_command *lc, int numlc);
 void						ft_print_segment_cmd_64(struct segment_command_64 *seg);
 void						ft_print_symtab_cmd(struct symtab_command *sym);
+void 						ft_print_lst_line();
+void 						ft_print_line(t_line *line, int i);
+
 
 /*
 ** Usage

@@ -34,6 +34,7 @@ void	ft_mach_header_64(void	*ptr, uint32_t magic_mh)
 	if (!ft_is_safe(ptr + size_struct, mach_header.sizeofcmds))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_load_command(ptr + size_struct, mach_header.ncmds);
+	//output nm here + free list_line
 }
 
 /*

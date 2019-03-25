@@ -51,6 +51,7 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_gestion_symtab_command(env()->ptr_mh, sym);
+	ft_print_lst_line();
 }
 
 /*

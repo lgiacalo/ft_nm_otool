@@ -40,7 +40,7 @@ SRC_NM		= main.c ft_option.c print_info.c\
 				ft_file.c ft_type_file.c ft_type_cpu.c\
 				record_struct.c swap.c copy.c\
 				fatbinary.c archive_static.c\
-				load_command.c nlist.c\
+				load_command.c nlist.c list_line.c\
 				function_nbr.c function_str.c
 
 INC_NM		= ft_nm_otool.h ft_nm.h
