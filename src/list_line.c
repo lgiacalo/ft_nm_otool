@@ -12,6 +12,16 @@
 
 #include "ft_nm.h"
 
+int		ft_tri_ascii(const char *s1, const char *s2)
+{
+	return (ft_strcmp(s1, s2));
+}
+
+int		ft_tri_ascii_r(const char *s1, const char *s2)
+{
+	return (-ft_strcmp(s1, s2));
+}
+
 void    ft_print_lst_line()
 {
 	t_line   *line;
@@ -19,13 +29,14 @@ void    ft_print_lst_line()
 
 	line = env()->line;
 	i = 1;
-	ft_fdprintf(FDD, "***** PRINT LIST LINE *****\n");
+	ft_fdprintf(1, "\n***** PRINT LIST LINE *****\n");
 	while (line)
 	{
 		ft_print_line(line, i);
 		line = line->next;
 		i++;
 	}
+	ft_fdprintf(1, "***** FIN PRINT LIST LINE *****\n\n");
 }
 
 t_line *ft_line_new(t_line new)
@@ -37,49 +48,61 @@ t_line *ft_line_new(t_line new)
 		return (NULL);
 	*ret = new;
 	ret->next = NULL;
+	ft_fdprintf(FDD, "\nVerification new line\n");
+//	ft_print_line(ret, 0);
+	ft_fdprintf(FDD, "FIN Verification new line\n");
 	return (ret);
 }
 
-t_line  *ft_line_search(t_line *new, int (*condition)(char *, char *))
+t_line  *ft_line_search(t_line *n, int (*condition)(const char *, const char *))
 {
 	t_env *e;
 	t_line *tmp;
+	t_line  *prev;
+	int     comp;
 
 	e = env();
 	tmp = e->line;
+	prev = tmp;
 	while (tmp)
 	{
-		if (condition && (*condition)(new->name, tmp->name) < 0)
-			return ((e->line == tmp) ? NULL : tmp);
+		comp = (*condition)(n->name, tmp->name);
+		ft_fdprintf(FDD, "Valeur cmp = %d - %s // %s\n", comp, n->name, tmp->name);
+		// if cmp == 0 !! alors tri par rapport au addresse
+		if (condition && comp < 0)
+			return ((e->line == tmp) ? NULL : prev);
+		if (!(tmp->next))
+			break;
+		prev = tmp;
 		tmp = tmp->next;
 	}
 	return (tmp);
 }
 
-void    ft_line_add(t_line *new, int (*condition)(char *, char *))
+void    ft_line_add(t_line *n, int (*condition)(const char *, const char *))
 {
 	t_env  *e;
 	t_line *prev;
 
 	prev = NULL;
-	if (!new)
+	if (!n)
 		return ;
 	e = env();
 	if (!(e->line))
-		e->line = new;
+		e->line = n;
 	else
 	{
-		prev = ft_line_search(new, condition);
+		prev = ft_line_search(n, condition);
 		if (!prev)
 		{
-			new->next = e->line;
-			e->line = new;
+			n->next = e->line;
+			e->line = n;
 		}
 		else
 		{
 			if (prev->next)
-				new->next = prev->next;
-			prev->next = new;
+				n->next = prev->next;
+			prev->next = n;
 		}
 	}
 }

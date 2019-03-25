@@ -11,3 +11,4 @@ otool/ft_nm
 resources/.DS_Store
 resources/tests/.DS_Store
 libft/libft.a
+log

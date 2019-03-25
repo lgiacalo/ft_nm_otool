@@ -51,7 +51,12 @@ void	ft_lc_symtab(struct load_command *lc, int i)
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
 	ft_gestion_symtab_command(env()->ptr_mh, sym);
+
+//PRINT
+	ft_fdprintf(1, "\nFile : %s + %s", env()->file_name, env()->file_name_mh);
 	ft_print_lst_line();
+	ft_fdprintf(1, "\n");
+	env()->line = NULL; //Free list !!!!
 }
 
 /*

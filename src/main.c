@@ -129,5 +129,4 @@ void		fichier(void)
 		ft_fdprintf(FDD, "Error fichier open fichier log");
 	}
 	ft_fdprintf(FDD, "Valeur fd = %d\n", FDD);
-	FDD = 1;
 }

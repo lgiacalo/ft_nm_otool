@@ -17,7 +17,10 @@ void 	ft_print_line(t_line *line, int i)
 	if (!line)
 		return ;
 	ft_fdprintf(FDD, "\nInfo NM --- LINE n%d ---\n", i);
-	ft_fdprintf(FDD, "%016llx %c %s\n", line->addr, line->sym, line->name);
+	if (!(line->addr) && line->sym == 'U')
+		ft_fdprintf(1, "%*16s %c %s\n", 16, " ", line->sym, line->name);
+	else
+		ft_fdprintf(1, "%016llx %c %s\n", line->addr, line->sym, line->name);
 }
 
 void	ft_print_symtab_cmd(struct symtab_command *sym)

@@ -110,8 +110,11 @@ struct 					segment_command_64	ft_copy_segment_cmd_64(struct segment_command *sr
 */
 
 t_line 					*ft_line_new(t_line new);
-t_line  				*ft_line_search(t_line *new, int (*condition)(char *, char *));
-void    				ft_line_add(t_line *new, int (*condition)(char *, char *));
+t_line  				*ft_line_search(t_line *n, int (*condition)(const char *, const char *));
+void    				ft_line_add(t_line *n, int (*condition)(const char *, const char *));
+
+int							ft_tri_ascii(const char *s1, const char *s2);
+int							ft_tri_ascii_r(const char *s1, const char *s2);
 
 
 /*
