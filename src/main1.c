@@ -21,14 +21,14 @@ void	print_output(char *ptr, int nsyms, int symoff, int stroff)
 	i = 0;
 	array = (void *)ptr + symoff;
 	strtable = (void *)ptr + stroff;
-	ft_fdprintf(1, "Sizeof nlist_64 = %lu\n", sizeof(struct nlist_64));
-	ft_fdprintf(1, "LC_SYMYAB : stroff = %d / symoff = %d\n\n", stroff, symoff);
+	ft_printf("Sizeof nlist_64 = %lu\n", sizeof(struct nlist_64));
+	ft_printf("LC_SYMYAB : stroff = %d / symoff = %d\n\n", stroff, symoff);
 	while (i < nsyms)
 	{
 		if (!(array[i].n_type & N_STAB))
 		{
-			ft_fdprintf(1, "%016llx %s\n", array[i].n_value, strtable + array[i].n_un.n_strx);
-			ft_fdprintf(1, "\t +%d <= n_strx / i = %d\t / n_type = %#x\n", array[i].n_un.n_strx, i, array[i].n_type);
+			ft_printf("%016llx %s\n", array[i].n_value, strtable + array[i].n_un.n_strx);
+			ft_printf("\t +%d <= n_strx / i = %d\t / n_type = %#x\n", array[i].n_un.n_strx, i, array[i].n_type);
 		}
 		i++;
 	}
@@ -44,7 +44,7 @@ void	handle_64(char *ptr)
 
 	header64 = (struct mach_header_64 *)ptr;
 	ncmds = header64->ncmds;
-	ft_fdprintf(1, "Nbr ncmds = %d\n", header64->ncmds);
+	ft_printf("Nbr ncmds = %d\n", header64->ncmds);
 	i = 0;
 	lc = (void *)ptr + sizeof(struct mach_header_64);
 	while (i < ncmds)
@@ -52,7 +52,7 @@ void	handle_64(char *ptr)
 		if (lc->cmd == LC_SYMTAB)
 		{
 			sym = (struct symtab_command *)lc;
-			ft_fdprintf(1, "Trouveeee LC_SYMTAB : nsyms = %d / strsize = %d\n", sym->nsyms, sym->strsize);
+			ft_printf("Trouveeee LC_SYMTAB : nsyms = %d / strsize = %d\n", sym->nsyms, sym->strsize);
 			print_output(ptr, sym->nsyms, sym->symoff, sym->stroff);
 			break;
 		}
@@ -78,7 +78,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_fdprintf(1, "Please give me an arg\n");
+		ft_printf("Please give me an arg\n");
 		return (EXIT_FAILUR);
 	}
 	if ((fd = open(argv[1], O_RDONLY)) < 0)

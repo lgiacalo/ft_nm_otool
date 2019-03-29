@@ -103,7 +103,6 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		ind;
 
-	fichier(); //TODO: a retirer
 	e = ft_init_env();
 	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
 	if (!ind || ind == argc)
@@ -113,10 +112,4 @@ int		main(int argc, char **argv)
 		env()->opt |= OPT_J;
 	ft_loop_args(argc, argv, ind);
 	return (0);
-}
-
-void	fichier(void)
-{
-	if ((FDD = open("log", O_RDWR | O_CREAT | O_APPEND)) == -1)
-		FDD = 1;
 }

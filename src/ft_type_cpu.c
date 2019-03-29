@@ -82,9 +82,9 @@ char	*ft_get_name_cpu(int cputype, int cpusubtype)
 
 
 	if (cputype == CPU_TYPE_X86_64)
-		ft_fdprintf(FDD, "CPU_TYPE_X86_64 : yes = %d!!\n", CPU_TYPE_X86_64);
+		ft_printf("CPU_TYPE_X86_64 : yes = %d!!\n", CPU_TYPE_X86_64);
 	if ((cpusubtype & ~CPU_SUBTYPE_MASK) == CPU_SUBTYPE_X86_64_ALL)
-		ft_fdprintf(FDD, "CPU_SUBTYPE_X86_64_ALL : yes = %d!!\n", CPU_SUBTYPE_X86_64_ALL);
+		ft_printf("CPU_SUBTYPE_X86_64_ALL : yes = %d!!\n", CPU_SUBTYPE_X86_64_ALL);
 	i = -1;
 	while (++i < 52)
 	{

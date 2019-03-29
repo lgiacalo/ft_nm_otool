@@ -89,7 +89,6 @@ void	ft_lc_segment_nm(struct load_command *lc)
 		seg.nsects == 0)
 		return ;
 	ft_reinit_sym();
-	// ft_fdprintf(1, "dec == %d \n", env()->dec);
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
@@ -104,8 +103,6 @@ void	ft_lc_segment_nm(struct load_command *lc)
 			env()->symbol.b = env()->dec;
 		k++;
 	}
-	//TODO: error numero !! symbol
-	// ft_fdprintf(1, "__text = %d, __data = %d, __bss = %d\n", env()->symbol.t, env()->symbol.d, env()->symbol.b);
 }
 
 /*

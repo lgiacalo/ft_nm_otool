@@ -24,15 +24,12 @@
 # include "libft.h"
 
 /*
-** TODO: suprimer include + FDD + fichier()
+** TODO: suprimer include + 1 + fichier()
 */
 
 # include <mach-o/arch.h>
 # include <stdio.h>
 # include <time.h>
-
-int						FDD;
-void					fichier(void);
 
 # define BASE16_U		"0123456789ABCDEF"
 # define BASE16_L		"0123456789abcdef"

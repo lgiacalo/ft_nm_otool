@@ -82,5 +82,5 @@ void		ft_putnbr16(unsigned long long int n)
 
 void		ft_print_int16(char *str1, unsigned long long int nbr, char *str2)
 {
-	ft_fdprintf(FDD, "%s%llx%s", str1, nbr, str2);
+	ft_printf("%s%llx%s", str1, nbr, str2);
 }
