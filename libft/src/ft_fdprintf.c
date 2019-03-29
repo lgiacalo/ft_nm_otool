@@ -89,7 +89,7 @@ int			ft_fdprintf(int fd, const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if ((out = ft_search(format, ap, &i, 0)) == -1)
+			if ((out = ft_search(format, ap, &i, fd)) == -1)
 				return (-1);
 			len += out;
 		}

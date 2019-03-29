@@ -78,14 +78,14 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if ((out = ft_search(format, ap, &i, 0)) == -1)
+			if ((out = ft_search(format, ap, &i, 1)) == -1)
 				return (-1);
 			len += out;
 		}
 		else if (format[i] == '{')
-			len += ft_color(format, &i, 0);
+			len += ft_color(format, &i, 1);
 		else
-			len += ft_putchar_fd(format[i], 0);
+			len += ft_putchar_fd(format[i], 1);
 		if (format[i] != '\0')
 			i++;
 	}
