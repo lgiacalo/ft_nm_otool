@@ -62,6 +62,16 @@ int		ft_lc_symtab(struct load_command *lc)
 	return (EXIT_SUCCES);
 }
 
+void ft_reinit_sym(void)
+{
+	t_sym	sym;
+
+	sym = env()->symbol;
+	sym.t = 0;
+	sym.d = 0;
+	sym.b = 0;
+}
+
 /*
 ** Lecture load command ==> segment_command
 */
@@ -78,6 +88,8 @@ void	ft_lc_segment_nm(struct load_command *lc)
 	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg) ||
 		seg.nsects == 0)
 		return ;
+	ft_reinit_sym();
+	// ft_fdprintf(1, "dec == %d \n", env()->dec);
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
