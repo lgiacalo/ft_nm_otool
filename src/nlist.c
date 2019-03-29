@@ -54,7 +54,7 @@ char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	else if (tmp == N_UNDF)
 	{
 		if ((n_type & N_EXT) && n_value)
-			return ('C');
+			c = 'C';
 		c = 'u';
 	}
 	if (n_type & N_EXT)
@@ -75,5 +75,7 @@ int		ft_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	if (!(new = ft_line_new(line)))
 		return ((ft_error_int(ERR_MALLOC)));
 	ft_line_add(new, ft_tri_ascii);
+	//TODO: error numero symbol
+	// ft_fdprintf(1, " -%s- Char = %c // N_sect = %d \n", line.name, line.sym, n_sect);
 	return (EXIT_SUCCES);
 }

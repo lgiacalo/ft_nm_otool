@@ -57,6 +57,7 @@ typedef struct				s_env
 	uint32_t				magic_mh;
 	uint32_t				dec;
 	uint8_t					swap;
+	uint8_t					arch;
 	t_sym					symbol;
 	t_line					*line;
 
@@ -158,6 +159,7 @@ char						*ft_strndup(char *s1, int len);
 ** Print
 */
 
+void						ft_print_title(void);
 void						ft_print_option_nm(void);
 void						ft_print_env(void);
 void						ft_print_file(void);

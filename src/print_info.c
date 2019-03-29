@@ -12,6 +12,22 @@
 
 #include "ft_nm.h"
 
+void	ft_print_title(void)
+{
+	t_env	*e;
+
+	e = env();
+	if (e->magic == 0)
+	{
+		ft_fdprintf(1, "\n%s(%s)", e->file_name, e->file_name_mh);
+		(e->arch) ? ft_fdprintf(1, ":\n") : ft_fdprintf(1, " (%s)\n", "archi");
+	}
+	else if (ft_is_fat(e->magic) && !(e->arch))
+		ft_fdprintf(1, "\n%s (%s):\n", e->file_name, "archi");
+	else if (e->print_name && !ft_is_fat(e->magic))
+		ft_fdprintf(1, "\n%s:\n", e->file_name);
+}
+
 void 	ft_print_line(t_line *line, int i)
 {
 	int 	pad;

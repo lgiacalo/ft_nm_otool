@@ -87,6 +87,8 @@ void	ft_fatbinary(int my_arch)
 	ft_record_fat_header(env()->ptr, &header);
 	if (header.nfat_arch < 1)
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR4));
+	if (my_arch)
+		env()->arch = 0;
 	while (++i < header.nfat_arch)
 	{
 		if (!ft_record_fat_arch_64(header.magic, env()->ptr +

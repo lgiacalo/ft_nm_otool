@@ -56,9 +56,8 @@ int		ft_lc_symtab(struct load_command *lc)
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	if (!ft_gestion_symtab_command(env()->ptr_mh, sym))
 		return (EXIT_FAILUR);
-	ft_fdprintf(1, "\nFile : %s + %s", env()->file_name, env()->file_name_mh);
+	ft_print_title();
 	ft_print_lst_line();
-	ft_fdprintf(1, "\n");
 	env()->line = NULL; //TODO: Free list !!!!
 	return (EXIT_SUCCES);
 }
@@ -93,6 +92,8 @@ void	ft_lc_segment_nm(struct load_command *lc)
 			env()->symbol.b = env()->dec;
 		k++;
 	}
+	//TODO: error numero !! symbol
+	// ft_fdprintf(1, "__text = %d, __data = %d, __bss = %d\n", env()->symbol.t, env()->symbol.d, env()->symbol.b);
 }
 
 /*

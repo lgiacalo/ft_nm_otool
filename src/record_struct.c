@@ -58,7 +58,7 @@ int	ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 		sym_h->name = (char *)(ptr + 60);
 	else	//TODO: a verifier pour les noms, a mon avis pas de '\0'
 		sym_h->name = (char *)ptr;
-//TODO:	env()->file_name_mh = sym_h->name;
+	env()->file_name_mh = sym_h->name;
 	if (!ft_verif_base_nm((char *)ptr + 16, 10, 42) ||
 		!ft_verif_base_nm((char *)ptr + 40, 8, 8))
 		return (EXIT_FAILUR);

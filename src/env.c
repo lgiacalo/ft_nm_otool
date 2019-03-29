@@ -37,6 +37,7 @@ void	ft_reinit_env(void)
 	e->symbol.t = 0;
 	e->symbol.d = 0;
 	e->symbol.b = 0;
+	e->arch = 1;
 }
 
 t_env	*ft_init_env(void)
@@ -60,5 +61,6 @@ t_env	*ft_init_env(void)
 	e->symbol.t = 0;
 	e->symbol.d = 0;
 	e->symbol.b = 0;
+	e->arch = 1;
 	return (e);
 }
