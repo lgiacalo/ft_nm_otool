@@ -12,19 +12,16 @@
 
 #include "ft_nm.h"
 
-int		ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
+int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
+		struct symtab_command *sym)
 {
 	uint32_t		i;
 	int				out;
-	char			*strtable;
-	struct nlist_64	*a_64;
 	struct nlist	*a;
 
 	i = -1;
 	out = 1;
-	a_64 = (void *)ptr + sym->symoff;
-	a = (void *)ptr + sym->symoff;
-	strtable = (void *)ptr + sym->stroff;
+	a = (void *)a_64;
 	while (++i < sym->nsyms)
 	{
 		if ((!(a[i].n_type & N_STAB) &&
@@ -60,7 +57,8 @@ int		ft_lc_symtab(struct load_command *lc)
 		sizeof(struct nlist))) ||
 		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
-	if (!ft_gestion_symtab_command(env()->ptr_mh, sym))
+	if (!ft_gestion_symtab_command(env()->ptr_mh + sym->symoff,
+		env()->ptr_mh + sym->stroff, sym))
 		return (EXIT_FAILUR);
 	ft_print_lst_line();
 	env()->line = NULL; //TODO: Free list !!!!
