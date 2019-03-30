@@ -82,6 +82,8 @@ t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
 void 						ft_reinit_sym(void);
+void 						ft_free(void);
+
 
 
 /*

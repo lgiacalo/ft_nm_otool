@@ -12,6 +12,22 @@
 
 #include "ft_nm.h"
 
+void ft_free(void)
+{
+		t_line	*line;
+		t_line	*tmp;
+
+		line = env()->line;
+		while (line)
+		{
+			tmp = line;
+			if (line->name)
+				free(line->name);
+			line = line->next;
+			free(tmp);
+		}
+}
+
 t_env	*env(void)
 {
 	static t_env	e;

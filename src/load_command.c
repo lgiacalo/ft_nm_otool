@@ -61,6 +61,7 @@ int		ft_lc_symtab(struct load_command *lc)
 		env()->ptr_mh + sym->stroff, sym))
 		return (EXIT_FAILUR);
 	ft_print_lst_line();
+	ft_free();
 	env()->line = NULL; //TODO: Free list !!!!
 	return (EXIT_SUCCES);
 }
