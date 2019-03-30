@@ -27,7 +27,8 @@ int		ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 	strtable = (void *)ptr + sym->stroff;
 	while (++i < sym->nsyms)
 	{
-		if (!(a[i].n_type & N_STAB) || !(a_64[i].n_type & N_STAB))
+		if ((!(a[i].n_type & N_STAB) &&
+			!ft_is_64(env()->magic_mh)) || (!(a_64[i].n_type & N_STAB)))
 		{
 			if (ft_is_64(env()->magic_mh))
 				out = ft_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
@@ -61,7 +62,6 @@ int		ft_lc_symtab(struct load_command *lc)
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	if (!ft_gestion_symtab_command(env()->ptr_mh, sym))
 		return (EXIT_FAILUR);
-	// ft_print_title();
 	ft_print_lst_line();
 	env()->line = NULL; //TODO: Free list !!!!
 	return (EXIT_SUCCES);

@@ -70,10 +70,10 @@ int		ft_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	line.name = ft_record_name_symbol(n_strx);
 	if (line.name == (void *)-1)
 		return (ft_error_int(ERR_MALLOC));
-	// if (ft_strlen(line.name) <= 0)
-	// 	return (EXIT_SUCCES);
 	line.addr = n_value;
 	line.sym = ft_record_symbol(n_type, n_sect, n_value);
+	if (ft_strlen(line.name) <= 0 || line.sym == '?')
+		return (EXIT_SUCCES);
 	if (!(new = ft_line_new(line)))
 		return ((ft_error_int(ERR_MALLOC)));
 	ft_line_add(new, ft_tri_ascii);
