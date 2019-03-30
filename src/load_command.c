@@ -52,7 +52,7 @@ int		ft_lc_symtab(struct load_command *lc)
 	struct symtab_command	*sym;
 
 	// ft_fdprintf(2, "__text = %d, __data = %d, __bss = %d\n",
-		env()->symbol.t, env()->symbol.d, env()->symbol.b);
+		// env()->symbol.t, env()->symbol.d, env()->symbol.b);
 	sym = (struct symtab_command *)lc;
 	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) :
