@@ -16,23 +16,27 @@ int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 		struct symtab_command *sym)
 {
 	uint32_t		i;
+	uint8_t			swap;
 	int				out;
 	struct nlist	*a;
 
 	i = -1;
 	out = 1;
 	a = (void *)a_64;
+	swap = ft_is_swap(env()->magic_mh);
 	while (++i < sym->nsyms)
 	{
 		if ((!(a[i].n_type & N_STAB) &&
 			!ft_is_64(env()->magic_mh)) || (!(a_64[i].n_type & N_STAB)))
 		{
 			if (ft_is_64(env()->magic_mh))
-				out = ft_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
-				a_64[i].n_sect, a_64[i].n_value);
+				out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
+				 a_64[i].n_type, a_64[i].n_sect, (swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
+
 			else
-				out = ft_nlist(strtable + a[i].n_un.n_strx, a[i].n_type,
-				a[i].n_sect, a[i].n_value);
+				out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
+					a[i].n_type, a[i].n_sect, (swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));
+
 			if (!out)
 				return (EXIT_FAILUR);
 		}
@@ -49,8 +53,6 @@ int		ft_lc_symtab(void *ptr, struct load_command *lc)
 {
 	struct symtab_command	sym;
 
-	// ft_fdprintf(2, "__text = %d, __data = %d, __bss = %d\n",
-		// env()->symbol.t, env()->symbol.d, env()->symbol.b);
 	if (!ft_record_symtab_command(env()->magic_mh, ptr, &sym, lc->cmdsize))
 		return (EXIT_FAILUR);
 	if (!ft_is_safe(env()->ptr_mh + sym.symoff, sym.nsyms *
