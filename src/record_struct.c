@@ -13,21 +13,35 @@
 #include "ft_nm.h"
 
 int	ft_record_segment_cmd_64(uint32_t magic, void *ptr,
-		struct segment_command_64 *dst)
+		struct segment_command_64 *dst, uint32_t cmdsize)
 {
 	struct segment_command	ret;
 
-	if (!(ptr = ft_safe(ptr, ((struct load_command *)ptr)->cmdsize)))
+	if (!(ptr = ft_safe(ptr, cmdsize)))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	*dst = *((struct segment_command_64 *)ptr);
 	if (!ft_is_64(magic))
 	{
 		ret = *((struct segment_command *)dst);
-		*dst = ft_copy_segment_cmd_64(&ret);
+		*dst = ft_copy_segment_cmd_64(ft_swap_segment_command(magic, &ret));
 	}
 	else
-		ft_strncpy(dst->segname, ((struct segment_command_64 *)ptr)->segname,
-				16);
+	{
+		ft_swap_segment_command_64(magic, dst);
+		ft_strncpy(dst->segname, ((struct segment_command_64 *)ptr)->segname, 16);
+	}
+	return (EXIT_SUCCES);
+}
+
+int	ft_record_load_command(uint32_t magic, void *ptr, struct load_command *dst)
+{
+	if (!(ptr = ft_safe(ptr, sizeof(struct load_command))))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	*dst = *((struct load_command *)ptr);
+	if (!ft_is_swap(magic))
+		return (EXIT_SUCCES);
+	dst->cmd = OSSwapInt32(dst->cmd);
+	dst->cmdsize = OSSwapInt32(dst->cmdsize);
 	return (EXIT_SUCCES);
 }
 

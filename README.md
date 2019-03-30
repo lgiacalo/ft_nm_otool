@@ -3,9 +3,6 @@
 - to do Makefile with two exec - ft_nm + ft_otool
 - TESTS -> https://github.com/mguillau42/unit_test_nm_otool
 
-A Penser :
-- fichier object vide dans lib
-
 A faire :
 - Verifier les name cpu
 - Jamais oublier le SAFE !!
@@ -15,5 +12,7 @@ A faire :
 * ATTENTION ==> fonctions non utilisees
 * look hell/the_revengeance_of_python probleme !! doit sortir !!
 * look hell/salam_i_like_cum !!! probleme tri avec chaine null ??
+
+* swap load command !!!
 
 **** VERIFIER LES LEAKS

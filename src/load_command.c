@@ -45,7 +45,7 @@ int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 **	* retirer parametre int i !!
 */
 
-int		ft_lc_symtab(struct load_command *lc)
+int		ft_lc_symtab(void *ptr, struct load_command *lc)
 {
 	struct symtab_command	*sym;
 
@@ -70,22 +70,23 @@ int		ft_lc_symtab(struct load_command *lc)
 ** Lecture load command ==> segment_command
 */
 
-void	ft_lc_segment_nm(struct load_command *lc)
+void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 {
 	struct segment_command_64	seg;
 	char						*str;
 	int							k;
 	int							st;
 
+	(void)lc;
 	k = 0;
 	st = ft_is_64(env()->magic_mh);
-	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg) ||
+	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)ptr, &seg, lc->cmdsize) ||
 		seg.nsects == 0)
 		return ;
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
-		str = (char *)(((void *)lc + (st ? sizeof(struct segment_command_64) :
+		str = (char *)(((void *)ptr + (st ? sizeof(struct segment_command_64) :
 		sizeof(struct segment_command))) + (k * (st ?
 		sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_strcmp("__text", str))
@@ -104,22 +105,25 @@ void	ft_lc_segment_nm(struct load_command *lc)
 
 void	ft_load_command(void *ptr, int ncmds)
 {
-	struct load_command	*lc;
+	struct load_command	lc;
+	void	*tmp;
 	int					i;
 
 	i = -1;
-	lc = (struct load_command *)ptr;
+	tmp = ptr;
 	ft_reinit_sym();
 	ft_print_title();
 	while (++i < ncmds)
 	{
-		if (!ft_is_safe(lc, lc->cmdsize))
+		if (!ft_record_load_command(env()->magic_mh, tmp, &lc))
+			return ;
+		if (!ft_is_safe(tmp, lc.cmdsize))
 			return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
-		if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
-			ft_lc_segment_nm(lc);
-		if (lc->cmd == LC_SYMTAB)
-			if (!ft_lc_symtab(lc))
+		if (lc.cmd == LC_SEGMENT || lc.cmd == LC_SEGMENT_64)
+			ft_lc_segment_nm(tmp, &lc);
+		if (lc.cmd == LC_SYMTAB)
+			if (!ft_lc_symtab(tmp, &lc))
 				return ;
-		lc = (struct load_command *)((char *)lc + lc->cmdsize);
+		tmp = (struct load_command *)((char *)tmp + lc.cmdsize);
 	}
 }

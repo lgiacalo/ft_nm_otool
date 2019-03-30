@@ -110,8 +110,11 @@ int							ft_record_symtab_header(t_symtab_header *sym_h,
 		void *ptr);
 int							ft_record_mach_header_64(uint32_t magic, void *ptr,
 		struct mach_header_64 *dst);
+int							ft_record_load_command(uint32_t magic, void *ptr,
+		struct load_command *dst);
+
 int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
-		struct segment_command_64 *dst);
+		struct segment_command_64 *dst, uint32_t cmdsize);
 
 struct fat_arch_64			ft_copy_fat_arch_64(struct fat_arch *src);
 struct mach_header_64		ft_copy_mach_header_64(struct mach_header *src);
@@ -145,6 +148,11 @@ struct mach_header_64		*ft_swap_mach_header_64(uint32_t magic,
 		struct mach_header_64 *mach);
 struct mach_header			*ft_swap_mach_header(uint32_t magic,
 		struct mach_header *mach);
+
+struct segment_command_64	*ft_swap_segment_command_64(uint32_t magic,
+		struct segment_command_64 *seg);
+struct segment_command	*ft_swap_segment_command(uint32_t magic,
+		struct segment_command *seg);
 
 /*
 **	Verif ptr in file

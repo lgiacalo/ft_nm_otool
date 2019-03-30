@@ -12,6 +12,38 @@
 
 #include "ft_nm.h"
 
+struct segment_command_64	*ft_swap_segment_command_64(uint32_t magic,
+		struct segment_command_64 *seg)
+{
+	if (!ft_is_swap(magic))
+		return (seg);
+	seg->cmd = OSSwapInt32(seg->cmd);
+	seg->cmdsize = OSSwapInt32(seg->cmdsize);
+	seg->vmaddr = OSSwapInt64(seg->vmaddr);
+	seg->vmsize = OSSwapInt64(seg->vmsize);
+	seg->fileoff = OSSwapInt64(seg->fileoff);
+	seg->filesize = OSSwapInt64(seg->filesize);
+	seg->nsects = OSSwapInt32(seg->nsects);
+	seg->flags = OSSwapInt32(seg->flags);
+	return (seg);
+}
+
+struct segment_command	*ft_swap_segment_command(uint32_t magic,
+		struct segment_command *seg)
+{
+	if (!ft_is_swap(magic))
+		return (seg);
+	seg->cmd = OSSwapInt32(seg->cmd);
+	seg->cmdsize = OSSwapInt32(seg->cmdsize);
+	seg->vmaddr = OSSwapInt32(seg->vmaddr);
+	seg->vmsize = OSSwapInt32(seg->vmsize);
+	seg->fileoff = OSSwapInt32(seg->fileoff);
+	seg->filesize = OSSwapInt32(seg->filesize);
+	seg->nsects = OSSwapInt32(seg->nsects);
+	seg->flags = OSSwapInt32(seg->flags);
+	return (seg);
+}
+
 struct mach_header_64	*ft_swap_mach_header_64(uint32_t magic,
 		struct mach_header_64 *mach)
 {
