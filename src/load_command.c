@@ -25,7 +25,6 @@ int		ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 	a_64 = (void *)ptr + sym->symoff;
 	a = (void *)ptr + sym->symoff;
 	strtable = (void *)ptr + sym->stroff;
-	//TODO: error nbr de tour ??
 	while (++i < sym->nsyms)
 	{
 		if (!(a[i].n_type & N_STAB) || !(a_64[i].n_type & N_STAB))
@@ -52,6 +51,8 @@ int		ft_lc_symtab(struct load_command *lc)
 {
 	struct symtab_command	*sym;
 
+	// ft_fdprintf(2, "__text = %d, __data = %d, __bss = %d\n",
+		env()->symbol.t, env()->symbol.d, env()->symbol.b);
 	sym = (struct symtab_command *)lc;
 	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) :
@@ -82,7 +83,6 @@ void	ft_lc_segment_nm(struct load_command *lc)
 	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg) ||
 		seg.nsects == 0)
 		return ;
-	//ft_reinit_sym();
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
@@ -110,6 +110,7 @@ void	ft_load_command(void *ptr, int ncmds)
 
 	i = -1;
 	lc = (struct load_command *)ptr;
+	ft_reinit_sym();
 	while (++i < ncmds)
 	{
 		if (!ft_is_safe(lc, lc->cmdsize))

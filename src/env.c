@@ -21,12 +21,9 @@ t_env	*env(void)
 
 void ft_reinit_sym(void)
 {
-	t_sym	sym;
-
-	sym = env()->symbol;
-	sym.t = 0;
-	sym.d = 0;
-	sym.b = 0;
+	env()->symbol.t = 0;
+	env()->symbol.d = 0;
+	env()->symbol.b = 0;
 }
 
 void	ft_reinit_env(void)
