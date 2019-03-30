@@ -47,22 +47,22 @@ int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 
 int		ft_lc_symtab(void *ptr, struct load_command *lc)
 {
-	struct symtab_command	*sym;
+	struct symtab_command	sym;
 
 	// ft_fdprintf(2, "__text = %d, __data = %d, __bss = %d\n",
 		// env()->symbol.t, env()->symbol.d, env()->symbol.b);
-	sym = (struct symtab_command *)lc;
-	if (!ft_is_safe(env()->ptr_mh + sym->symoff, sym->nsyms *
+	if (!ft_record_symtab_command(env()->magic_mh, ptr, &sym, lc->cmdsize))
+		return (EXIT_FAILUR);
+	if (!ft_is_safe(env()->ptr_mh + sym.symoff, sym.nsyms *
 		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) :
 		sizeof(struct nlist))) ||
-		!ft_is_safe(env()->ptr_mh + sym->stroff, sym->strsize))
+		!ft_is_safe(env()->ptr_mh + sym.stroff, sym.strsize))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
-	if (!ft_gestion_symtab_command(env()->ptr_mh + sym->symoff,
-		env()->ptr_mh + sym->stroff, sym))
+	if (!ft_gestion_symtab_command(env()->ptr_mh + sym.symoff,
+		env()->ptr_mh + sym.stroff, &sym))
 		return (EXIT_FAILUR);
 	ft_print_lst_line();
 	ft_free();
-	env()->line = NULL; //TODO: Free list !!!!
 	return (EXIT_SUCCES);
 }
 
@@ -80,13 +80,13 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 	(void)lc;
 	k = 0;
 	st = ft_is_64(env()->magic_mh);
-	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)ptr, &seg, lc->cmdsize) ||
+	if (!ft_record_segment_cmd_64(env()->magic_mh, ptr, &seg, lc->cmdsize) ||
 		seg.nsects == 0)
 		return ;
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
-		str = (char *)(((void *)ptr + (st ? sizeof(struct segment_command_64) :
+		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
 		sizeof(struct segment_command))) + (k * (st ?
 		sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_strcmp("__text", str))

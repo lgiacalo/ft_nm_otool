@@ -23,6 +23,8 @@ struct segment_command_64	*ft_swap_segment_command_64(uint32_t magic,
 	seg->vmsize = OSSwapInt64(seg->vmsize);
 	seg->fileoff = OSSwapInt64(seg->fileoff);
 	seg->filesize = OSSwapInt64(seg->filesize);
+	seg->maxprot = OSSwapInt32(seg->maxprot);
+	seg->initprot = OSSwapInt32(seg->initprot);
 	seg->nsects = OSSwapInt32(seg->nsects);
 	seg->flags = OSSwapInt32(seg->flags);
 	return (seg);
@@ -39,6 +41,8 @@ struct segment_command	*ft_swap_segment_command(uint32_t magic,
 	seg->vmsize = OSSwapInt32(seg->vmsize);
 	seg->fileoff = OSSwapInt32(seg->fileoff);
 	seg->filesize = OSSwapInt32(seg->filesize);
+	seg->maxprot = OSSwapInt32(seg->maxprot);
+	seg->initprot = OSSwapInt32(seg->initprot);
 	seg->nsects = OSSwapInt32(seg->nsects);
 	seg->flags = OSSwapInt32(seg->flags);
 	return (seg);

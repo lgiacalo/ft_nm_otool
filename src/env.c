@@ -23,9 +23,11 @@ void ft_free(void)
 			tmp = line;
 			if (line->name)
 				free(line->name);
+			line->name = NULL;
 			line = line->next;
 			free(tmp);
 		}
+		env()->line = NULL;
 }
 
 t_env	*env(void)

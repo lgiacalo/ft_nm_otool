@@ -12,6 +12,24 @@
 
 #include "ft_nm.h"
 
+int	ft_record_symtab_command(uint32_t magic, void *ptr,
+		struct symtab_command *dst, uint32_t cmdsize)
+{
+	if (!(ptr = ft_safe(ptr, cmdsize)))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	*dst = *((struct symtab_command *)ptr);
+	if (!ft_is_swap(magic))
+		return (EXIT_SUCCES);
+	dst->cmd = OSSwapInt32(dst->cmd);
+	dst->cmdsize = OSSwapInt32(dst->cmdsize);
+	dst->symoff = OSSwapInt32(dst->symoff);
+	dst->nsyms = OSSwapInt32(dst->nsyms);
+	dst->stroff = OSSwapInt32(dst->stroff);
+	dst->strsize = OSSwapInt32(dst->strsize);
+	return (EXIT_SUCCES);
+}
+
+
 int	ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 		struct segment_command_64 *dst, uint32_t cmdsize)
 {

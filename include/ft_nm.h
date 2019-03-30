@@ -115,6 +115,9 @@ int							ft_record_load_command(uint32_t magic, void *ptr,
 
 int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 		struct segment_command_64 *dst, uint32_t cmdsize);
+int	ft_record_symtab_command(uint32_t magic, void *ptr,
+		struct symtab_command *dst, uint32_t cmdsize);
+
 
 struct fat_arch_64			ft_copy_fat_arch_64(struct fat_arch *src);
 struct mach_header_64		ft_copy_mach_header_64(struct mach_header *src);

@@ -67,6 +67,7 @@ int		ft_nlist(char *n_strx, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 	t_line					line;
 	t_line					*new;
 
+	line.next = NULL;
 	line.name = ft_record_name_symbol(n_strx);
 	if (line.name == (void *)-1)
 		return (ft_error_int(ERR_MALLOC));
