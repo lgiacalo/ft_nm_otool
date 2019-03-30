@@ -14,32 +14,30 @@
 
 void	ft_error_void(char *str)
 {
-	ft_print_str("Error : ", str, "\n");
+	ft_fdprintf(2, "Error : %s\n", str);
 	return ;
 }
 
 int		ft_error_int(char *str)
 {
-	ft_print_str("Error : ", str, "\n");
+	ft_fdprintf(2, "Error : %s\n", str);
 	return (EXIT_FAILUR);
 }
 
 void	*ft_error_star(char *str)
 {
-	ft_print_str("Error : ", str, "\n");
+	ft_fdprintf(2, "Error : %s\n", str);
 	return (NULL);
 }
 
 int		ft_error_int3(char *str1, char *str2, char *str3)
 {
-	ft_print_str(str1, str2, str3);
-	ft_putstr("\n");
+	ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
 	return (EXIT_FAILUR);
 }
 
 void	ft_error_void3(char *str1, char *str2, char *str3)
 {
-	ft_print_str(str1, str2, str3);
-	ft_putstr("\n");
+	ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
 	return ;
 }

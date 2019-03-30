@@ -1,9 +1,8 @@
 #!/bin/sh
 
-make -C ../
 rm -f their mine mine_err their_err 2>/dev/null
-TESTNM=0
-TESTOTOOL=1
+TESTNM=1
+TESTOTOOL=0
 # -agnopruUjA
 OPT=""
 # fahLtd

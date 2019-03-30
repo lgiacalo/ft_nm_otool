@@ -81,6 +81,8 @@ typedef struct				s_symtab_header
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
+void 						ft_reinit_sym(void);
+
 
 /*
 **	Gestion fichier

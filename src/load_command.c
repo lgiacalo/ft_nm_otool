@@ -28,7 +28,7 @@ int		ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 	//TODO: error nbr de tour ??
 	while (++i < sym->nsyms)
 	{
-		if (!(a_64[i].n_type & N_STAB))
+		if (!(a[i].n_type & N_STAB) || !(a_64[i].n_type & N_STAB))
 		{
 			if (ft_is_64(env()->magic_mh))
 				out = ft_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
@@ -66,16 +66,6 @@ int		ft_lc_symtab(struct load_command *lc)
 	return (EXIT_SUCCES);
 }
 
-void ft_reinit_sym(void)
-{
-	t_sym	sym;
-
-	sym = env()->symbol;
-	sym.t = 0;
-	sym.d = 0;
-	sym.b = 0;
-}
-
 /*
 ** Lecture load command ==> segment_command
 */
@@ -92,7 +82,7 @@ void	ft_lc_segment_nm(struct load_command *lc)
 	if (!ft_record_segment_cmd_64(env()->magic_mh, (void *)lc, &seg) ||
 		seg.nsects == 0)
 		return ;
-	ft_reinit_sym();
+	//ft_reinit_sym();
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;

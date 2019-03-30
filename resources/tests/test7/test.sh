@@ -1,9 +1,8 @@
 #!/bin/sh
 
-make re -C ../
 rm -f their mine mine_err their_err 2>/dev/null
 TESTNM=1
-TESTOTOOL=1
+TESTOTOOL=0
 
 if [ $TESTNM != 0 ]; then
 	echo "Test NM 32bits on 32/:"
@@ -32,7 +31,7 @@ if [ $TESTNM != 0 ]; then
 			COUNT=$(diff their mine | wc -l)
 			if [ $COUNT != 0 ]; then
 				echo "64bits tests NM: FAILED! : "$FILE1": see their, mine."
-				exit 1
+#				exit 1
 			else
 				echo "64bits tests NM: SUCCESS! :"$FILE1
 			fi

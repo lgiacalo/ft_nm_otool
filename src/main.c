@@ -27,6 +27,7 @@ void	ft_mach_header_64(void *ptr, uint32_t magic_mh)
 	env()->magic_mh = magic_mh;
 	env()->ptr_mh = ptr;
 	env()->dec = 0;
+	ft_reinit_sym();
 	size_struct = ft_is_64(magic_mh) ? sizeof(struct mach_header_64)
 	: sizeof(struct mach_header);
 	if (!ft_record_mach_header_64(magic_mh, ptr, &mach_header))
