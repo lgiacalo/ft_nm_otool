@@ -53,12 +53,10 @@ char	ft_record_symbol(uint8_t n_type, uint8_t n_sect, uint64_t n_value)
 		c = ft_record_symbol_section(n_sect);
 	else if (tmp == N_UNDF)
 	{
+		c = 'u';
 		if ((n_type & N_EXT) && n_value)
 			c = 'C';
-		c = 'u';
 	}
-	else
-		c = '?';
 	if (n_type & N_EXT)
 		c = ft_toupper(c);
 	return (c);
