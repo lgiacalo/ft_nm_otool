@@ -25,16 +25,20 @@ int		ft_gestion_symtab_command(void *ptr, struct symtab_command *sym)
 	a_64 = (void *)ptr + sym->symoff;
 	a = (void *)ptr + sym->symoff;
 	strtable = (void *)ptr + sym->stroff;
+	//TODO: error nbr de tour ??
 	while (++i < sym->nsyms)
 	{
-		if (ft_is_64(env()->magic_mh) && !(a_64[i].n_type & N_STAB))
-			out = ft_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
+		if (!(a_64[i].n_type & N_STAB))
+		{
+			if (ft_is_64(env()->magic_mh))
+				out = ft_nlist(strtable + a_64[i].n_un.n_strx, a_64[i].n_type,
 				a_64[i].n_sect, a_64[i].n_value);
-		else if (!(a[i].n_type & N_STAB))
-			out = ft_nlist(strtable + a[i].n_un.n_strx, a[i].n_type,
+			else
+				out = ft_nlist(strtable + a[i].n_un.n_strx, a[i].n_type,
 				a[i].n_sect, a[i].n_value);
-		if (!out)
-			return (EXIT_FAILUR);
+			if (!out)
+				return (EXIT_FAILUR);
+		}
 	}
 	return (EXIT_SUCCES);
 }
