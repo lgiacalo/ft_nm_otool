@@ -61,7 +61,7 @@ int		ft_lc_symtab(struct load_command *lc)
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	if (!ft_gestion_symtab_command(env()->ptr_mh, sym))
 		return (EXIT_FAILUR);
-	ft_print_title();
+	// ft_print_title();
 	ft_print_lst_line();
 	env()->line = NULL; //TODO: Free list !!!!
 	return (EXIT_SUCCES);
@@ -111,6 +111,7 @@ void	ft_load_command(void *ptr, int ncmds)
 	i = -1;
 	lc = (struct load_command *)ptr;
 	ft_reinit_sym();
+	ft_print_title();
 	while (++i < ncmds)
 	{
 		if (!ft_is_safe(lc, lc->cmdsize))
