@@ -29,7 +29,6 @@ int	ft_record_symtab_command(uint32_t magic, void *ptr,
 	return (EXIT_SUCCES);
 }
 
-
 int	ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 		struct segment_command_64 *dst, uint32_t cmdsize)
 {

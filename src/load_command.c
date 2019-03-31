@@ -53,7 +53,6 @@ int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 
 /*
 **	Lecture load command ==> symtab_command
-**	* retirer parametre int i !!
 */
 
 int		ft_lc_symtab(void *ptr, struct load_command *lc)

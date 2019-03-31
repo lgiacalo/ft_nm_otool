@@ -23,11 +23,6 @@ char	*ft_strndup(char *s1, int len)
 	return (ft_memcpy(ret, s1, len));
 }
 
-/*
-**	Fonction strlen special nm avec ft_is_safe()
-**		Mais comment savoir si str totalement en dehors du fichier ?
-*/
-
 int		ft_strlen_nm(char *str)
 {
 	int	i;

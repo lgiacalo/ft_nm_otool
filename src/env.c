@@ -50,7 +50,7 @@ void	ft_reinit_env(void)
 
 	e = env();
 	e->file_name = NULL;
-	e->file_name_mh = NULL; //TODO: a revoir !!
+	e->file_name_mh = NULL;
 	e->file_size = 0;
 	e->ptr = NULL;
 	e->ptr_mh = NULL;

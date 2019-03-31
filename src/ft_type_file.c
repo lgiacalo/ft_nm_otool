@@ -44,10 +44,6 @@ int	ft_is_fat(uint32_t magic)
 	return (EXIT_FAILUR);
 }
 
-/*
-**	Attention lecture trop loin de 8 pour les archives static
-*/
-
 int	ft_is_arc(char *arc)
 {
 	if (!ft_strncmp(arc, "!<arch>\n", 8))

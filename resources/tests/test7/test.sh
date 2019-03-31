@@ -3,13 +3,17 @@
 rm -f their mine mine_err their_err 2>/dev/null
 TESTNM=1
 TESTOTOOL=0
+# -agnopruUjA
+OPT="-uUjgr"
+# fahLtd
+OPT2=""
 
 if [ $TESTNM != 0 ]; then
 	echo "Test NM 32bits on 32/:"
 	find "./32" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
+		FILE1=$OPT$filename
 		[ $? == 1 ] && exit 0;
-		FILE1=$filename
 		nm $FILE1 > their ; ../ft_nm $FILE1 > mine
 		COUNT=$(diff their mine | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -20,26 +24,29 @@ if [ $TESTNM != 0 ]; then
 		fi
 	done
 	[ $? == 1 ] && exit 0;
+
 	#without fat files
 	echo "Test NM 64bits binary on /bin:"
 	find "/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/bin/bash" -a "$FILE1" != "/bin/sh" -a "$FILE1" != "/bin/sync" ]; then
 			nm $FILE1 > their ; ../ft_nm $FILE1 > mine
 			COUNT=$(diff their mine | wc -l)
 			if [ $COUNT != 0 ]; then
 				echo "64bits tests NM: FAILED! : "$FILE1": see their, mine."
-#				exit 1
+				exit 1
 			else
 				echo "64bits tests NM: SUCCESS! :"$FILE1
 			fi
 		fi
 	done
 	[ $? == 1 ] && exit 0;
+
 	echo "Test NM fat files on /bin:"
-	nm /bin/bash > their ; ../ft_nm /bin/bash > mine
+	nm $OPT /bin/bash > their ; ../ft_nm $OPT /bin/bash > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests NM: FAILED! : /bin/bash: see their, mine."
@@ -48,7 +55,7 @@ if [ $TESTNM != 0 ]; then
 		echo "Fat tests NM: SUCCESS! : /bin/bash"
 	fi
 	[ $? == 1 ] && exit 0;
-	nm /bin/sh > their ; ../ft_nm /bin/sh > mine
+	nm $OPT /bin/sh > their ; ../ft_nm $OPT /bin/sh > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests NM: FAILED! : /bin/sh: see their, mine."
@@ -57,7 +64,8 @@ if [ $TESTNM != 0 ]; then
 		echo "Fat tests NM: SUCCESS! : /bin/sh"
 	fi
 	[ $? == 1 ] && exit 0;
-	nm /bin/sync > their ; ../ft_nm /bin/sync > mine
+
+	nm $OPT /bin/sync > their ; ../ft_nm $OPT /bin/sync > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests: FAILED! : /bin/sync: see their, mine."
@@ -66,10 +74,12 @@ if [ $TESTNM != 0 ]; then
 		echo "Fat tests: SUCCESS! : /bin/sync"
 	fi
 	[ $? == 1 ] && exit 0;
+
 	echo "Test NM archives 32 & 64:"
 	find "./ar" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		nm $FILE1 > their ; ../ft_nm $FILE1 > mine
 		COUNT=$(diff their mine | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -85,12 +95,14 @@ if [ $TESTNM != 0 ]; then
 	# libkmodc++ ,cplus_start.o): cplus_stop.o): return 2 error : no name list, mine : archive size detected == 0, no entry found in archive
 	# erreur /usr/lib/libnetsnmp.5.2.1.dylib detecte comme i386, nm /usr/lib/libnetsnmp.5.2.1.dylib(link editor): ???
 	[ $? == 1 ] && exit 0;
+
 	echo "Test NM on /usr/lib:"
 	find "/usr/lib" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		[ $? == 1 ] && exit 0;
-		if [ "$FILE1" != "" -a "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" -a "$FILE1" != "/usr/lib/libsqlite3.dylib" ]; then
+		if [ "$filename" != "" ]; then
 			nm $FILE1 2>/dev/null > their 
 			../ft_nm  $FILE1 2>/dev/null > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -108,9 +120,10 @@ if [ $TESTNM != 0 ]; then
 	echo "Test NM on /sbin:"
 	find "/sbin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		[ $? == 1 ] && exit 0;
-		if [ "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" ]; then
+		if [ "$filename" != "/usr/lib/libnetsnmp.5.2.1.dylib" ]; then
 			nm $FILE1 2> their_err  > their  
 			../ft_nm $FILE1  2> mine_err > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -128,10 +141,12 @@ if [ $TESTNM != 0 ]; then
 		fi
 	done
 	[ $? == 1 ] && exit 0;
+
 	echo "Test NM on /usr/bin:"
 	find "/usr/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		nm $FILE1 2> their_err  > their  
 		../ft_nm $FILE1  2> mine_err > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -147,7 +162,8 @@ if [ $TESTNM != 0 ]; then
 	find "/usr/sbin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
 		[ $? == 1 ] && exit 0;
-		FILE1=$filename
+#		FILE1=$filename
+		FILE1=$OPT$filename
 		nm $FILE1 2> their_err  > their  
 		../ft_nm $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -155,17 +171,35 @@ if [ $TESTNM != 0 ]; then
 			echo "/usr/sbin tests NM: FAILED! : "$FILE1": see their, mine."
 			exit 1
 		else
-			echo "/usr/bin tests NM: SUCCESS! :"$FILE1
+			echo "/usr/sbin tests NM: SUCCESS! :"$FILE1
+		fi
+	done
+
+	echo "Test NM on /usr/share:"
+	find "/usr/share" -type f -print0 | \
+	while IFS='' read -r -d '' filename; do
+		[ $? == 1 ] && exit 0;
+#		FILE1=$filename
+		FILE1=$OPT$filename
+		nm $FILE1 2> their_err  > their  
+		../ft_nm $FILE1  2> mine_err  > mine
+		COUNT=$(cat their mine | sort | uniq -u | wc -l)
+		if [ $COUNT != 0 ]; then
+			echo "/usr/share tests NM: FAILED! : "$FILE1": see their, mine."
+			exit 1
+		else
+			echo "/usr/share tests NM: SUCCESS! :"$FILE1
 		fi
 	done
 fi
+
 
 if [ $TESTOTOOL != 0 ]; then
 	echo "Test OTOOL 32bits on 32/:"
 	find "./32" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
 		[ $? == 1 ] && exit 0;
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
 		COUNT=$(diff their mine | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -176,11 +210,12 @@ if [ $TESTOTOOL != 0 ]; then
 		fi
 	done
 	[ $? == 1 ] && exit 0;
+
 	#without fat files
 	echo "Test OTOOL 64bits binary on /bin:"
 	find "/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/bin/bash" -a "$FILE1" != "/bin/sh" -a "$FILE1" != "/bin/sync" ]; then
 			otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
@@ -194,8 +229,9 @@ if [ $TESTOTOOL != 0 ]; then
 		fi
 	done
 	[ $? == 1 ] && exit 0;
+
 	echo "Test OTOOL fat files on /bin:"
-	otool -t /bin/bash > their ; ../ft_otool /bin/bash > mine
+	otool -t $OPT2 /bin/bash > their ; ../ft_otool $OPT2 /bin/bash > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests OTOOL: FAILED! : /bin/bash: see their, mine."
@@ -204,7 +240,8 @@ if [ $TESTOTOOL != 0 ]; then
 		echo "Fat tests OTOOL: SUCCESS! : /bin/bash"
 	fi
 	[ $? == 1 ] && exit 0;
-	otool -t /bin/sh > their ; ../ft_otool /bin/sh > mine
+
+	otool -t $OPT2 /bin/sh > their ; ../ft_otool $OPT2 /bin/sh > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests OTOOL: FAILED! : /bin/sh: see their, mine."
@@ -213,7 +250,8 @@ if [ $TESTOTOOL != 0 ]; then
 		echo "Fat tests OTOOL: SUCCESS! : /bin/sh"
 	fi
 	[ $? == 1 ] && exit 0;
-	otool -t /bin/sync > their ; ../ft_otool /bin/sync > mine
+
+	otool -t $OPT2 /bin/sync > their ; ../ft_otool $OPT2 /bin/sync > mine
 	COUNT=$(diff their mine | wc -l)
 	if [ $COUNT != 0 ]; then
 		echo "Fat tests OTOOL: FAILED! : /bin/sync: see their, mine."
@@ -222,10 +260,11 @@ if [ $TESTOTOOL != 0 ]; then
 		echo "Fat tests OTOOL: SUCCESS! : /bin/sync"
 	fi
 	[ $? == 1 ] && exit 0;
+
 	echo "Test OTOOL archives 32 & 64:"
 	find "./ar" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		otool -t $FILE1 > their ; ../ft_otool $FILE1 > mine
 		COUNT=$(diff their mine | wc -l)
 		if [ $COUNT != 0 ]; then
@@ -244,11 +283,11 @@ if [ $TESTOTOOL != 0 ]; then
 	echo "Test OTOOL on /usr/lib:"
 	find "/usr/lib" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		[ $? == 1 ] && exit 0;
-		if [ "$FILE1" != "/usr/lib/libkmodc++.a" -a "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" -a "$FILE1" != "/usr/lib/libsqlite3.dylib" ]; then
+		if [ "$filename" != "" ]; then
 			otool -t $FILE1 2>/dev/null > their 
-			../ft_otool  $FILE1 2>/dev/null > mine
+			../ft_otool $FILE1 2>/dev/null > mine
 			COUNT=$(cat their mine | sort | uniq -u | wc -l)
 			if [ $COUNT != 0 ]; then
 				echo "/usr/lib tests OTOOL: FfAILED! : "$FILE1": see their, mine."
@@ -264,7 +303,7 @@ if [ $TESTOTOOL != 0 ]; then
 	echo "Test OTOOL on /sbin:"
 	find "/sbin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		[ $? == 1 ] && exit 0;
 		if [ "$FILE1" != "/usr/lib/libnetsnmp.5.2.1.dylib" ]; then
 			otool -t $FILE1 2> their_err > their  
@@ -287,7 +326,7 @@ if [ $TESTOTOOL != 0 ]; then
 	echo "Test on /usr/bin:"
 	find "/usr/bin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		otool -t $FILE1 2> their_err  > their  
 		../ft_otool $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -303,7 +342,7 @@ if [ $TESTOTOOL != 0 ]; then
 	find "/usr/sbin" -type f -print0 | \
 	while IFS='' read -r -d '' filename; do
 		[ $? == 1 ] && exit 0;
-		FILE1=$filename
+		FILE1=$OPT2$filename
 		otool -t $FILE1 2> their_err  > their  
 		../ft_otool $FILE1  2> mine_err  > mine
 		COUNT=$(cat their mine | sort | uniq -u | wc -l)
@@ -315,9 +354,4 @@ if [ $TESTOTOOL != 0 ]; then
 		fi
 	done
 fi
-rm -f their mine mine_err their_err 2>/dev/null
-
-
-
-
-
+rm -f their mine mine_err their_err 2> /dev/null
