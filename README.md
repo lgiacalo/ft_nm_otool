@@ -9,3 +9,5 @@ A faire :
 * swap load command !!!
 
 **** VERIFIER LES LEAKS
+
+Version NM OK !!!
