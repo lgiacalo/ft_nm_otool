@@ -14,11 +14,6 @@
 
 /*
 **	gestion de chaque types darch du fat
-**    verifier si mh, or .a archive (fat d'archives)
-**	ft_align(arch->offset + arch->size, ft_power(2, arch->align))))
-**		TODO: verifier align avec file 998...
-**	Ajoutez alignement pour verifier la taille !!! align que sur size ?
-**	BUG align memoire avec resources/tests/archTest/998_valid_x86-64_i386.out
 */
 
 int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
@@ -29,6 +24,8 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 		arch->offset + arch->size))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
+	if (!(env()->arch))
+		env()->cputype = arch->cputype;
 	if (ft_is_mh(magic))
 		ft_mach_header_64((env()->ptr + arch->offset), magic);
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
@@ -83,6 +80,7 @@ void	ft_fatbinary(int my_arch)
 		env()->arch = 0;
 	while (++i < header.nfat_arch)
 	{
+		env()->cputype = 0;
 		if (!ft_record_fat_arch_64(header.magic, env()->ptr +
 		sizeof(struct fat_header) + i * (ft_is_64(header.magic) ?
 		sizeof(struct fat_arch_64) : sizeof(struct fat_arch)), &arch) ||

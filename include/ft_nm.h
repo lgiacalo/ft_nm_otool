@@ -56,8 +56,8 @@ typedef struct				s_env
 	uint32_t				magic;
 	uint32_t				magic_mh;
 	uint32_t				dec;
-	uint8_t					swap;
 	uint8_t					arch;
+	uint32_t				cputype;
 	t_sym					symbol;
 	t_line					*line;
 

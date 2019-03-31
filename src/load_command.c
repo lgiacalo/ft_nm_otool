@@ -25,7 +25,6 @@ int		ft_gestion_nlist(void *array, char *strtable, int i)
 	if (ft_is_64(env()->magic_mh))
 		out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
 		 a_64[i].n_type, a_64[i].n_sect, (swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
-
 	else
 		out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
 			a[i].n_type, a[i].n_sect, (swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));

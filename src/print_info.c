@@ -12,6 +12,34 @@
 
 #include "ft_nm.h"
 
+char	*ft_print_archi(void)
+{
+	cpu_type_t	cputype;
+
+	cputype = env()->cputype;
+	if (cputype == CPU_TYPE_I386)
+		return ("i386");
+	if (cputype == CPU_TYPE_POWERPC)
+		return ("ppc");
+	if (cputype == CPU_TYPE_POWERPC64)
+		return ("ppc64");
+	if (cputype == CPU_TYPE_ARM)
+		return ("arm");
+	if (cputype == CPU_TYPE_ANY)
+		return ("any");
+	if (cputype == CPU_TYPE_I860)
+		return ("i860");
+	if (cputype == CPU_TYPE_HPPA)
+		return ("hppa");
+	if (cputype == CPU_TYPE_SPARC)
+		return ("sparc");
+	if (cputype == CPU_TYPE_ARM64)
+		return ("arm64");
+	if (cputype == CPU_TYPE_X86_64)
+		return ("x86_64");
+	return ("ooooo");
+}
+
 void	ft_print_title(void)
 {
 	t_env	*e;
@@ -20,10 +48,10 @@ void	ft_print_title(void)
 	if (e->magic == 0)
 	{
 		ft_printf("\n%s(%s)", e->file_name, e->file_name_mh);
-		(e->arch) ? ft_printf(":\n") : ft_printf(" (%s)\n", "archi");
+		(e->arch) ? ft_printf(":\n") : ft_printf(" (for architecture %s)\n", ft_print_archi());
 	}
 	else if (ft_is_fat(e->magic) && !(e->arch))
-		ft_printf("\n%s (%s):\n", e->file_name, "archi");
+		ft_printf("\n%s (for architecture %s):\n", e->file_name, ft_print_archi());
 	else if (e->print_name && !ft_is_fat(e->magic))
 		ft_printf("\n%s:\n", e->file_name);
 }
@@ -197,8 +225,7 @@ void	ft_print_env(void)
 		ft_print_str("Magic number: \t%s\n", "archive", "\n");
 	else
 		ft_print_int16("Magic number: \t", (unsigned long long int)(e->magic), "\n");
-	ft_print_int16("Magic_mh number: \t", (unsigned long long int)(e->magic_mh), "\n");
-	ft_printf("Swap: \t\t%d\n\n", e->swap);
+	ft_print_int16("Magic_mh number: \t", (unsigned long long int)(e->magic_mh), "\n\n");
 }
 
 void	ft_print_file(void)

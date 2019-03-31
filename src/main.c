@@ -50,7 +50,6 @@ void	ft_reading_file(char *name)
 	e = env();
 	e->file_name = name;
 	e->magic = *((uint32_t *)(e->ptr));
-	e->swap = ft_is_swap(e->magic);
 	if (ft_is_mh(e->magic))
 		return (ft_mach_header_64(e->ptr, e->magic));
 	else if (ft_is_fat(e->magic))
