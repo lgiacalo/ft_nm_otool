@@ -12,32 +12,40 @@
 
 #include "ft_nm.h"
 
+int		ft_gestion_nlist(void *array, char *strtable, int i)
+{
+	int				out;
+	uint8_t			swap;
+	struct nlist	*a;
+	struct nlist_64	*a_64;
+
+	swap = ft_is_swap(env()->magic_mh);
+	a = (struct nlist *)array;
+	a_64 = (struct nlist_64 *)array;
+	if (ft_is_64(env()->magic_mh))
+		out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
+		 a_64[i].n_type, a_64[i].n_sect, (swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
+
+	else
+		out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
+			a[i].n_type, a[i].n_sect, (swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));
+	return (out);
+}
+
 int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 		struct symtab_command *sym)
 {
 	uint32_t		i;
-	uint8_t			swap;
-	int				out;
 	struct nlist	*a;
 
 	i = -1;
-	out = 1;
 	a = (void *)a_64;
-	swap = ft_is_swap(env()->magic_mh);
 	while (++i < sym->nsyms)
 	{
-		if ((!(a[i].n_type & N_STAB) &&
-			!ft_is_64(env()->magic_mh)) || (!(a_64[i].n_type & N_STAB)))
+		if ((!(a[i].n_type & N_STAB) && !ft_is_64(env()->magic_mh)) ||
+			(!(a_64[i].n_type & N_STAB) && ft_is_64(env()->magic_mh)))
 		{
-			if (ft_is_64(env()->magic_mh))
-				out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
-				 a_64[i].n_type, a_64[i].n_sect, (swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
-
-			else
-				out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
-					a[i].n_type, a[i].n_sect, (swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));
-
-			if (!out)
+			if (!(ft_gestion_nlist((void *)a_64, strtable, i)))
 				return (EXIT_FAILUR);
 		}
 	}
@@ -63,8 +71,6 @@ int		ft_lc_symtab(void *ptr, struct load_command *lc)
 	if (!ft_gestion_symtab_command(env()->ptr_mh + sym.symoff,
 		env()->ptr_mh + sym.stroff, &sym))
 		return (EXIT_FAILUR);
-	ft_print_lst_line();
-	ft_free();
 	return (EXIT_SUCCES);
 }
 
@@ -114,7 +120,6 @@ void	ft_load_command(void *ptr, int ncmds)
 	i = -1;
 	tmp = ptr;
 	ft_reinit_sym();
-	ft_print_title();
 	while (++i < ncmds)
 	{
 		if (!ft_record_load_command(env()->magic_mh, tmp, &lc))
@@ -128,4 +133,9 @@ void	ft_load_command(void *ptr, int ncmds)
 				return ;
 		tmp = (struct load_command *)((char *)tmp + lc.cmdsize);
 	}
+	ft_print_title();
+	if (ncmds == 0)
+		return ;
+	ft_print_lst_line();
+	ft_free();
 }

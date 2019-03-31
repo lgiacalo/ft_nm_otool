@@ -34,17 +34,9 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 	else if (ft_is_arc((char *)(env()->ptr + arch->offset)))
 		ft_archive_static(env()->ptr + arch->offset, arch->size);
 	else if (ft_is_fat(magic))
-	{
-		ft_print_int16("Its fat !!! encore ?? Magic number: \t",
-				(unsigned long long int)magic, "\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR3));
-	}
 	else
-	{
-		ft_print_int16("Piege probleme magic number ? Magic number: \t",
-				(unsigned long long int)magic, "\n");
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR5));
-	}
 	return (EXIT_SUCCES);
 }
 
