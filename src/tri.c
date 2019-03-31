@@ -15,15 +15,12 @@
 void	ft_print_lst_line(void)
 {
 	t_line	*line;
-	int		i;
 
 	line = env()->line;
-	i = 1;
 	while (line)
 	{
-		ft_print_line(line, i);
+		ft_print_line(line);
 		line = line->next;
-		i++;
 	}
 }
 

@@ -190,7 +190,7 @@ void						ft_print_segment_cmd_64(struct segment_command_64
 		*seg);
 void						ft_print_symtab_cmd(struct symtab_command *sym);
 void						ft_print_lst_line();
-void						ft_print_line(t_line *line, int i);
+void						ft_print_line(t_line *line);
 
 /*
 ** Usage

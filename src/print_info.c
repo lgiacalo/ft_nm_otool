@@ -56,18 +56,23 @@ void	ft_print_title(void)
 		ft_printf("\n%s:\n", e->file_name);
 }
 
-void 	ft_print_line(t_line *line, int i)
+void 	ft_print_line(t_line *line)
 {
 	int 	pad;
+	int		opt;
 
+	opt = env()->opt;
 	pad = ft_is_64(env()->magic_mh) ? 16 : 8;
-	if (!line)
+	if (!line || ((opt & OPT_G) && (int)line->sym != ft_toupper(line->sym)) ||
+	((opt & OPT_U) && line->sym != 'U' && line->sym != 'u') ||
+	((opt & OPT_UU) && (line->sym == 'U' || line->sym == 'u')))
 		return ;
 	if (!(line->addr) && line->sym == 'U')
-		ft_printf("%*s %c %s\n", pad, " ", line->sym, line->name);
+		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%*s ", pad, " ") : 0;
 	else
-		ft_printf("%0*llx %c %s\n", pad, line->addr, line->sym, line->name);
-	(void)i;
+		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%0*llx ", pad, line->addr) : 0;
+	(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%c ", line->sym) : 0;
+	ft_printf("%s\n", line->name);
 }
 
 void	ft_print_symtab_cmd(struct symtab_command *sym)
