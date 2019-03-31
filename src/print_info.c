@@ -167,7 +167,6 @@ void	ft_print_mach_header_64(struct mach_header_64	*mach_header)
 	ft_printf("Info NM ----- MACH_HEADER_64 ---------\n");
 	ft_print_int16("Magic number: \t", (unsigned long long int)mach_header->magic, "\n");
 	ft_printf("CpuType: \t%d (", mach_header->cputype);
-	// ft_print_str((char *)(NXGetArchInfoFromCpuType(mach_header->cputype, mach_header->cpusubtype)->name), ")", "\n");
 	ft_print_int16("CpuSubType: \t", (uint16_t)mach_header->cpusubtype, "\n");
 	ft_printf("File Type: \t%d\n", mach_header->filetype);
 	ft_printf("Ncmds: \t\t%d\n", mach_header->ncmds);
@@ -181,7 +180,6 @@ void	ft_print_fat_arch_64(struct fat_arch_64 *arch)
 		return ;
 	ft_printf("\nInfo NM --------------------- FAT_ARCH_64 ---------------------\n");
 	ft_printf("CpuType: \t%d (", arch->cputype);
-	// ft_print_str((char *)(NXGetArchInfoFromCpuType(arch->cputype, arch->cpusubtype)->name), ")", "\n");
 	ft_printf("CpuSubType: \t%x\n", (uint16_t)arch->cpusubtype);
 	ft_printf("Offset: \t%d\n", arch->offset);
 	ft_printf("Size: \t\t%d\n", arch->size);
@@ -212,6 +210,7 @@ void	ft_print_option_nm(void)
 	ft_printf("-u:\t%s\n", (env()->opt & OPT_U) ? "Yes" : "No");
 	ft_printf("-U:\t%s\n", (env()->opt & OPT_UU) ? "Yes" : "No");
 	ft_printf("-r:\t%s\n", (env()->opt & OPT_R) ? "Yes" : "No");
+	ft_printf("-a:\t%s\n", (env()->opt & OPT_A) ? "Yes" : "No");
 	ft_printf("Variable opt = %d\n\n", env()->opt);
 }
 

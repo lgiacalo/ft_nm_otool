@@ -26,7 +26,8 @@
 # define OPT_U				(1 << 2)
 # define OPT_UU				(1 << 3)
 # define OPT_R				(1 << 4)
-# define OPT_NM				"gjuUr"
+# define OPT_A				(1 << 5)
+# define OPT_NM				"gjuUra"
 
 typedef struct				s_line
 {

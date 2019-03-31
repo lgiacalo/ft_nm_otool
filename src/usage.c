@@ -21,12 +21,13 @@ size_t	ft_align(size_t nb, size_t modulo)
 
 int		ft_usage_nm(void)
 {
-	ft_putstr("\nUSAGE: ft_nm [options] <input files>\n\n");
-	ft_putstr("OPTIONS:\n");
-	ft_putstr("\t-g\t\t- Display only global (external) symbols\n");
-	ft_putstr("\t-j\t\t- Just display the symbol names (no value or type)\n");
-	ft_putstr("\t-u\t\t- Display only undefined symbols\n");
-	ft_putstr("\t-U\t\t- Don't display undefined symbols\n");
-	ft_putstr("\t-r\t\t- Sort in reverse order (alphabetically by default)\n");
+	ft_printf("\nUSAGE: ft_nm [options] <input files>\n\n");
+	ft_printf("OPTIONS:\n");
+	ft_printf("\t-g\t\t- Display only global (external) symbols\n");
+	ft_printf("\t-j\t\t- Just display the symbol names (no value or type)\n");
+	ft_printf("\t-u\t\t- Display only undefined symbols\n");
+	ft_printf("\t-U\t\t- Don't display undefined symbols\n");
+	ft_printf("\t-r\t\t- Sort in reverse order (alphabetically by default)\n");
+	ft_printf("\t-a\t\t- Display all arch\n");
 	return (EXIT_FAILUR);
 }

@@ -53,7 +53,7 @@ void	ft_reading_file(char *name)
 	if (ft_is_mh(e->magic))
 		return (ft_mach_header_64(e->ptr, e->magic));
 	else if (ft_is_fat(e->magic))
-		return (ft_fatbinary(0));
+		return (ft_fatbinary((e->opt & OPT_A) ? 1 : 0));
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
