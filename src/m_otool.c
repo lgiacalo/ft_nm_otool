@@ -20,6 +20,11 @@ int		ft_text(void *ptr)
 		return (EXIT_FAILUR);
 	if (!ft_is_safe(env()->ptr_mh + sect.offset, sect.size))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	if (env()->symbol.t == 0)
+	{
+		ft_print_title_otool();
+		env()->symbol.t = 1;
+	}
 	ft_printf("Contents of (__TEXT,__text) section\n");
 	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size, sect.addr);
 	return (EXIT_SUCCES);
@@ -33,6 +38,11 @@ int		ft_data(void *ptr)
 		return (EXIT_FAILUR);
 	if (!ft_is_safe(env()->ptr_mh + sect.offset, sect.size))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	if (env()->symbol.t == 0)
+	{
+		ft_print_title_otool();
+		env()->symbol.t = 1;
+	}
 	ft_printf("Contents of (__DATA,__data) section\n");
 	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size, sect.addr);
 	return (EXIT_SUCCES);
@@ -74,6 +84,7 @@ void	ft_load_command_otool(void *ptr, int ncmds)
 	i = -1;
 	tmp = ptr;
 	ret = 1;
+	env()->symbol.t = 0;
 	while (++i < ncmds)
 	{
 		if (!ft_record_load_command(env()->magic_mh, tmp, &lc))
@@ -86,5 +97,4 @@ void	ft_load_command_otool(void *ptr, int ncmds)
 			return ;
 		tmp = (struct load_command *)((char *)tmp + lc.cmdsize);
 	}
-	ft_print_title();
 }

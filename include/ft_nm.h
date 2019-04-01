@@ -24,9 +24,10 @@
 # define OPT_G				(1 << 0)
 # define OPT_J				(1 << 1)
 # define OPT_U				(1 << 2)
-# define OPT_UU				(1 << 3)
-# define OPT_R				(1 << 4)
-# define OPT_A				(1 << 5)
+# define OPT_A				(1 << 3)
+# define OPT_UU				(1 << 4)
+# define OPT_R				(1 << 5)
+
 
 typedef struct				s_symtab_header
 {
@@ -43,7 +44,6 @@ typedef struct				s_symtab_header
 ** Env
 */
 
-void 						ft_reinit_sym(void);
 void 						ft_free(void);
 
 

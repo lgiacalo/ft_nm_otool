@@ -47,8 +47,8 @@
 
 # define MY_ARCHI		CPU_TYPE_X86_64
 
-# define OPT_NM				"gjuUra"
-# define OPT_OTOOL		"tdm"
+# define OPT_NM				"gjuaUr"
+# define OPT_OTOOL		"tdma"
 
 typedef struct				s_line
 {
@@ -82,6 +82,7 @@ typedef struct				s_env
 	uint32_t				cputype;
 	t_sym					symbol;
 	t_line					*line;
+	uint8_t					p_archive;
 
 }							t_env;
 
@@ -94,6 +95,8 @@ void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
+void 						ft_reinit_sym(void);
+
 
 void						ft_loop_args(int argc, char **argv, int ind);
 

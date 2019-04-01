@@ -81,6 +81,7 @@ void	ft_loop_args(int argc, char **argv, int ind)
 	while (++i < argc || i == argc)
 	{
 		ft_reinit_env();
+		env()->p_archive = 0;
 		file = (ind == argc) ? "a.out" : argv[i];
 		if (ft_open_file(env()->cmd, file, &fd))
 		{

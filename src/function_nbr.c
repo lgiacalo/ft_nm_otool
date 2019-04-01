@@ -44,7 +44,7 @@ void		print_memory(const void *addr, size_t size, uint64_t ad)
 	str = (unsigned char*)addr;
 	while (i < size)
 	{
-		ft_printf("%0*llx\t", 16, (ad + i));
+		ft_printf("%0*llx\t", (ft_is_64(env()->magic_mh) ? 16 : 8), (ad + i));
 		ft_print_ligne(str, i, size);
 		ft_putchar('\n');
 		i += 16;

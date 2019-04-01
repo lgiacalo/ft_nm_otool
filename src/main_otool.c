@@ -14,7 +14,6 @@
 
 int  main(int argc, char **argv)
 {
-	ft_printf("---- OTOOL -----\n");
 	t_env	*e;
 	int		ind;
 
@@ -23,7 +22,7 @@ int  main(int argc, char **argv)
 	ind = ft_parse_option(argc, argv, OPT_OTOOL, &(e->opt));
 	if (!ind || ind == argc)
 		return (ft_usage_otool());
-	e->print_name = ft_multi_args(ind, argc);
+	e->print_name = 1;
 	if (!(env()->opt & OPT_D))
 		env()->opt |= OPT_T;
 	ft_loop_args(argc, argv, ind);

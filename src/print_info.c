@@ -56,6 +56,28 @@ void	ft_print_title(void)
 		ft_printf("\n%s:\n", e->file_name);
 }
 
+void	ft_print_title_otool(void)
+{
+	t_env	*e;
+
+	e = env();
+	//TODO: cas particulier si PPC
+	if (e->magic == 0)
+	{
+		if (!(e->p_archive))
+		{
+			e->p_archive = 1;
+			ft_printf("Archive : %s\n", e->file_name);
+		}
+		ft_printf("%s(%s)", e->file_name, e->file_name_mh);
+		(e->arch) ? ft_printf(":\n") : ft_printf(" (for architecture %s)\n", ft_print_archi());
+	}
+	else if (ft_is_fat(e->magic) && !(e->arch))
+		ft_printf("%s (for architecture %s):\n", e->file_name, ft_print_archi());
+	else if (e->print_name && !ft_is_fat(e->magic))
+		ft_printf("%s:\n", e->file_name);
+}
+
 void 	ft_print_line(t_line *line)
 {
 	int 	pad;

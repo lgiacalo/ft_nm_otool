@@ -87,5 +87,6 @@ t_env	*ft_init_env(void)
 	e->symbol.b = 0;
 	e->arch = 1;
 	e->cputype = 0;
+	e->p_archive = 0;
 	return (e);
 }
