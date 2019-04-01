@@ -12,6 +12,16 @@
 
 #include "ft_nm.h"
 
+int		ft_is_ppc(void)
+{
+	t_env	*e;
+
+	e = env();
+	if (e->cputype == CPU_TYPE_POWERPC || e->cputype == CPU_TYPE_POWERPC64)
+			return (EXIT_SUCCES);
+	return (EXIT_FAILUR);
+}
+
 /*
 **	gestion de chaque types darch du fat
 */

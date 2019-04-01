@@ -70,10 +70,10 @@ void	ft_print_title_otool(void)
 			ft_printf("Archive : %s\n", e->file_name);
 		}
 		ft_printf("%s(%s)", e->file_name, e->file_name_mh);
-		(e->arch) ? ft_printf(":\n") : ft_printf(" (for architecture %s)\n", ft_print_archi());
+		(e->arch) ? ft_printf(":\n") : ft_printf(" (architecture %s)\n", ft_print_archi());
 	}
 	else if (ft_is_fat(e->magic) && !(e->arch))
-		ft_printf("%s (for architecture %s):\n", e->file_name, ft_print_archi());
+		ft_printf("%s (architecture %s):\n", e->file_name, ft_print_archi());
 	else if (e->print_name)
 		ft_printf("%s:\n", e->file_name);
 }

@@ -130,6 +130,8 @@ int						ft_is_64(uint32_t magic);
 int						ft_is_mh(uint32_t magic);
 int						ft_is_fat(uint32_t magic);
 int						ft_is_arc(char *arc);
+int						ft_is_ppc(void);
+
 
 /*
 ** Option

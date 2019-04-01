@@ -22,7 +22,7 @@ static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 	{
 		ft_putchar(BASE16_L[(str[k] / 16)]);
 		ft_putchar(BASE16_L[(str[k] % 16)]);
-		ft_putchar(' ');
+		(ft_is_ppc() && ((k + 1) % 4)) ? 0 : ft_putchar(' ');
 	}
 	k--;
 	if (!(env()->opt & OPT_M))

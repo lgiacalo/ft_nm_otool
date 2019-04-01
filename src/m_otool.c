@@ -12,7 +12,7 @@
 
 #include "ft_otool.h"
 
-int		ft_text(void *ptr)
+int		ft_gestion_section(void *ptr, char *print)
 {
 	struct section_64	sect;
 
@@ -25,26 +25,17 @@ int		ft_text(void *ptr)
 		ft_print_title_otool();
 		env()->symbol.t = 1;
 	}
-	ft_printf("Contents of (__TEXT,__text) section\n");
+	ft_printf("%s", print);
 	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size, sect.addr);
 	return (EXIT_SUCCES);
 }
 
-int		ft_data(void *ptr)
+int		ft_section(char *str)
 {
-	struct section_64	sect;
-
-	if (!ft_record_section_64(env()->magic_mh, ptr, &sect))
-		return (EXIT_FAILUR);
-	if (!ft_is_safe(env()->ptr_mh + sect.offset, sect.size))
-		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
-	if (env()->symbol.t == 0)
-	{
-		ft_print_title_otool();
-		env()->symbol.t = 1;
-	}
-	ft_printf("Contents of (__DATA,__data) section\n");
-	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size, sect.addr);
+	if ((env()->opt & OPT_T) && !ft_strcmp("__text", str))
+		return (ft_gestion_section((void *)str, "Contents of (__TEXT,__text) section\n"));
+	else if ((env()->opt & OPT_D) && !ft_strcmp("__data", str))
+		return (ft_gestion_section((void *)str, "Contents of (__DATA,__data) section\n"));
 	return (EXIT_SUCCES);
 }
 
@@ -66,10 +57,9 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
 		sizeof(struct segment_command))) + (k * (st ?
 		sizeof(struct section_64) : sizeof(struct section))));
-		if ((env()->opt & OPT_T) && !ft_strcmp("__text", str))
-			return (ft_text((void *)str));
-		else if ((env()->opt & OPT_D) && !ft_strcmp("__data", str))
-			return (ft_data((void *)str));
+		if (!ft_section((void *)str))
+			return (EXIT_FAILUR);
+
 	}
 	return (EXIT_SUCCES);
 }
