@@ -109,7 +109,7 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 **  Boucle sur toutes les load commands
 */
 
-void	ft_load_command(void *ptr, int ncmds)
+void	ft_load_command_nm(void *ptr, int ncmds)
 {
 	struct load_command	lc;
 	void	*tmp;

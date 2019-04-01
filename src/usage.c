@@ -31,3 +31,16 @@ int		ft_usage_nm(void)
 	ft_printf("\t-a\t\t- Display all arch\n");
 	return (EXIT_FAILUR);
 }
+
+int		ft_usage_otool(void)
+{
+	ft_printf("\nUSAGE: ft_otool [options] <input files>\n\n");
+	ft_printf("OPTIONS:\n");
+	ft_printf("\t-g\t\t- Display only global (external) symbols\n");
+	ft_printf("\t-j\t\t- Just display the symbol names (no value or type)\n");
+	ft_printf("\t-u\t\t- Display only undefined symbols\n");
+	ft_printf("\t-U\t\t- Don't display undefined symbols\n");
+	ft_printf("\t-r\t\t- Sort in reverse order (alphabetically by default)\n");
+	ft_printf("\t-a\t\t- Display all arch\n");
+	return (EXIT_FAILUR);
+}

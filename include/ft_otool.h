@@ -19,7 +19,7 @@
 **	OPTION OTOOL
 */
 
-# define NM					"ft_nm: "
+# define OTOOL					"ft_otool: "
 
 # define OPT_G				(1 << 0)
 # define OPT_J				(1 << 1)
@@ -31,5 +31,6 @@
 
 
 int							ft_usage_otool(void);
+
 
 #endif

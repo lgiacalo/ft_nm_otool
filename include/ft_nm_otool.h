@@ -47,6 +47,53 @@
 
 # define MY_ARCHI		CPU_TYPE_X86_64
 
+typedef struct				s_line
+{
+	uint64_t				addr;
+	char					sym;
+	char					*name;
+	struct s_line			*next;
+}							t_line;
+
+typedef struct				s_sym
+{
+	int						t;
+	int						d;
+	int						b;
+}							t_sym;
+
+typedef struct				s_env
+{
+	char					*cmd;
+	int						opt;
+	uint8_t					print_name;
+	char					*file_name;
+	char					*file_name_mh;
+	size_t					file_size;
+	void					*ptr;
+	void					*ptr_mh;
+	uint32_t				magic;
+	uint32_t				magic_mh;
+	uint32_t				dec;
+	uint8_t					arch;
+	uint32_t				cputype;
+	t_sym					symbol;
+	t_line					*line;
+
+}							t_env;
+
+
+void	          ft_load_command_otool(void *ptr, int ncmds);
+void						ft_load_command_nm(void *ptr, int ncmds);
+
+void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
+
+t_env						*env(void);
+t_env						*ft_init_env(void);
+void						ft_reinit_env(void);
+
+void						ft_loop_args(int argc, char **argv, int ind);
+
 /*
 ** File
 */

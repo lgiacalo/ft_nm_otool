@@ -14,10 +14,20 @@
 
 int  main(int argc, char **argv)
 {
-	ft_printf("OTOOL\n");
+	ft_printf("---- OTOOL -----\n");
+	t_env	*e;
+	int		ind;
 
-	(void)argv;
-	(void)argc;
+	e = ft_init_env();
+	e->cmd = OTOOL;
+	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
+	if (!ind || ind == argc)
+		return (ft_usage_otool());
+	e->print_name = ft_multi_args(ind, argc);
+	if (env()->opt & OPT_U)
+		env()->opt |= OPT_J;
+	ft_loop_args(argc, argv, ind);
+
 
 	return (0);
 }

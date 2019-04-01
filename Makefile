@@ -35,33 +35,35 @@ INC_PATH	= include
 OBJ_PATH	= obj
 
 
-SRC_NM		= main_nm.c ft_option.c print_info.c\
+SRC_NM		= main_nm.c m_nm.c m_otool.c ft_option.c print_info.c\
 				env.c verif.c usage.c error.c\
 				ft_file.c ft_type_file.c\
 				record_struct.c swap.c copy.c\
 				fatbinary.c archive_static.c\
 				load_command.c nlist.c list_line.c tri.c\
 				function_nbr.c function_str.c
-
-INC_NM		= ft_nm_otool.h ft_nm.h
 OBJ_NM		= $(SRC_NM:.c=.o)
 
-
-SRC_OTOOL	= main_otool.c
-
-INC_OTOOL	= ft_otool.h
-
+SRC_OTOOL	= main_otool.c m_nm.c m_otool.c ft_option.c print_info.c\
+				env.c verif.c usage.c error.c\
+				ft_file.c ft_type_file.c\
+				record_struct.c swap.c copy.c\
+				fatbinary.c archive_static.c\
+				load_command.c nlist.c list_line.c tri.c\
+				function_nbr.c function_str.c
 OBJ_OTOOL	= $(SRC_OTOOL:.c=.o)
+
+INC_NM_OTOOL		= ft_nm_otool.h ft_nm.h ft_otool.h
 
 ################################################################################
 
 SRC_N	= $(addprefix $(SRC_PATH)/,$(SRC_NM))
 OBJ_N	= $(addprefix $(OBJ_PATH)/,$(OBJ_NM))
-INC_N = $(addprefix $(INC_PATH)/,$(INC_NM))
 
 SRC_O	= $(addprefix $(SRC_PATH)/,$(SRC_OTOOL))
 OBJ_O	= $(addprefix $(OBJ_PATH)/,$(OBJ_OTOOL))
-INC_O = $(addprefix $(INC_PATH)/,$(INC_OTOOL))
+
+INC = $(addprefix $(INC_PATH)/,$(INC_NM_OTOOL))
 
 LIB	= libft/libft.a
 
@@ -89,7 +91,7 @@ all: lib $(NM) $(OTOOL)
 $(OBJ_PATH):
 	$(SPY)mkdir $(OBJ_PATH) 2> /dev/null || true
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC_N) $(INC_O) $(LIB) Makefile
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC) $(LIB) Makefile
 	$(SPY)$(CC) $(OPT) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(LIB):

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_nm.c                                          :+:      :+:    :+:   */
+/*   m_otool.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,24 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm.h"
+#include "ft_otool.h"
 
-/*
-** Commande NM
-*/
-
-int		main(int argc, char **argv)
+void	ft_load_command_otool(void *ptr, int ncmds)
 {
-	t_env	*e;
-	int		ind;
-
-	e = ft_init_env();
-	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
-	if (!ind)
-		return (ft_usage_nm());
-	e->print_name = ft_multi_args(ind, argc);
-	if (env()->opt & OPT_U)
-		env()->opt |= OPT_J;
-	ft_loop_args(argc, argv, ind);
-	return (0);
+	(void)ptr;
+	(void)ncmds;
+	ft_printf("Je suis dans load_command -->> OTOOL\n");
 }
