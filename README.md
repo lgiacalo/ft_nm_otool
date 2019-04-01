@@ -11,3 +11,4 @@ A faire :
 **** VERIFIER LES LEAKS
 
 Version NM OK !!!
+bud --> nb args with a.out

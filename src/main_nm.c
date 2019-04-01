@@ -75,7 +75,7 @@ void	ft_loop_args(int argc, char **argv, int ind)
 	char	*file;
 
 	i = ind - 1;
-	while (++i < argc || ind == argc)
+	while (++i < argc || i == argc)
 	{
 		ft_reinit_env();
 		file = (ind == argc) ? "a.out" : argv[i];
@@ -105,7 +105,7 @@ int		main(int argc, char **argv)
 
 	e = ft_init_env();
 	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
-	if (!ind || ind == argc)
+	if (!ind)
 		return (ft_usage_nm());
 	e->print_name = ft_multi_args(ind, argc);
 	if (env()->opt & OPT_U)
