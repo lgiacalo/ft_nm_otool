@@ -74,7 +74,7 @@ void	ft_print_title_otool(void)
 	}
 	else if (ft_is_fat(e->magic) && !(e->arch))
 		ft_printf("%s (for architecture %s):\n", e->file_name, ft_print_archi());
-	else if (e->print_name && !ft_is_fat(e->magic))
+	else if (e->print_name)
 		ft_printf("%s:\n", e->file_name);
 }
 

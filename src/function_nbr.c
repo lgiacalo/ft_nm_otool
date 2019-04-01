@@ -25,11 +25,11 @@ static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 		ft_putchar(' ');
 	}
 	k--;
+	if (!(env()->opt & OPT_M))
+		return;
 	while (++k < (i + 16))
 		ft_putstr("   ");
 	k = i - 1;
-	if (!(env()->opt & OPT_M))
-		return;
 	ft_putstr("\t");
 	while (++k < (i + 16) && k < size)
 		ft_putchar((str[k] >= 32 && str[k] < 127) ? str[k] : '.');

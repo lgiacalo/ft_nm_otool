@@ -10,34 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm_otool.h"
+#include "ft_otool.h"
 
 void	ft_error_void(char *str)
 {
-	ft_fdprintf(2, "Error : %s\n", str);
+	if (!ft_strcmp(env()->cmd, OTOOL))
+		ft_fdprintf(1, "%s: is not an object file\n", str);
+	else
+		ft_fdprintf(2, "Error : %s\n", str);
 	return ;
 }
 
 int		ft_error_int(char *str)
 {
-	ft_fdprintf(2, "Error : %s\n", str);
+	if (!ft_strcmp(env()->cmd, OTOOL))
+		ft_fdprintf(1, "%s: is not an object file\n", str);
+	else
+		ft_fdprintf(2, "Error : %s\n", str);
 	return (EXIT_FAILUR);
 }
 
 void	*ft_error_star(char *str)
 {
-	ft_fdprintf(2, "Error : %s\n", str);
+	if (!ft_strcmp(env()->cmd, OTOOL))
+		ft_fdprintf(1, "%s: is not an object file\n", str);
+	else
+		ft_fdprintf(2, "Error : %s\n", str);
 	return (NULL);
 }
 
 int		ft_error_int3(char *str1, char *str2, char *str3)
 {
-	ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
+	if (!ft_strcmp(env()->cmd, OTOOL))
+		ft_fdprintf(1, "%s: is not an object file\n", str2);
+	else
+		ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
 	return (EXIT_FAILUR);
 }
 
 void	ft_error_void3(char *str1, char *str2, char *str3)
 {
-	ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
+	if (!ft_strcmp(env()->cmd, OTOOL))
+		ft_fdprintf(1, "%s: is not an object file\n", str2);
+	else
+		ft_fdprintf(2, "%s%s%s\n", str1, str2, str3);
 	return ;
 }

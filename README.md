@@ -12,3 +12,5 @@ A faire :
 
 Version NM OK !!!
 bud --> nb args with a.out
+
+otool : si un arg plante, ne pas lire les suivants
