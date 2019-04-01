@@ -27,7 +27,6 @@
 # define OPT_UU				(1 << 3)
 # define OPT_R				(1 << 4)
 # define OPT_A				(1 << 5)
-# define OPT_NM				"gjuUra"
 
 typedef struct				s_symtab_header
 {
@@ -71,11 +70,6 @@ int							ft_record_symtab_header(t_symtab_header *sym_h,
 		void *ptr);
 int							ft_record_mach_header_64(uint32_t magic, void *ptr,
 		struct mach_header_64 *dst);
-int							ft_record_load_command(uint32_t magic, void *ptr,
-		struct load_command *dst);
-
-int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
-		struct segment_command_64 *dst, uint32_t cmdsize);
 int	ft_record_symtab_command(uint32_t magic, void *ptr,
 		struct symtab_command *dst, uint32_t cmdsize);
 
@@ -122,7 +116,6 @@ struct segment_command	*ft_swap_segment_command(uint32_t magic,
 **	Verif ptr in file
 */
 
-int							ft_is_safe(void *ptr, size_t size);
 void						*ft_safe(void *ptr, size_t size);
 int							ft_verif_header_line(void *ptr);
 int							ft_get_len_name_header_line(void *ptr);
@@ -135,7 +128,6 @@ char						*ft_strndup(char *s1, int len);
 ** Print
 */
 
-void						ft_print_title(void);
 void						ft_print_option_nm(void);
 void						ft_print_env(void);
 void						ft_print_file(void);

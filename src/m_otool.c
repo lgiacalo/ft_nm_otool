@@ -12,9 +12,69 @@
 
 #include "ft_otool.h"
 
+int		ft_text(void *sect)
+{
+	ft_printf("Je suis text -->> OTOOL\n");
+	(void)sect;
+	return (EXIT_SUCCES);
+}
+
+int		ft_data(void *sect)
+{
+	ft_printf("Je suis data -->> OTOOL\n");
+
+	(void)sect;
+	return (EXIT_SUCCES);
+}
+
+int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
+{
+	struct segment_command_64	seg;
+	char						*str;
+	int							k;
+	int							st;
+
+	k = -1;
+	st = ft_is_64(env()->magic_mh);
+	if (!ft_record_segment_cmd_64(env()->magic_mh, ptr, &seg, lc->cmdsize))
+		return (EXIT_FAILUR);
+	if (seg.nsects == 0)
+		return (EXIT_SUCCES);
+	while (((uint32_t)++k) < seg.nsects)
+	{
+		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
+		sizeof(struct segment_command))) + (k * (st ?
+		sizeof(struct section_64) : sizeof(struct section))));
+		if ((env()->opt & OPT_T) && !ft_strcmp("__text", str))
+			return (ft_text((void *)str));
+		else if ((env()->opt & OPT_D) && !ft_strcmp("__data", str))
+			return (ft_data((void *)str));
+	}
+	return (EXIT_SUCCES);
+}
+
 void	ft_load_command_otool(void *ptr, int ncmds)
 {
-	(void)ptr;
-	(void)ncmds;
 	ft_printf("Je suis dans load_command -->> OTOOL\n");
+	struct load_command	lc;
+	void	*tmp;
+	int					i;
+	int		ret;
+
+	i = -1;
+	tmp = ptr;
+	ret = 1;
+	while (++i < ncmds)
+	{
+		if (!ft_record_load_command(env()->magic_mh, tmp, &lc))
+			return ;
+		if (!ft_is_safe(tmp, lc.cmdsize))
+			return (ft_error_void3(env()->cmd, env()->file_name, ERROR6));
+		if (lc.cmd == LC_SEGMENT || lc.cmd == LC_SEGMENT_64)
+			ret = ft_lc_segment_otool(tmp, &lc);
+		if (!ret)
+			return ;
+		tmp = (struct load_command *)((char *)tmp + lc.cmdsize);
+	}
+	ft_print_title();
 }

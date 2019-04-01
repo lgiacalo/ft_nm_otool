@@ -47,6 +47,9 @@
 
 # define MY_ARCHI		CPU_TYPE_X86_64
 
+# define OPT_NM				"gjuUra"
+# define OPT_OTOOL		"td"
+
 typedef struct				s_line
 {
 	uint64_t				addr;
@@ -93,6 +96,15 @@ t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
 
 void						ft_loop_args(int argc, char **argv, int ind);
+
+int							ft_record_load_command(uint32_t magic, void *ptr,
+	struct load_command *dst);
+int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
+		struct segment_command_64 *dst, uint32_t cmdsize);
+
+int							ft_is_safe(void *ptr, size_t size);
+
+void						ft_print_title(void);
 
 /*
 ** File

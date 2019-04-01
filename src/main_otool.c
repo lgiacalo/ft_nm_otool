@@ -20,12 +20,12 @@ int  main(int argc, char **argv)
 
 	e = ft_init_env();
 	e->cmd = OTOOL;
-	ind = ft_parse_option(argc, argv, OPT_NM, &(e->opt));
+	ind = ft_parse_option(argc, argv, OPT_OTOOL, &(e->opt));
 	if (!ind || ind == argc)
 		return (ft_usage_otool());
 	e->print_name = ft_multi_args(ind, argc);
-	if (env()->opt & OPT_U)
-		env()->opt |= OPT_J;
+	if (!(env()->opt))
+		env()->opt = OPT_T;
 	ft_loop_args(argc, argv, ind);
 
 

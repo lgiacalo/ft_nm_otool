@@ -21,13 +21,8 @@
 
 # define OTOOL					"ft_otool: "
 
-# define OPT_G				(1 << 0)
-# define OPT_J				(1 << 1)
-# define OPT_U				(1 << 2)
-# define OPT_UU				(1 << 3)
-# define OPT_R				(1 << 4)
-# define OPT_A				(1 << 5)
-# define OPT_NM				"gjuUra"
+# define OPT_T				(1 << 0)
+# define OPT_D				(1 << 1)
 
 
 int							ft_usage_otool(void);
