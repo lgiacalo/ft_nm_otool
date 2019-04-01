@@ -12,18 +12,25 @@
 
 #include "ft_otool.h"
 
-int		ft_text(void *sect)
+int		ft_text(void *ptr)
 {
 	ft_printf("Je suis text -->> OTOOL\n");
-	(void)sect;
+	struct section_64	sect;
+
+
+	if (!ft_record_section_64(env()->magic_mh, ptr, &sect))
+		return (EXIT_FAILUR);
+	ft_print_section(&sect);
+	if (!ft_is_safe(env()->ptr_mh + sect.offset, sect.size))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	return (EXIT_SUCCES);
 }
 
-int		ft_data(void *sect)
+int		ft_data(void *ptr)
 {
 	ft_printf("Je suis data -->> OTOOL\n");
 
-	(void)sect;
+	(void)ptr;
 	return (EXIT_SUCCES);
 }
 

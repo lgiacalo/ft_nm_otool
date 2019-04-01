@@ -75,6 +75,22 @@ void 	ft_print_line(t_line *line)
 	ft_printf("%s\n", line->name);
 }
 
+void	ft_print_section(struct section_64 *sect)
+{
+	if (!sect)
+		return ;
+	ft_printf("Info OTOOL ----- Section ---------\n");
+	ft_printf("SectName:\t%s\n", sect->sectname);
+	ft_printf("SegName:\t%s\n", sect->segname);
+	ft_printf("Addr:\t\t%#llx\n", sect->addr);
+	ft_printf("Size:\t\t%d\n", sect->size);
+	ft_printf("Offset:\t\t%d\n", sect->offset);
+	ft_printf("Align:\t\t%d\n", sect->align);
+	ft_printf("Reloff:\t\t%d\n", sect->reloff);
+	ft_printf("NReloc:\t\t%d\n", sect->nreloc);
+	ft_printf("Flags:\t\t%u\n\n", sect->flags);
+}
+
 void	ft_print_symtab_cmd(struct symtab_command *sym)
 {
 	if (!sym || sym->cmd != LC_SYMTAB)

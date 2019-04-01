@@ -12,6 +12,23 @@
 
 #include "ft_nm.h"
 
+struct section_64					ft_copy_section_64(struct section *src)
+{
+	struct section_64	dst;
+
+	dst.addr = src->addr;
+	dst.size = src->size;
+	dst.offset = src->offset;
+	dst.align = src->align;
+	dst.reloff = src->reloff;
+	dst.nreloc = src->nreloc;
+	dst.flags = src->flags;
+	dst.reserved1 = src->reserved1;
+	dst.reserved2 = src->reserved2;
+	dst.reserved3 = 0;
+	return (dst);
+}
+
 struct segment_command_64	ft_copy_segment_cmd_64(struct segment_command *src)
 {
 	struct segment_command_64	dst;

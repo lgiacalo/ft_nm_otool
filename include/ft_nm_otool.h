@@ -103,6 +103,7 @@ int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 		struct segment_command_64 *dst, uint32_t cmdsize);
 
 int							ft_is_safe(void *ptr, size_t size);
+void						*ft_safe(void *ptr, size_t size);
 
 void						ft_print_title(void);
 

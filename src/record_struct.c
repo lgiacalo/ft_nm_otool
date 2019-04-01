@@ -11,6 +11,27 @@
 /* ************************************************************************** */
 
 #include "ft_nm.h"
+#include "ft_otool.h"
+
+int		ft_record_section_64(uint32_t magic, void *ptr, struct section_64 *dst)
+{
+	struct section	ret;
+
+	if (!(ptr = ft_safe(ptr, (ft_is_64(magic)) ?
+				sizeof(struct section_64) : sizeof(struct section))))
+		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
+	*dst = *((struct section_64 *)ptr);
+	if (ft_is_64(magic))
+		ft_swap_section_64(magic, dst);
+	else
+	{
+		ret = *((struct section *)dst);
+		*dst = ft_copy_section_64(ft_swap_section(magic, &ret));
+	}
+	ft_strncpy(dst->sectname, ((struct section_64 *)ptr)->sectname, 16);
+	ft_strncpy(dst->segname, ((struct section_64 *)ptr)->segname, 16);
+	return (EXIT_SUCCES);
+}
 
 int	ft_record_symtab_command(uint32_t magic, void *ptr,
 		struct symtab_command *dst, uint32_t cmdsize)
