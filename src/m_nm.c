@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_nm.h"
+#include "ft_otool.h"
 
 /*
 **	Fichier object :
@@ -52,17 +53,25 @@ void	ft_reading_file(char *name)
 
 	e = env();
 	e->file_name = name;
+	e->symbol.b	= 0;
 	e->magic = *((uint32_t *)(e->ptr));
 	if (ft_is_mh(e->magic))
-		return (ft_mach_header_64(e->ptr, e->magic));
+		 ft_mach_header_64(e->ptr, e->magic);
 	else if (ft_is_fat(e->magic))
-		return (ft_fatbinary((e->opt & OPT_A) ? 1 : 0));
+		 ft_fatbinary((e->opt & OPT_A) ? 1 : 0);
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
-		return (ft_archive_static(e->ptr, e->file_size));
+		ft_archive_static(e->ptr, e->file_size);
 	}
-	return (ft_error_void3(e->cmd, name, ERROR1));
+	else
+	{
+		if (!ft_strcmp(e->cmd, OTOOL))
+			ft_error_void3(name, ": is not an object file", "");
+		else
+			ft_error_void3(e->cmd, name, ERROR1);
+	}
+ ft_munmap_file(env()->file_size, &(env()->ptr));
 }
 
 /*
@@ -82,18 +91,18 @@ void	ft_loop_args(int argc, char **argv, int ind)
 	{
 		ft_reinit_env();
 		env()->p_archive = 0;
+		env()->symbol.b = 1;
 		file = (ind == argc) ? "a.out" : argv[i];
 		if (ft_open_file(env()->cmd, file, &fd))
 		{
 			if (ft_check_file(fd, file, env()->cmd, &(env()->file_size)))
 			{
 				if (ft_mmap_file(fd, env()->file_size, &(env()->ptr)))
-				{
 					ft_reading_file(file);
-					ft_munmap_file(env()->file_size, &(env()->ptr));
-				}
 			}
 			ft_close_file(env()->cmd, file, fd);
 		}
+		if (env()->symbol.b && !ft_strcmp(env()->cmd, OTOOL))
+			return;
 	}
 }

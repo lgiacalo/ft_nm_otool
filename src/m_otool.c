@@ -58,7 +58,10 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 		sizeof(struct segment_command))) + (k * (st ?
 		sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_section((void *)str))
+		{
+			env()->symbol.b = 1;
 			return (EXIT_FAILUR);
+		}
 
 	}
 	return (EXIT_SUCCES);
@@ -74,7 +77,7 @@ void	ft_load_command_otool(void *ptr, int ncmds)
 	i = -1;
 	tmp = ptr;
 	ret = 1;
-	env()->symbol.t = 0;
+	ft_reinit_sym();
 	while (++i < ncmds)
 	{
 		if (!ft_record_load_command(env()->magic_mh, tmp, &lc))
@@ -87,4 +90,6 @@ void	ft_load_command_otool(void *ptr, int ncmds)
 			return ;
 		tmp = (struct load_command *)((char *)tmp + lc.cmdsize);
 	}
+	if (env()->symbol.t == 0)
+		ft_print_title_otool();
 }
