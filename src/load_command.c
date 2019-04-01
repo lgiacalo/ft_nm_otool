@@ -83,7 +83,6 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 	int							k;
 	int							st;
 
-	(void)lc;
 	k = 0;
 	st = ft_is_64(env()->magic_mh);
 	if (!ft_record_segment_cmd_64(env()->magic_mh, ptr, &seg, lc->cmdsize) ||
