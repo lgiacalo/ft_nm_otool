@@ -23,7 +23,7 @@
 
 # define OPT_T				(1 << 0)
 # define OPT_D				(1 << 1)
-
+# define OPT_M				(1 << 2)
 
 int							ft_usage_otool(void);
 

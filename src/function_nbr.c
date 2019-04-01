@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_nm.h"
+#include "ft_otool.h"
 
 static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 {
@@ -27,12 +28,14 @@ static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 	while (++k < (i + 16))
 		ft_putstr("   ");
 	k = i - 1;
+	if (!(env()->opt & OPT_M))
+		return;
+	ft_putstr("\t");
 	while (++k < (i + 16) && k < size)
 		ft_putchar((str[k] >= 32 && str[k] < 127) ? str[k] : '.');
-	ft_putchar('\n');
 }
 
-void		print_memory(const void *addr, size_t size)
+void		print_memory(const void *addr, size_t size, uint64_t ad)
 {
 	unsigned char	*str;
 	size_t			i;
@@ -41,8 +44,9 @@ void		print_memory(const void *addr, size_t size)
 	str = (unsigned char*)addr;
 	while (i < size)
 	{
-		ft_print_int16("", (unsigned long long int)(str + i), " : ");
+		ft_printf("%0*llx\t", 16, (ad + i));
 		ft_print_ligne(str, i, size);
+		ft_putchar('\n');
 		i += 16;
 	}
 }

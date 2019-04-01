@@ -254,6 +254,6 @@ void	ft_print_file(void)
 
 	e = env();
 	ft_printf("Info NM --- PRINT FILE ------\n");
-	print_memory(e->ptr, e->file_size);
+	print_memory(e->ptr, e->file_size, *((uint32_t *)(e->ptr)));
 	ft_printf("\n");
 }

@@ -48,7 +48,7 @@
 # define MY_ARCHI		CPU_TYPE_X86_64
 
 # define OPT_NM				"gjuUra"
-# define OPT_OTOOL		"td"
+# define OPT_OTOOL		"tdm"
 
 typedef struct				s_line
 {
@@ -142,7 +142,7 @@ int						ft_parse_option(int argc, char **argv, char *list_opt,
 
 void					ft_putnbr_long(long long int n);
 void					ft_putnbr16(unsigned long long int n);
-void					print_memory(const void *addr, size_t size);
+void					print_memory(const void *addr, size_t size, uint64_t ad);
 
 void					ft_print_str(char *str1, char *str2, char *str3);
 void					ft_print_int(char *str1, long long int nbr, char *str2);

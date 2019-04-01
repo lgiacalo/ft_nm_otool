@@ -38,5 +38,6 @@ int		ft_usage_otool(void)
 	ft_printf("OPTIONS:\n");
 	ft_printf("\t-t\t\t- Print the text section\n");
 	ft_printf("\t-d\t\t- Print the data section\n");
+	ft_printf("\t-m\t\t- Display like print memory\n");
 	return (EXIT_FAILUR);
 }
