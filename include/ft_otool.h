@@ -37,5 +37,4 @@ struct section_64					ft_copy_section_64(struct section *src);
 void	                   ft_print_section(struct section_64 *sect);
 void	                   ft_print_title_otool(void);
 
-
 #endif

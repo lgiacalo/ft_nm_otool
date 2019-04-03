@@ -14,7 +14,6 @@
 # define FT_NM_OTOOL_H
 
 # include <sys/mman.h>
-# include <unistd.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <mach-o/loader.h>
@@ -27,11 +26,6 @@
 ** TODO: suprimer include + 1 + fichier()
 */
 
-# include <mach-o/arch.h>
-# include <stdio.h>
-# include <time.h>
-
-# define BASE16_U		"0123456789ABCDEF"
 # define BASE16_L		"0123456789abcdef"
 
 # define EXIT_SUCCES	1
@@ -86,7 +80,6 @@ typedef struct				s_env
 
 }							t_env;
 
-
 void	          ft_load_command_otool(void *ptr, int ncmds);
 void						ft_load_command_nm(void *ptr, int ncmds);
 
@@ -97,7 +90,6 @@ t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
 void 						ft_reinit_sym(void);
 
-
 void						ft_loop_args(int argc, char **argv, int ind);
 
 int							ft_record_load_command(uint32_t magic, void *ptr,
@@ -107,8 +99,6 @@ int							ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 
 int							ft_is_safe(void *ptr, size_t size);
 void						*ft_safe(void *ptr, size_t size);
-
-void						ft_print_title(void);
 
 /*
 ** File
@@ -132,7 +122,6 @@ int						ft_is_fat(uint32_t magic);
 int						ft_is_arc(char *arc);
 int						ft_is_ppc(void);
 
-
 /*
 ** Option
 */
@@ -145,23 +134,15 @@ int						ft_parse_option(int argc, char **argv, char *list_opt,
 ** Prints
 */
 
-void					ft_putnbr_long(long long int n);
-void					ft_putnbr16(unsigned long long int n);
 void					print_memory(const void *addr, size_t size, uint64_t ad);
-
-void					ft_print_str(char *str1, char *str2, char *str3);
-void					ft_print_int(char *str1, long long int nbr, char *str2);
-void					ft_print_int16(char *str1, unsigned long long int nbr,
-		char *str2);
+void						ft_print_title(void);
 
 /*
 ** Error
 */
 
-void					ft_error_void(char *str);
 void					ft_error_void3(char *str1, char *str2, char *str3);
 int						ft_error_int(char *str);
 int						ft_error_int3(char *str1, char *str2, char *str3);
-void					*ft_error_star(char *str);
 
 #endif

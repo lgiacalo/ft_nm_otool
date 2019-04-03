@@ -28,7 +28,6 @@
 # define OPT_UU				(1 << 4)
 # define OPT_R				(1 << 5)
 
-
 typedef struct				s_symtab_header
 {
 	char					*name;
@@ -45,8 +44,6 @@ typedef struct				s_symtab_header
 */
 
 void 						ft_free(void);
-
-
 
 /*
 **	Gestion fichier
@@ -127,20 +124,6 @@ char						*ft_strndup(char *s1, int len);
 ** Print
 */
 
-void						ft_print_option_nm(void);
-void						ft_print_env(void);
-void						ft_print_file(void);
-void						ft_print_fat_header(struct fat_header *header);
-void						ft_print_fat_arch_64(struct fat_arch_64 *arch);
-void						ft_print_mach_header_64(struct mach_header_64
-		*mach_header);
-void						ft_print_symtab_header(t_symtab_header *sym_h);
-void						ft_print_symtab_header2(void *ptr);
-void						ft_print_load_command(struct load_command *lc,
-		int numlc);
-void						ft_print_segment_cmd_64(struct segment_command_64
-		*seg);
-void						ft_print_symtab_cmd(struct symtab_command *sym);
 void						ft_print_lst_line();
 void						ft_print_line(t_line *line);
 

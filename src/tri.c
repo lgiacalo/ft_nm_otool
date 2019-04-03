@@ -12,18 +12,6 @@
 
 #include "ft_nm.h"
 
-void	ft_print_lst_line(void)
-{
-	t_line	*line;
-
-	line = env()->line;
-	while (line)
-	{
-		ft_print_line(line);
-		line = line->next;
-	}
-}
-
 int		ft_tri_ascii(const char *s1, const char *s2)
 {
 	return (ft_strcmp(s1, s2));

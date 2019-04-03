@@ -32,13 +32,3 @@ int		ft_strlen_nm(char *str)
 		i++;
 	return (i);
 }
-
-void	ft_print_int(char *str1, long long int nbr, char *str2)
-{
-	ft_printf("%s%lld%s", str1, nbr, str2);
-}
-
-void	ft_print_str(char *str1, char *str2, char *str3)
-{
-	ft_printf("%s%s%s", str1, str2, str3);
-}

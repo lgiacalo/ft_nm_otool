@@ -26,7 +26,5 @@ int  main(int argc, char **argv)
 	if (!(env()->opt & OPT_D))
 		env()->opt |= OPT_T;
 	ft_loop_args(argc, argv, ind);
-
-
 	return (0);
 }
