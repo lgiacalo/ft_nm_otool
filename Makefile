@@ -38,7 +38,7 @@ OBJ_PATH	= obj
 SRC_NM		= main_nm.c m_nm.c m_otool.c ft_option.c print_info.c\
 				env.c verif.c usage.c error.c\
 				ft_file.c ft_type_file.c\
-				record_struct.c swap.c copy.c\
+				record_struct.c record_struct2.c swap.c swap2.c copy.c\
 				fatbinary.c archive_static.c\
 				load_command.c nlist.c list_line.c tri.c\
 				function_nbr.c function_str.c
@@ -47,7 +47,7 @@ OBJ_NM		= $(SRC_NM:.c=.o)
 SRC_OTOOL	= main_otool.c m_nm.c m_otool.c ft_option.c print_info.c\
 				env.c verif.c usage.c error.c\
 				ft_file.c ft_type_file.c\
-				record_struct.c swap.c copy.c\
+				record_struct.c record_struct2.c swap.c swap2.c copy.c\
 				fatbinary.c archive_static.c\
 				load_command.c nlist.c list_line.c tri.c\
 				function_nbr.c function_str.c

@@ -22,10 +22,6 @@
 
 # include "libft.h"
 
-/*
-** TODO: suprimer include + 1 + fichier()
-*/
-
 # define BASE16_L		"0123456789abcdef"
 
 # define EXIT_SUCCES	1
