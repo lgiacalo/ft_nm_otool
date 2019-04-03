@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:22:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 21:13:44 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,21 @@ int		ft_gestion_section(void *ptr, char *print)
 		env()->symbol.t = 1;
 	}
 	ft_printf("%s", print);
-	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size, sect.addr);
+	print_memory((const void *)(env()->ptr_mh + sect.offset), sect.size,
+		sect.addr);
 	return (EXIT_SUCCES);
 }
 
 int		ft_section(char *str)
 {
 	if ((env()->opt & OPT_T) && !ft_strcmp("__text", str))
-		return (ft_gestion_section((void *)str, "Contents of (__TEXT,__text) section\n"));
+		return (ft_gestion_section((void *)str,
+			"Contents of (__TEXT,__text) section\n"));
 	else if ((env()->opt & OPT_D) && !ft_strcmp("__data", str))
-		return (ft_gestion_section((void *)str, "Contents of (__DATA,__data) section\n"));
+	{
+		return (ft_gestion_section((void *)str,
+			"Contents of (__DATA,__data) section\n"));
+	}
 	return (EXIT_SUCCES);
 }
 
@@ -52,7 +57,7 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 		return (EXIT_FAILUR);
 	if (seg.nsects == 0)
 		return (EXIT_SUCCES);
-	while (((uint32_t)++k) < seg.nsects)
+	while (((uint32_t)(++k)) < seg.nsects)
 	{
 		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
 		sizeof(struct segment_command))) + (k * (st ?
@@ -62,7 +67,6 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 			env()->symbol.b = 1;
 			return (EXIT_FAILUR);
 		}
-
 	}
 	return (EXIT_SUCCES);
 }
@@ -70,9 +74,9 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 void	ft_load_command_otool(void *ptr, int ncmds)
 {
 	struct load_command	lc;
-	void	*tmp;
+	void				*tmp;
 	int					i;
-	int		ret;
+	int					ret;
 
 	i = -1;
 	tmp = ptr;

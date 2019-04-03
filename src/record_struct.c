@@ -56,8 +56,8 @@ int	ft_record_symtab_header(t_symtab_header *sym_h, void *ptr)
 		!ft_verif_base_nm((char *)ptr + 40, 8, 8))
 		return (EXIT_FAILUR);
 	sym_h->date = (char *)(ptr + 16);
-	sym_h->userId = ft_atoi((char *)(ptr + 28));
-	sym_h->groupId = ft_atoi((char *)(ptr + 34));
+	sym_h->userid = ft_atoi((char *)(ptr + 28));
+	sym_h->groupid = ft_atoi((char *)(ptr + 34));
 	sym_h->mode = ft_atoi((char *)(ptr + 40));
 	sym_h->size = ft_atoi((char *)(ptr + 48));
 	sym_h->next = 60 + ((*(char *)ptr == '#') ?

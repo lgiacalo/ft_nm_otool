@@ -6,13 +6,14 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 13:22:17 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:29:44 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:47:02 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-struct section_64					*ft_swap_section_64(uint32_t magic, struct section_64 *sect)
+struct section_64			*ft_swap_section_64(uint32_t magic,
+	struct section_64 *sect)
 {
 	if (!ft_is_swap(magic))
 		return (sect);
@@ -29,7 +30,8 @@ struct section_64					*ft_swap_section_64(uint32_t magic, struct section_64 *sec
 	return (sect);
 }
 
-struct section						*ft_swap_section(uint32_t magic, struct section *sect)
+struct section				*ft_swap_section(uint32_t magic,
+	struct section *sect)
 {
 	if (!ft_is_swap(magic))
 		return (sect);

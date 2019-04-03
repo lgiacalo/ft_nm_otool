@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:22:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:39:26 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	ft_reading_file(char *name)
 
 	e = env();
 	e->file_name = name;
-	e->symbol.b	= 0;
+	e->symbol.b = 0;
 	e->magic = *((uint32_t *)(e->ptr));
 	if (ft_is_mh(e->magic))
-		 ft_mach_header_64(e->ptr, e->magic);
+		ft_mach_header_64(e->ptr, e->magic);
 	else if (ft_is_fat(e->magic))
-		 ft_fatbinary((e->opt & OPT_A) ? 1 : 0);
+		ft_fatbinary((e->opt & OPT_A) ? 1 : 0);
 	else if (ft_is_arc((char *)(e->ptr)))
 	{
 		e->magic = 0;
@@ -71,7 +71,7 @@ void	ft_reading_file(char *name)
 		else
 			ft_error_void3(e->cmd, name, ERROR1);
 	}
- ft_munmap_file(env()->file_size, &(env()->ptr));
+	ft_munmap_file(env()->file_size, &(env()->ptr));
 }
 
 /*
@@ -103,6 +103,6 @@ void	ft_loop_args(int argc, char **argv, int ind)
 			ft_close_file(env()->cmd, file, fd);
 		}
 		if (env()->symbol.b && !ft_strcmp(env()->cmd, OTOOL))
-			return;
+			return ;
 	}
 }

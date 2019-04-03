@@ -6,28 +6,28 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 22:24:59 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 18:57:10 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:33:26 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void ft_free(void)
+void	ft_free(void)
 {
-		t_line	*line;
-		t_line	*tmp;
+	t_line	*line;
+	t_line	*tmp;
 
-		line = env()->line;
-		while (line)
-		{
-			tmp = line;
-			if (line->name)
-				free(line->name);
-			line->name = NULL;
-			line = line->next;
-			free(tmp);
-		}
-		env()->line = NULL;
+	line = env()->line;
+	while (line)
+	{
+		tmp = line;
+		if (line->name)
+			free(line->name);
+		line->name = NULL;
+		line = line->next;
+		free(tmp);
+	}
+	env()->line = NULL;
 }
 
 t_env	*env(void)
@@ -37,7 +37,7 @@ t_env	*env(void)
 	return (&e);
 }
 
-void ft_reinit_sym(void)
+void	ft_reinit_sym(void)
 {
 	env()->symbol.t = 0;
 	env()->symbol.d = 0;

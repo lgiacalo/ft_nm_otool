@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:43:43 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:03:10 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:35:12 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_print_ligne(unsigned char *str, size_t i, size_t size)
 	}
 	k--;
 	if (!(env()->opt & OPT_M))
-		return;
+		return ;
 	while (++k < (i + 16))
 		ft_putstr("   ");
 	k = i - 1;

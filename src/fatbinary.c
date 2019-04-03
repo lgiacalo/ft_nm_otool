@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:00:21 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:33:55 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_is_ppc(void)
 
 	e = env();
 	if (e->cputype == CPU_TYPE_POWERPC || e->cputype == CPU_TYPE_POWERPC64)
-			return (EXIT_SUCCES);
+		return (EXIT_SUCCES);
 	return (EXIT_FAILUR);
 }
 

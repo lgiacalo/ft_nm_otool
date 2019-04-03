@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:21:06 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:37:33 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int		ft_gestion_nlist(void *array, char *strtable, int i)
 	a = (struct nlist *)array;
 	a_64 = (struct nlist_64 *)array;
 	if (ft_is_64(env()->magic_mh))
-		out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
-		 a_64[i].n_type, a_64[i].n_sect, (swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
+		out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) :
+		a_64[i].n_un.n_strx), a_64[i].n_type, a_64[i].n_sect, (swap ?
+		OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
 	else
-		out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
-			a[i].n_type, a[i].n_sect, (swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));
+		out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) :
+				a[i].n_un.n_strx), a[i].n_type, a[i].n_sect, (swap ?
+					OSSwapInt32(a[i].n_value) : a[i].n_value));
 	return (out);
 }
 
@@ -111,7 +113,7 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 void	ft_load_command_nm(void *ptr, int ncmds)
 {
 	struct load_command	lc;
-	void	*tmp;
+	void				*tmp;
 	int					i;
 
 	i = -1;

@@ -6,13 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:22:36 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:43:42 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_otool.h"
 
-int  main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_env	*e;
 	int		ind;

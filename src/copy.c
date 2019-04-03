@@ -6,13 +6,13 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:29:48 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 18:55:53 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:32:07 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-struct section_64					ft_copy_section_64(struct section *src)
+struct section_64			ft_copy_section_64(struct section *src)
 {
 	struct section_64	dst;
 

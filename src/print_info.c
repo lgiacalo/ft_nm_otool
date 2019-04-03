@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:47:27 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/02/05 17:32:25 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:45:22 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void	ft_print_title(void)
 	if (e->magic == 0)
 	{
 		ft_printf("\n%s(%s)", e->file_name, e->file_name_mh);
-		(e->arch) ? ft_printf(":\n") : ft_printf(" (for architecture %s)\n", ft_print_archi());
+		(e->arch) ? ft_printf(":\n") : ft_printf(" (for architecture %s)\n",
+			ft_print_archi());
 	}
 	else if (ft_is_fat(e->magic) && !(e->arch))
-		ft_printf("\n%s (for architecture %s):\n", e->file_name, ft_print_archi());
+		ft_printf("\n%s (for architecture %s):\n", e->file_name,
+			ft_print_archi());
 	else if (e->print_name && !ft_is_fat(e->magic))
 		ft_printf("\n%s:\n", e->file_name);
 }
@@ -69,7 +71,8 @@ void	ft_print_title_otool(void)
 			ft_printf("Archive : %s\n", e->file_name);
 		}
 		ft_printf("%s(%s)", e->file_name, e->file_name_mh);
-		(e->arch) ? ft_printf(":\n") : ft_printf(" (architecture %s)\n", ft_print_archi());
+		(e->arch) ? ft_printf(":\n") : ft_printf(" (architecture %s)\n",
+			ft_print_archi());
 	}
 	else if (ft_is_fat(e->magic) && !(e->arch))
 		ft_printf("%s (architecture %s):\n", e->file_name, ft_print_archi());
@@ -77,10 +80,10 @@ void	ft_print_title_otool(void)
 		ft_printf("%s:\n", e->file_name);
 }
 
-void 	ft_print_line(t_line *line)
+void	ft_print_line(t_line *line)
 {
-	int 	pad;
-	int		opt;
+	int	pad;
+	int	opt;
 
 	opt = env()->opt;
 	pad = ft_is_64(env()->magic_mh) ? 16 : 8;
@@ -91,7 +94,8 @@ void 	ft_print_line(t_line *line)
 	if (!(line->addr) && line->sym == 'U')
 		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%*s ", pad, " ") : 0;
 	else
-		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%0*llx ", pad, line->addr) : 0;
+		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%0*llx ", pad,
+			line->addr) : 0;
 	(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%c ", line->sym) : 0;
 	ft_printf("%s\n", line->name);
 }

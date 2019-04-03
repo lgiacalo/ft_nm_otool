@@ -6,14 +6,14 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:13:34 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:26:13 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 20:46:02 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 #include "ft_otool.h"
 
-int		ft_record_section_64(uint32_t magic, void *ptr, struct section_64 *dst)
+int	ft_record_section_64(uint32_t magic, void *ptr, struct section_64 *dst)
 {
 	struct section	ret;
 
@@ -66,7 +66,8 @@ int	ft_record_segment_cmd_64(uint32_t magic, void *ptr,
 	else
 	{
 		ft_swap_segment_command_64(magic, dst);
-		ft_strncpy(dst->segname, ((struct segment_command_64 *)ptr)->segname, 16);
+		ft_strncpy(dst->segname, ((struct segment_command_64 *)ptr)->segname,
+			16);
 	}
 	return (EXIT_SUCCES);
 }

@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:19:15 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 21:17:23 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct				s_symtab_header
 {
 	char					*name;
 	char					*date;
-	int						userId;
-	int						groupId;
+	int						userid;
+	int						groupid;
 	int						mode;
 	int						size;
 	int						next;
@@ -43,7 +43,7 @@ typedef struct				s_symtab_header
 ** Env
 */
 
-void 						ft_free(void);
+void						ft_free(void);
 
 /*
 **	Gestion fichier
@@ -67,9 +67,8 @@ int							ft_record_symtab_header(t_symtab_header *sym_h,
 		void *ptr);
 int							ft_record_mach_header_64(uint32_t magic, void *ptr,
 		struct mach_header_64 *dst);
-int	ft_record_symtab_command(uint32_t magic, void *ptr,
+int							ft_record_symtab_command(uint32_t magic, void *ptr,
 		struct symtab_command *dst, uint32_t cmdsize);
-
 
 struct fat_arch_64			ft_copy_fat_arch_64(struct fat_arch *src);
 struct mach_header_64		ft_copy_mach_header_64(struct mach_header *src);
@@ -106,6 +105,7 @@ struct mach_header			*ft_swap_mach_header(uint32_t magic,
 
 struct segment_command_64	*ft_swap_segment_command_64(uint32_t magic,
 		struct segment_command_64 *seg);
+
 struct segment_command	*ft_swap_segment_command(uint32_t magic,
 		struct segment_command *seg);
 
