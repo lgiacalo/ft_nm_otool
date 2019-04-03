@@ -23,13 +23,15 @@ int		ft_gestion_nlist(void *array, char *strtable, int i)
 	a = (struct nlist *)array;
 	a_64 = (struct nlist_64 *)array;
 	if (ft_is_64(env()->magic_mh))
-		out = ft_nlist(strtable + (swap ? OSSwapInt32(a_64[i].n_un.n_strx) :
-		a_64[i].n_un.n_strx), a_64[i].n_type, a_64[i].n_sect, (swap ?
-		OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
+		out = ft_nlist(strtable
+			+ (swap ? OSSwapInt32(a_64[i].n_un.n_strx) : a_64[i].n_un.n_strx),
+			a_64[i].n_type, a_64[i].n_sect,
+			(swap ? OSSwapInt64(a_64[i].n_value) : a_64[i].n_value));
 	else
-		out = ft_nlist(strtable + (swap ? OSSwapInt32(a[i].n_un.n_strx) :
-				a[i].n_un.n_strx), a[i].n_type, a[i].n_sect, (swap ?
-					OSSwapInt32(a[i].n_value) : a[i].n_value));
+		out = ft_nlist(strtable
+			+ (swap ? OSSwapInt32(a[i].n_un.n_strx) : a[i].n_un.n_strx),
+			a[i].n_type, a[i].n_sect,
+			(swap ? OSSwapInt32(a[i].n_value) : a[i].n_value));
 	return (out);
 }
 
@@ -43,8 +45,8 @@ int		ft_gestion_symtab_command(struct nlist_64 *a_64, char *strtable,
 	a = (void *)a_64;
 	while (++i < sym->nsyms)
 	{
-		if ((!(a[i].n_type & N_STAB) && !ft_is_64(env()->magic_mh)) ||
-			(!(a_64[i].n_type & N_STAB) && ft_is_64(env()->magic_mh)))
+		if ((!(a[i].n_type & N_STAB) && !ft_is_64(env()->magic_mh))
+		|| (!(a_64[i].n_type & N_STAB) && ft_is_64(env()->magic_mh)))
 		{
 			if (!(ft_gestion_nlist((void *)a_64, strtable, i)))
 				return (EXIT_FAILUR);
@@ -93,9 +95,9 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
-		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
-		sizeof(struct segment_command))) + (k * (st ?
-		sizeof(struct section_64) : sizeof(struct section))));
+		str = (char *)(((char *)ptr + (st
+		? sizeof(struct segment_command_64) : sizeof(struct segment_command)))
+		+ (k * (st ? sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_strcmp("__text", str))
 			env()->symbol.t = env()->dec;
 		else if (!ft_strcmp("__data", str))

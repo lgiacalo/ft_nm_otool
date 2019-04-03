@@ -30,8 +30,8 @@ int		ft_gestion_arch_fat(struct fat_arch_64 *arch)
 {
 	uint32_t magic;
 
-	if (!arch || !ft_is_safe(env()->ptr,
-		arch->offset + arch->size))
+	if (!arch
+		|| !ft_is_safe(env()->ptr, arch->offset + arch->size))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	magic = *((uint32_t *)(env()->ptr + arch->offset));
 	if (!(env()->arch))

@@ -65,8 +65,8 @@ int		ft_verif_header_line(void *ptr)
 	if (s[0] == '#' && s[1] == '1' && s[2] == '/')
 	{
 		nb = ft_get_len_name_header_line(ptr);
-		if (!ft_is_safe((void *)(s + 60), nb) ||
-				!ft_verif_base_nm(s + 3, 10, 2))
+		if (!ft_is_safe((void *)(s + 60), nb)
+		|| !ft_verif_base_nm(s + 3, 10, 2))
 			return (EXIT_FAILUR);
 	}
 	else

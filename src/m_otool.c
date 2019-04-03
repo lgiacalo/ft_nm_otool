@@ -59,9 +59,9 @@ int		ft_lc_segment_otool(void *ptr, struct load_command *lc)
 		return (EXIT_SUCCES);
 	while (((uint32_t)(++k)) < seg.nsects)
 	{
-		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64) :
-		sizeof(struct segment_command))) + (k * (st ?
-		sizeof(struct section_64) : sizeof(struct section))));
+		str = (char *)(((char *)ptr + (st
+		? sizeof(struct segment_command_64) : sizeof(struct segment_command)))
+		+ (k * (st ? sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_section((void *)str))
 		{
 			env()->symbol.b = 1;

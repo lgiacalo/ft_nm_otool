@@ -25,15 +25,15 @@ void	ft_archive_static(void *ptr, int max)
 
 	if (env()->file_size <= 68)
 		return ;
-	if (!ft_record_symtab_header(&sym_h, ptr + 8) &&
-			!ft_is_safe(ptr + 68, sym_h.size))
+	if (!ft_record_symtab_header(&sym_h, ptr + 8)
+	&& !ft_is_safe(ptr + 68, sym_h.size))
 		return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 	env()->magic = 0;
 	tp = ptr + 68 + sym_h.size;
 	while (tp < (ptr + max))
 	{
-		if (!ft_record_symtab_header(&sym_h, tp) ||
-				!ft_is_safe(tp + 60, sym_h.size))
+		if (!ft_record_symtab_header(&sym_h, tp)
+		|| !ft_is_safe(tp + 60, sym_h.size))
 			return (ft_error_void3(env()->cmd, env()->file_name, ERROR3));
 		ft_mach_header_64((tp + sym_h.next), *((uint32_t *)(tp + sym_h.next)));
 		tp = tp + 60 + sym_h.size;

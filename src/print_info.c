@@ -87,9 +87,9 @@ void	ft_print_line(t_line *line)
 
 	opt = env()->opt;
 	pad = ft_is_64(env()->magic_mh) ? 16 : 8;
-	if (!line || ((opt & OPT_G) && (int)line->sym != ft_toupper(line->sym)) ||
-	((opt & OPT_U) && line->sym != 'U' && line->sym != 'u') ||
-	((opt & OPT_UU) && (line->sym == 'U' || line->sym == 'u')))
+	if (!line || ((opt & OPT_G) && (int)line->sym != ft_toupper(line->sym))
+	|| ((opt & OPT_U) && line->sym != 'U' && line->sym != 'u')
+	|| ((opt & OPT_UU) && (line->sym == 'U' || line->sym == 'u')))
 		return ;
 	if (!(line->addr) && line->sym == 'U')
 		(!(opt & OPT_J) && !(opt & OPT_U)) ? ft_printf("%*s ", pad, " ") : 0;

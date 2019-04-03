@@ -29,8 +29,8 @@ int	ft_record_mach_header_64(uint32_t magic, void *ptr,
 {
 	struct mach_header	ret;
 
-	if (!(ptr = ft_safe(ptr, (ft_is_64(magic)) ?
-				sizeof(struct mach_header_64) : sizeof(struct mach_header))))
+	if (!(ptr = ft_safe(ptr, (ft_is_64(magic))
+	? sizeof(struct mach_header_64) : sizeof(struct mach_header))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	*dst = *((struct mach_header_64 *)ptr);
 	if (ft_is_64(magic))
@@ -69,8 +69,8 @@ int	ft_record_fat_arch_64(uint32_t magic, void *arch, struct fat_arch_64 *dst)
 {
 	struct fat_arch	ret;
 
-	if (!(arch = ft_safe(arch, (ft_is_64(magic)) ?
-					sizeof(struct fat_arch_64) : sizeof(struct fat_arch))))
+	if (!(arch = ft_safe(arch, (ft_is_64(magic))
+	? sizeof(struct fat_arch_64) : sizeof(struct fat_arch))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	*dst = *((struct fat_arch_64 *)arch);
 	if (ft_is_64(magic))
@@ -88,7 +88,7 @@ int	ft_record_fat_header(void *header, struct fat_header *ret)
 	if (!(header = (ft_safe(header, sizeof(struct fat_header)))))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR4));
 	*ret = *((struct fat_header *)(header));
-	ret->nfat_arch = (ft_is_swap(ret->magic)) ?
-		OSSwapInt32(ret->nfat_arch) : ret->nfat_arch;
+	ret->nfat_arch = (ft_is_swap(ret->magic))
+	? OSSwapInt32(ret->nfat_arch) : ret->nfat_arch;
 	return (EXIT_SUCCES);
 }
