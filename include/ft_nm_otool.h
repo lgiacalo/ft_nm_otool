@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/04/03 21:49:40 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 22:45:04 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct				s_env
 
 }							t_env;
 
-void                        ft_load_command_otool(void *ptr, int ncmds);
+void						ft_load_command_otool(void *ptr, int ncmds);
 void						ft_load_command_nm(void *ptr, int ncmds);
 
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
@@ -84,7 +84,7 @@ void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
-void                        ft_reinit_sym(void);
+void						ft_reinit_sym(void);
 
 void						ft_loop_args(int argc, char **argv, int ind);
 
