@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/03/25 18:53:56 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 21:49:40 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 
 # include "libft.h"
 
-# define BASE16_L		"0123456789abcdef"
+# define BASE16_L			"0123456789abcdef"
 
-# define EXIT_SUCCES	1
-# define EXIT_FAILUR	0
+# define EXIT_SUCCES		1
+# define EXIT_FAILUR		0
 
 # define ERROR1			" The file was not recognized as a valid object file"
 # define ERROR2			": No such file or directory"
@@ -35,10 +35,10 @@
 # define ERROR6			": truncated or malformed object"
 # define ERR_MALLOC		"Malloc"
 
-# define MY_ARCHI		CPU_TYPE_X86_64
+# define MY_ARCHI			CPU_TYPE_X86_64
 
 # define OPT_NM				"gjuaUr"
-# define OPT_OTOOL		"tdma"
+# define OPT_OTOOL			"tdma"
 
 typedef struct				s_line
 {
@@ -76,7 +76,7 @@ typedef struct				s_env
 
 }							t_env;
 
-void	          ft_load_command_otool(void *ptr, int ncmds);
+void                        ft_load_command_otool(void *ptr, int ncmds);
 void						ft_load_command_nm(void *ptr, int ncmds);
 
 void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
@@ -84,7 +84,7 @@ void						ft_mach_header_64(void	*ptr, uint32_t magic_mh);
 t_env						*env(void);
 t_env						*ft_init_env(void);
 void						ft_reinit_env(void);
-void 						ft_reinit_sym(void);
+void                        ft_reinit_sym(void);
 
 void						ft_loop_args(int argc, char **argv, int ind);
 
@@ -100,45 +100,46 @@ void						*ft_safe(void *ptr, size_t size);
 ** File
 */
 
-int						ft_open_file(char *cmd, char *file, int *fd);
-int						ft_close_file(char *cmd, char *file, int fd);
-int						ft_check_file(int fd, char *file, char *cmd,
+int							ft_open_file(char *cmd, char *file, int *fd);
+int							ft_close_file(char *cmd, char *file, int fd);
+int							ft_check_file(int fd, char *file, char *cmd,
 		size_t *size);
-int						ft_mmap_file(int fd, size_t size, void **ptr);
-int						ft_munmap_file(size_t size, void **ptr);
+int							ft_mmap_file(int fd, size_t size, void **ptr);
+int							ft_munmap_file(size_t size, void **ptr);
 
 /*
 **  Type file
 */
 
-int						ft_is_swap(uint32_t magic);
-int						ft_is_64(uint32_t magic);
-int						ft_is_mh(uint32_t magic);
-int						ft_is_fat(uint32_t magic);
-int						ft_is_arc(char *arc);
-int						ft_is_ppc(void);
+int							ft_is_swap(uint32_t magic);
+int							ft_is_64(uint32_t magic);
+int							ft_is_mh(uint32_t magic);
+int							ft_is_fat(uint32_t magic);
+int							ft_is_arc(char *arc);
+int							ft_is_ppc(void);
 
 /*
 ** Option
 */
 
-int						ft_multi_args(int ind, int argc);
-int						ft_parse_option(int argc, char **argv, char *list_opt,
-		int *env_opt);
+int							ft_multi_args(int ind, int argc);
+int							ft_parse_option(int argc, char **argv,
+	char *list_opt, int *env_opt);
 
 /*
 ** Prints
 */
 
-void					print_memory(const void *addr, size_t size, uint64_t ad);
+void						print_memory(const void *addr, size_t size,
+	uint64_t ad);
 void						ft_print_title(void);
 
 /*
 ** Error
 */
 
-void					ft_error_void3(char *str1, char *str2, char *str3);
-int						ft_error_int(char *str);
-int						ft_error_int3(char *str1, char *str2, char *str3);
+void						ft_error_void3(char *str1, char *str2, char *str3);
+int							ft_error_int(char *str);
+int							ft_error_int3(char *str1, char *str2, char *str3);
 
 #endif

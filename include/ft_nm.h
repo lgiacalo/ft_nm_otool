@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 21:10:09 by lgiacalo          #+#    #+#             */
-/*   Updated: 2019/04/03 21:17:23 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/03 21:45:10 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,14 @@ struct fat_arch_64			*ft_swap_fat_arch_64(uint32_t magic,
 		struct fat_arch_64 *arch);
 struct fat_arch				*ft_swap_fat_arch(uint32_t magic,
 		struct fat_arch *arch);
-
 struct mach_header_64		*ft_swap_mach_header_64(uint32_t magic,
 		struct mach_header_64 *mach);
 struct mach_header			*ft_swap_mach_header(uint32_t magic,
 		struct mach_header *mach);
-
 struct segment_command_64	*ft_swap_segment_command_64(uint32_t magic,
 		struct segment_command_64 *seg);
 
-struct segment_command	*ft_swap_segment_command(uint32_t magic,
+struct segment_command		*ft_swap_segment_command(uint32_t magic,
 		struct segment_command *seg);
 
 /*
