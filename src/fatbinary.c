@@ -91,10 +91,10 @@ void	ft_fatbinary(int my_arch)
 	while (++i < header.nfat_arch)
 	{
 		env()->cputype = 0;
-		if (!ft_record_fat_arch_64(header.magic, env()->ptr +
-		sizeof(struct fat_header) + i * (ft_is_64(header.magic) ?
-		sizeof(struct fat_arch_64) : sizeof(struct fat_arch)), &arch) ||
-		!ft_fatbinary2(i, &overlaps, &arch, my_arch))
+		if (!ft_record_fat_arch_64(header.magic, env()->ptr
+			+ sizeof(struct fat_header) + i * (ft_is_64(header.magic)
+			? sizeof(struct fat_arch_64) : sizeof(struct fat_arch)), &arch)
+			|| !ft_fatbinary2(i, &overlaps, &arch, my_arch))
 			return ;
 	}
 	(!my_arch) ? ft_fatbinary(1) : 0;

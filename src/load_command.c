@@ -95,9 +95,9 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 	while ((uint32_t)k < seg.nsects)
 	{
 		(env()->dec)++;
-		str = (char *)(((char *)ptr + (st
-		? sizeof(struct segment_command_64) : sizeof(struct segment_command)))
-		+ (k * (st ? sizeof(struct section_64) : sizeof(struct section))));
+		str = (char *)(((char *)ptr + (st ? sizeof(struct segment_command_64)
+			: sizeof(struct segment_command))) + (k * (st
+				? sizeof(struct section_64) : sizeof(struct section))));
 		if (!ft_strcmp("__text", str))
 			env()->symbol.t = env()->dec;
 		else if (!ft_strcmp("__data", str))
