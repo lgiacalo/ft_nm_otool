@@ -66,7 +66,7 @@ int		ft_verif_header_line(void *ptr)
 	{
 		nb = ft_get_len_name_header_line(ptr);
 		if (!ft_is_safe((void *)(s + 60), nb)
-		|| !ft_verif_base_nm(s + 3, 10, 2))
+			|| !ft_verif_base_nm(s + 3, 10, 2))
 			return (EXIT_FAILUR);
 	}
 	else

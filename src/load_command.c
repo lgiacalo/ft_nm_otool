@@ -65,10 +65,10 @@ int		ft_lc_symtab(void *ptr, struct load_command *lc)
 
 	if (!ft_record_symtab_command(env()->magic_mh, ptr, &sym, lc->cmdsize))
 		return (EXIT_FAILUR);
-	if (!ft_is_safe(env()->ptr_mh + sym.symoff, sym.nsyms *
-		(ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64) :
-		sizeof(struct nlist))) ||
-		!ft_is_safe(env()->ptr_mh + sym.stroff, sym.strsize))
+	if (!ft_is_safe(env()->ptr_mh + sym.symoff, sym.nsyms
+		* (ft_is_64(env()->magic_mh) ? sizeof(struct nlist_64)
+			: sizeof(struct nlist))) || !ft_is_safe(env()->ptr_mh + sym.stroff,
+			sym.strsize))
 		return (ft_error_int3(env()->cmd, env()->file_name, ERROR6));
 	if (!ft_gestion_symtab_command(env()->ptr_mh + sym.symoff,
 		env()->ptr_mh + sym.stroff, &sym))
@@ -89,8 +89,8 @@ void	ft_lc_segment_nm(void *ptr, struct load_command *lc)
 
 	k = 0;
 	st = ft_is_64(env()->magic_mh);
-	if (!ft_record_segment_cmd_64(env()->magic_mh, ptr, &seg, lc->cmdsize) ||
-		seg.nsects == 0)
+	if (!ft_record_segment_cmd_64(env()->magic_mh, ptr, &seg, lc->cmdsize)
+		|| seg.nsects == 0)
 		return ;
 	while ((uint32_t)k < seg.nsects)
 	{
