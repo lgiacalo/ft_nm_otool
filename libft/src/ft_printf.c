@@ -6,7 +6,7 @@
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 20:43:28 by lgiacalo          #+#    #+#             */
-/*   Updated: 2017/05/10 21:50:15 by lgiacalo         ###   ########.fr       */
+/*   Updated: 2019/04/04 19:27:01 by lgiacalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,3 @@ int			ft_printf(const char *format, ...)
 	va_end(ap);
 	return (len);
 }
-
-//
-//
-//
-//
-// int			ft_printf(const char *format, ...)
-// {
-// 	return (ft_fdprintf(1, format));
-// }
